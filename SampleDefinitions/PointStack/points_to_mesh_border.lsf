@@ -1,0 +1,36 @@
+
+#
+#   This is an example of creating a mesh from describing the border with points
+#   This is the same as the Rhino Command: MeshPolyline
+#
+#
+
+
+
+lsystem : mesh_edge
+
+	define : theta : rad(18)
+	define : dist : 1
+
+
+	axiom : {.+F.-^F.^-F.+|+F.-^F.-^F}
+
+	#group : F : Pf	
+
+	alias : P : PlaneAxes : 1
+	alias : F : MoveOnAxis : 0 : dist
+
+	alias : & : RotateOnAxis : 1 : rad(-15)
+	alias : ^ : RotateOnAxis : 1 : rad(15)
+
+	alias : + : RotateOnAxis : 2 : theta
+	alias : - : RotateOnAxis : 2 : -theta
+
+	alias : | : RotateOnAxis : 2 : pi
+
+
+	alias : { : PushPointStack
+	alias : . : Point : D_STACK : FALSE
+	alias : } : PopPointsToMeshBorder
+
+

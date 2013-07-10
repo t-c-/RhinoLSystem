@@ -1,0 +1,85 @@
+
+
+#ABOP_1.8_pg35
+
+#test for page 35
+#  carefull! this takes forever!!!!
+lsystem : abop_1-8_pg35_a
+
+
+	axiom : F1F1F1
+
+	derivations : 24
+	#derivations : 30
+
+	define : theta : rad(22.5)
+	define : dist : 1
+
+
+	ignore : +-F
+	branchsymbols : []
+
+
+	axiom : F1F1F1
+
+	production : 0 : 0 : 0 :*: 0
+	production : 0 : 0 : 1 :*: 1[+F1F1]
+	production : 0 : 1 : 0 :*: 1
+	production : 0 : 1 : 1 :*: 1
+	production : 1 : 0 : 0 :*: 0
+	production : 1 : 0 : 1 :*: 1F1
+	production : 1 : 1 : 0 :*: 0
+	production : 1 : 1 : 1 :*: 0
+	production : * : + : * :*: -
+	production : * : - : * :*: +
+
+
+
+	alias : 0 : null
+	alias : 1 : null
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	#alias : f : GoPenUp : dist
+	#alias : f : MoveOnAxis : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+	alias : [ : PushStack
+	alias : ] : PopStack 
+
+
+
+
+
+lsystem : abop_1-8_pg35_d
+
+
+	define : theta : rad(25.75)
+	define : dist : 1
+
+	ignore : +-F
+	branchsymbols : []
+
+	derivations : 24
+	axiom : F0F1F1
+
+
+	production : 0 : 0 : 0 :*: 1
+	production : 0 : 0 : 1 :*: 0
+	production : 0 : 1 : 0 :*: 0
+	production : 0 : 1 : 1 :*: 1F1
+	production : 1 : 0 : 0 :*: 1
+	production : 1 : 0 : 1 :*: 1[+F1F1]
+	production : 1 : 1 : 0 :*: 1
+	production : 1 : 1 : 1 :*: 0
+	production : * : + : * :*: -
+	production : * : - : * :*: +
+
+
+	alias : 0 : MoveOnAxisWithLine : 0 : dist
+	alias : 1 : MoveOnAxisWithLine : 0 : dist
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	alias : f : MoveOnAxis : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+	alias : [ : PushStack
+	alias : ] : PopStack 
+

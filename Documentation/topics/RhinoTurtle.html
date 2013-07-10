@@ -1,0 +1,1243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>LSystem Engine - Rhino Turtle Commands</title>
+        
+        <link rel="stylesheet" href="../css/master.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+    </head>
+    <body>
+    	
+    	<div>
+    		<a name="home" href="../LSystemEngine.html"> Home </a>
+    		<h1> Rhino Turtle Commands</h1>
+    		<h2>General Notes</h2>
+    		<p>The Turtle is passed arguments that are floating point values, but the examples show unprocessed arguments (before they are evaluated). 
+    			All arguments provided in the LSystem file are processed through the Expression evaluator.  All defined variables are accessible.  
+    			Where integer values are expected, values are checked for validity: 1.0 equals 1, but 1.1 does not equal 1 and will throw an error. 
+    			The examples omit the LSystem file statement &quot; alias : &lt; letter &gt; &quot; , but do remember to include this in your definition files.
+    			
+    		</p>
+    		
+    		<h2>The Modeling Process</h2>
+    		<p>
+    			The LSystem Turtle for Rhino is a stack based modeller.  There are two stacks inside the Turtle: one for points and one for curves.  
+    			Stacks are intialized with "push" calls which intializes a list for either points or curves.  
+    			Points and Curves are added to the lists, and then the list is "popped" off the stack and geometry is created with the list.
+    			What geometry is created is a function of the specific Turtle command.  Points can be used to create curves and meshes, while Curves can be used to create surfaces.  
+    			Stacks can be nested, where lists can be created on top of each other.  This deferes "pop" operations on lists.  
+    			For the point stack it would look like this: "{....{....}}"  Where "{" = push, "}" = pop, and "." = drop point (records Turtle's position).  
+    			The example would create two curves, but the second one, since it is "popped" first, is created first.
+    			Different Turtle commands will require different numbers of points or curves, refer to the individual Turtle commands for specifics.
+    		</p>    		
+    		
+    	</div>
+    	
+    	<a name="TOPOFPAGE"> </a>
+    	
+    	<div>
+    		
+    		<h3> Environment </h3>
+    		
+    		<p>
+    		    <a href="#SetTropismActive">SetTropismActive</a> &nbsp;&nbsp;
+    			<a href="#SetTropismFactor">SetTropismFactor</a> &nbsp;&nbsp;
+    			<a href="#SetTropismVector">SetTropismVector</a> &nbsp;&nbsp;
+    		
+    		</p>
+    		
+    		<h3> Transforms and Alignment </h3>
+    		
+    		
+    		<p>
+    			<a href="#MoveOnAxis">MoveOnAxis</a> &nbsp;&nbsp;
+    			<a href="#MoveOnPlane">MoveOnPlane</a> &nbsp;&nbsp;
+    			<a href="#MoveInWorld">MoveInWorld</a> &nbsp;&nbsp;
+    			<a href="#RotateOnAxis">RotateOnAxis</a> &nbsp;&nbsp;
+ 			<a href="#AlignToPlane">AlignToPlane</a> &nbsp;&nbsp;
+    			<a href="#RollToLevel">RollToLevel</a> &nbsp;&nbsp;
+   
+   
+   
+    		</p>
+    		
+    		<h3> Stack </h3>
+    		
+    		<p>
+    		    <a href="#PushStack">PushStack</a> &nbsp;&nbsp;
+    		   <a href="#PopStack">PopStack</a> &nbsp;&nbsp;
+    		   <a href="#PruneBranch">PruneBranch</a> &nbsp;&nbsp;
+    		
+    		</p>
+    		
+    		
+    		<h3> Curves </h3>
+    		
+    		<p>
+    			
+    		    <a href="#MoveOnAxisWithLine">MoveOnAxisWithLine</a> &nbsp;&nbsp;
+    		    <a href="#Line">Line</a> &nbsp;&nbsp;
+    		    <a href="#Arc">Arc</a> &nbsp;&nbsp;
+    		    <a href="#Circle">Circle</a> &nbsp;&nbsp;
+    		    <a href="#Ellipse">Ellipse</a> &nbsp;&nbsp;
+    		    <a href="#Polygon">Polygon</a> &nbsp;&nbsp;
+
+    		</p>
+    		    		
+    		<h3> Point Stack </h3>
+    		
+    		<p>
+    			
+    		    <a href="#PushPointStack">PushPointStack</a> &nbsp;&nbsp;
+    		    <a href="#Point">Point</a> &nbsp;&nbsp;
+    		    <a href="#PopPointsToCurve">PopPointsToCurve</a> &nbsp;&nbsp;
+    		    <a href="#PopPointsToPolyline">PopPointsToPolyline</a> &nbsp;&nbsp;
+    		    <a href="#PopPointsToPolygons">PopPointsToPolygons</a> &nbsp;&nbsp;
+    		    <a href="#PopPointsToMeshBorder">PopPointsToMeshBorder</a> &nbsp;&nbsp;
+
+    		</p>
+    		
+    		<h3> Curve Stack </h3>
+    		
+    		<p>
+    			
+    		    <a href="#PushCurveStack">PushCurveStack</a> &nbsp;&nbsp;
+    		    <a href="#PopCurveStackToLoft">PopCurveStackToLoft</a> &nbsp;&nbsp;
+    		    <a href="#PopCurveStackToSweep">PopCurveStackToSweep</a> &nbsp;&nbsp;
+		    <a href="#PopCurveStackToRevolve">PopCurveStackToRevolve</a> &nbsp;&nbsp;
+		    <a href="#PopCurveStackToExtrude">PopCurveStackToExtrude</a> &nbsp;&nbsp;
+	
+
+    		</p>
+    		
+    		<h3> Solids </h3>
+    		
+    		<p>
+    			
+    		    <a href="#Sphere">Sphere</a> &nbsp;&nbsp;
+    		    <a href="#Cube">Cube</a> &nbsp;&nbsp;
+    		    <a href="#Cylinder">Cylinder</a> &nbsp;&nbsp;
+		    <a href="#Cone">Cone</a> &nbsp;&nbsp;
+
+    		</p>    		
+    		
+    		<h3> Blocks </h3>
+    		
+    		<p>
+    		    <a href="#InsertBlock">InsertBlock</a> &nbsp;&nbsp;
+    		
+    		</p>
+    		
+    		<h3> Parametric Objects </h3>
+    		
+    		<p>
+    			<a href="#BranchSection">BranchSection</a> &nbsp;&nbsp;
+    			<a href="#StraightTube">StraightTube</a> &nbsp;&nbsp;
+    			<a href="#Petal">Petal</a> &nbsp;&nbsp;
+    			
+    		</p>
+    		    		    
+    		
+   		<h3> Presentation </h3>
+    		
+    		<p>
+    			
+    		    <a href="#SetColor">SetColor</a> &nbsp;&nbsp;
+    		    <a href="#SetColor">SetPlotColor</a> &nbsp;&nbsp;
+    		    <a href="#SetLineWeight">SetLineWeight</a> &nbsp;&nbsp;
+    		    <a href="#SetLayer">SetLayer</a> &nbsp;&nbsp;
+    		    <a href="#SetMaterial">SetMaterial</a> &nbsp;&nbsp;
+
+
+    		</p>
+    		  
+   		<h3> Debugging </h3>
+    		
+    		<p>
+    			
+    		    <a href="#PlaneAxes">PlaneAxes</a> &nbsp;&nbsp;
+
+
+    		</p>
+  		
+    		<br /> <br />
+    		
+  
+    	</div>
+    	
+    	
+    	<!-- 
+			
+		================================  Environment Commands ===============================
+			
+	-->	 
+    	 
+    	<div>
+		<h2> Environment </h2> 
+	</div>
+
+    	<!--  SetTropismActive -->
+    	<div>
+    		<a name="SetTropismActive"> </a>
+    		<p class="codeHeader">  SetTropismActive : &lt; switch &gt;  </p>
+    		<p>
+    			Turns Tropism on.  This is global for the LSystem and any nested LSystems.  
+    			The turtle's X Axis is considered the heading and is the axis attracted to the Tropism vector.
+    			Currently, this does not produce the same results as ABOP, it seems much stronger.  Setting example multipliers (TropismFactor) down produces better results.
+    		</p>
+    		<p>
+    			&lt; switch &gt; = 1 for on, 0 for off <br />
+    		</p>
+    		
+    		<p class="codeExample"> 
+    			#turns tropism on <br /> 
+    			SetTropismActive : 1  <br /> </p>
+    		
+    	</div>
+
+
+    	<!--  SetTropismFactor -->
+    	<div>
+    		<a name="SetTropismFactor"> </a>
+    		<p class="codeHeader">  SetTropismFactor : &lt; factor &gt;  </p>
+    		<p>
+    			Sets the turtle's susceptibility to bending by the Tropism vector.
+    		</p>
+    		<p>
+    			&lt; factor &gt; = 0 to 1 for turtle's bending susceptibility<br />
+    		</p>
+    		
+    		<p class="codeExample"> 
+    			#set the tropism factor<br /> 
+    			SetTropismFactor : 0.23 <br /> 
+    			</p>
+    		
+    	</div>    	
+    	
+    	    	<!--  SetTropismVector -->
+    	<div>
+    		<a name="SetTropismVector"> </a>
+    		<p class="codeHeader">  SetTropismVector : &lt; x &gt;  : &lt; y &gt; : &lt; z &gt;</p>
+    		<p>
+    			Sets the Tropism vector.  This is the vector that the turtle aligns itself to based on the Tropism Factor.
+    		</p>
+    		<p>
+    			&lt; x &gt; = Tropism vector x component<br />
+    			&lt; y &gt; = Tropism vector y component<br />
+    			&lt; z &gt; = Tropism vector z component<br />
+    		</p>
+    		
+    		<p class="codeExample"> 
+    			#set the tropism vector<br /> 
+    			SetTropismVector : 0.1 : 0.1 : -1.2 <br /> 
+    			</p>
+    		
+    	</div>
+    	
+    	<div>
+    		<a  href="#TOPOFPAGE"> Contents </a>
+	</div>
+    	
+    	<!-- 
+			
+			================================  Transform and Alignment Commands ===============================
+			
+	-->	     
+		
+	<div>
+		<h2> Transforms and Alignment </h2> 
+	</div>
+			
+    	<!--  MoveOnAxis -->
+    	<div >
+    		<a name="MoveOnAxis"> </a>
+    		<p class="codeHeader">  MoveOnAxis : &lt; axis &gt; : &lt; distance &gt;</p>
+    		<p>  Moves the Turtle along it's local axis.  <br />
+    		</p>
+    		<p>    			
+    		&lt; axis &gt; = 0 for x axis, 1 for y axis, 2 for z axis <br />
+    		&lt; distance &gt; = distance to move on axis <br />
+    		
+    		</p>
+
+			<p class="codeExample"> 
+				#move along x axis  (heading) by value of variable "dist" <br /> 
+				MoveOnAxis : 0 : dist <br /> 
+				#move (laterally) on y axis by 10 <br /> 
+				MoveOnAxis : 1 : 10 <br /> 
+				</p>
+    		
+    	</div>
+    	
+    	
+    	<!--  MoveInWorld -->
+    	<div >
+    		<a name="MoveInWorld"> </a>
+    		<p class="codeHeader">  MoveInWorld : &lt; x &gt; : &lt; y &gt; : &lt; z &gt; </p>
+    		<p>  Moves the Turtle in world coordinates (relative move).  <br />
+    		</p>
+    		<p>    			
+    		&lt; x &gt; = distance to move in x <br />
+    		&lt; y &gt; = distance to move in y <br />
+    		&lt; z &gt; = distance to move in z <br />
+    		
+    		</p>
+
+			<p class="codeExample"> 
+				#move in world coordinates by 3 for x, y, &amp; z<br /> 
+				MoveInWorld : 3 : 3 : 3 <br /> 
+
+				</p>
+    		
+    	</div>    	
+    	
+    	    	<!--  MoveOnPlane -->
+    	<div >
+    		<a name="MoveOnPlane"> </a>
+    		<p class="codeHeader">  MoveOnPlane : &lt; plane &gt; : &lt; x &gt; : &lt; y &gt; : &lt; z &gt;</p>
+    		<p>  Moves the Turtle locally in the plane specified.  Turtle orientation is preserved.  <br />
+    		</p>
+    		<p>    			
+    		&lt; plane &gt; = 0 for xy plane, 1 for yz plane, 2 for xz plane <br />
+    		&lt; x &gt; = distance to move in x <br />
+    		&lt; y &gt; = distance to move in y <br />
+    		&lt; z &gt; = distance to move in z <br />
+    		
+    		</p>
+
+			<p class="codeExample"> 
+				#move locally to xy plane  3, 5, &amp; 7 units in x,y,z<br /> 
+				MoveOnPlane : 0 : 3 : 5 : 7 <br /> 
+				#move locally to yz plane  3, 5, &amp; 0 units in x,y,z - this is the quivelent of moving 0,3,5 in the world xy plane<br /> 
+				MoveOnPlane : 1 : 3 : 5 : 0 <br /> 
+				</p>
+    		
+    	</div>
+    	
+    	
+    	
+    	<!--  RotateOnAxis  -->
+    	<div >
+    		<a name="RotateOnAxis"> </a>
+    		<p class="codeHeader">  RotateOnAxis  : &lt; axis &gt; : &lt; radians &gt;  </p>
+    		<p>  Rotates the Turtle around it's local axis.<br />
+    		</p>
+    		<p>    			
+				&lt; axis &gt; = 0 for x axis, 1 for y axis, 2 for z axis <br />
+				&lt; radians &gt;  = The amount to rotate the Turtle in radians.
+
+    		</p>
+
+			<p class="codeExample"> 
+				#rotate around the z axis 45 degrees <br />
+				RotateOnAxis  : 2 : rad(45) <br /> 
+				</p>
+    		
+    	</div>
+    	
+     	<!--  AlignToPlane  -->
+    	<div >
+    		<a name="AlignToPlane"> </a>
+    		<p class="codeHeader">  AlignToPlane  : &lt; plane &gt;   </p>
+    		<p>  Aligns the Turtle to the specified plane.  Turtle location is preserved. <br />
+    		</p>
+    		<p>    			
+				&lt; plane &gt; = 0 for xy plane, 1 for yz plane, 2 for xz plane <br />
+    		</p>
+
+			<p class="codeExample"> 
+				#aligns Turtle to XY Plane<br />
+				AlignToPlane  : 0 <br /> 
+				
+				</p>
+    		
+    	</div>
+    	 
+    	 
+    	<!--  RollToLevel  -->
+    	<div >
+    		<a name="RollToLevel"> </a>
+    		<p class="codeHeader">  RollToLevel   </p>
+    		<p> Rotates the Y Axis around the X Axis until the Y Axis lays in the World XY Plane.  Turtle location is preserved.  
+    			This is the '$' command described in ABOP on Page 57 (Figure 2.6, page 56). This command takes no arguments.
+
+
+    		</p>
+
+			<p class="codeExample"> 
+				#rolls the Turtle to level<br />
+				RollToLevel  <br /> 
+				
+				</p>
+    		
+    	</div>
+    	 
+    	<div>
+    		<a  href="#TOPOFPAGE"> Contents </a>
+	</div>
+	
+    	<!-- 
+			
+			================================  Stack Commands ===============================
+			
+		-->	 
+    	 
+    	<div>
+			<h2> Stack </h2> 
+		</div>
+
+    	<!--  PushStack -->
+    	<div>
+    		<a name="PushStack"> </a>
+    		<p class="codeHeader">  PushStack   </p>
+    		<p>
+    			Records the current Turtle state (position, orientation, material index, etc) and pushes onto the record stack for retrieval later.
+    			This command takes no arguments.
+    		</p>
+    		
+    		<p class="codeExample"> PushStack  <br /> </p>
+    		
+    	</div>
+
+
+    	<!--  PopStack -->
+    	<div>
+    		<a name="PopStack"> </a>
+    		<p class="codeHeader">  PopStack   </p>
+    		<p>
+    			Pops a Turtle state record off the stack, and sets the Turtle back to that state (position, orientation, material index, etc).
+    			This command takes no arguments.
+    		</p>
+    		
+    		<p class="codeExample"> PopStack  <br /> </p>
+    		
+    	</div>
+
+    	<!--  PruneBranch -->
+    	<div>
+    		<a name="PruneBranch"> </a>
+    		<p class="codeHeader">  PruneBranch   </p>
+    		<p>
+    			Prunes the rest of the branch.  After this command, no Turtle commands will be issued until the next PopStack (end of branch) is encountered.  
+    			This command takes no arguments.
+    		</p>
+    		
+    		<p class="codeExample"> PruneBranch  <br /> </p>
+    		
+    	</div>
+
+    	<div>
+    		<a  href="#TOPOFPAGE"> Contents </a>
+	</div>
+    	
+		<!-- 
+			
+			================================  Curves ===============================
+			
+		-->
+
+	<div>
+		<h2> Curves </h2> 
+	</div>
+
+
+  	    <!--  MoveOnAxisWithLine  -->
+    	<div >
+    		<a name="MoveOnAxisWithLine"> </a>
+    		<p class="codeHeader">  MoveOnAxisWithLine : &lt; axis &gt; : &lt; length &gt;</p>
+    		<p>  Moves the Turtle along it's local axis and creates a line from it's begining and end position.  
+    			This command is provided as an equivalent to "F" (go with pen down) described in ABOP.<br />
+    		</p>
+    		<p>    			
+    		&lt; axis &gt; = 0 for x axis, 1 for y axis, 2 for z axis <br />
+    		&lt; length &gt; = length of the line to draw and distance to move <br />
+    		
+    		</p>
+			<p class="codeExample"> 
+				#draws a line along the x axis (heading) of the length set in variable "dist"<br />
+				Line : 0 :  dist <br /> 
+			</p>
+    		
+    	</div>
+
+  	    <!--  Line  -->
+    	<div >
+    		<a name="Line"> </a>
+    		<p class="codeHeader">  Line : &lt; plane &gt; : &lt; destination &gt; : &lt; x &gt; : &lt; y &gt; : &lt; z &gt;</p>
+    		<p>  Creates a line from the Turtle's current position to the coordinates in the local plane space specified.   
+    			The plane is defined locally to the Turtle, meaning that orientation in world space is preserved; i.e.: (the YZ Plane is constructed from the turtle's current y and z axis).
+    			The Turtle is not moved in the command.
+    			The destination controls where the resulting Line is put: the Curve Stack, the Rhino Document, or both.  
+    			Remember that you are still responsible for calling PushCurveStack before any curves are placed on the stack.<br />
+    		</p>
+    		<p>    			
+    		&lt; plane &gt; = 0 for xy plane, 1 for yz plane, 2 for xz plane <br />
+    		&lt; destination &gt; = 0 for Curve Stack, 1 for Document, 2 for both <br />
+    		&lt; x &gt; = x component of line end point <br />
+    		&lt; y &gt; = y component of line end point <br />
+    		&lt; z &gt; = z component of line end point <br />
+    		</p>
+			<p class="codeExample"> 
+				#draws a line in the local xy plane,<br />
+				Line : 0 : 0 : 3 : 3 : 3 <br /> 
+			</p>
+    		
+    	</div>
+    	
+         	    <!--  Arc  -->
+    	<div >
+    		<a name="Arc"> </a>
+    		<p class="codeHeader">  Arc : &lt; plane &gt; : &lt; destination &gt; : &lt; radius &gt; : &lt; start angle &gt; : &lt; end angle &gt;</p>
+    		<p> Creates an arc in the plane specified centered at the Turtle's position and drawn at the radius specified, from the start angle to the end angle.   
+    			The plane is defined locally to the Turtle, meaning that orientation in world space is preserved; i.e.: (the YZ Plane is constructed from the turtle's current y and z axis).  
+    			The Turtle is not moved in the command.  
+    			The destination controls where the resulting Arc is put: the Curve Stack, the Rhino Document, or both.  
+    			Remember that you are still responsible for calling PushCurveStack before any curves are placed on the stack.<br />
+    		</p>
+    		<p>    			
+    		&lt; plane &gt; = 0 for xy plane, 1 for yz plane, 2 for xz plane <br />
+    		&lt; destination &gt; = 0 for Curve Stack, 1 for Document, 2 for both <br />
+    		&lt; major radius &gt; = major radius of the ellipse (x axis) <br />
+    		&lt; minor radius &gt; = minor radius of the ellipse (y axis)<br />
+    		
+    		</p>
+			<p class="codeExample"> 
+				#draws an arc on the local xy plane with radius of 1, from 30 to 270 degrees<br />
+				#the arc is created in the current document <br /> 
+				Arc : 0 : 1 : 10 : rad(30) : rad(270)  <br /> 
+			</p>
+    		
+    	</div>
+    	
+    	    	
+
+  	    <!--  Circle  -->
+    	<div >
+    		<a name="Circle"> </a>
+    		<p class="codeHeader">  Circle : &lt; plane &gt; : &lt; destination &gt; : &lt; radius &gt;</p>
+    		<p>  Creates a circle in the plane specified, centered at the Turtle's position using the radius provided.  
+    			The plane is defined locally to the Turtle, meaning that orientation in world space is preserved; i.e.: (the YZ Plane is constructed from the turtle's current y and z axis).
+    			The Turtle is not moved in the command.  
+    			The destination controls where the resulting Circle is put: the Curve Stack, the Rhino Document, or both.  
+    			Remember that you are still responsible for calling PushCurveStack before any curves are placed on the stack.<br />
+    		</p>
+    		<p>    			
+    		&lt; plane &gt; = 0 for xy plane, 1 for yz plane, 2 for xz plane <br />
+    		&lt; destination &gt; = 0 for Curve Stack, 1 for Document, 2 for both <br />
+    		&lt; radius &gt; = radius of the circle <br />
+    		
+    		</p>
+			<p class="codeExample"> 
+				#draws a circle on the local xy plane with a radius set in variable "radius"<br />
+				#the circle is drawn in the document and not placed in the curve stack
+				Circle : 0 :  1 :  radius  <br /> 
+			</p>
+    		
+    	</div>
+    	
+    	
+    	
+     	    <!--  Ellipse  -->
+    	<div >
+    		<a name="Ellipse"> </a>
+    		<p class="codeHeader">  Ellipse : &lt; plane &gt; : &lt; destination &gt; : &lt; major radius &gt; : &lt; minor radius &gt;</p>
+    		<p>  Creates an ellipse in the plane specified, centered at the Turtle's position using the major and minor radii provided.  
+    			The plane is defined locally to the Turtle, meaning that orientation in world space is preserved; i.e.: (the YZ Plane is constructed from the turtle's current y and z axis).
+    			The Turtle is not moved in the command.
+    			The destination controls where the resulting Ellipse is put: the Curve Stack, the Rhino Document, or both.  
+    			Remember that you are still responsible for calling PushCurveStack before any curves are placed on the stack.<br />
+    		</p>
+    		<p>    			
+    		&lt; plane &gt; = 0 for xy plane, 1 for yz plane, 2 for xz plane <br />
+    		&lt; destination &gt; = 0 for Curve Stack, 1 for Document, 2 for both <br />
+    		&lt; major radius &gt; = major radius of the ellipse (x axis) <br />
+    		&lt; minor radius &gt; = minor radius of the ellipse (y axis)<br />
+    		
+    		</p>
+			<p class="codeExample"> 
+				#draws an ellipse on the local xy plane with radii set in variables "r1" and "r2"<br />
+				#the ellipse is pushed to the curve stack </br>
+				Ellipse : 0 :  0 :  r1 : r2  <br /> 
+				
+				</p>
+    		
+    	</div>
+     
+     
+ 
+     
+          
+          	    <!--  Polygon  -->
+    	<div >
+    		<a name="Polygon"> </a>
+    		<p class="codeHeader">  Polygon : &lt; plane &gt; : &lt; destination &gt; : &lt; radius &gt; : &lt; sides &gt; </p>
+    		<p>  Creates a polygon in the plane specified.   The plane is defined locally to the Turtle, meaning that orientation in world space is preserved; i.e.: (the YZ Plane is constructed from the turtle's current y and z axis).
+    			The polygon is centered at the Turtle's position and is drawn inscribed in the radius specified with the number of sides specified.  The Turtle is not moved in the command.
+    			The destination controls where the resulting Arc is put: the Curve Stack, the Rhino Document, or both.  
+    			Remember that you are still responsible for calling PushCurveStack before any curves are placed on the stack.<br />
+    		</p>
+    		<p>
+    		&lt; plane &gt; = 0 for xy plane, 1 for yz plane, 2 for xz plane <br />
+    		&lt; destination &gt; = 0 for Curve Stack, 1 for Document, 2 for both <br />
+    		&lt; radius &gt; = major radius of the ellipse (x axis) <br />
+ 
+    		</p>
+    		
+			<p class="codeExample"> 
+				#draws a polygon on the local xy plane with radius of 5 with 7 sides<br />
+				#the arc is created in the current document <br /> 
+				Polygon : 0 : 1 : 5 : 7  <br /> 
+				
+				</p>
+    		
+    	</div>
+     
+    	<div>
+    		<a  href="#TOPOFPAGE"> Contents </a>
+	</div>    	
+    	
+    	<!-- 
+			
+		================================  Point Stack ===============================
+			
+	-->	      
+     
+    	<div>
+		<h2> Point Stack </h2> 
+	</div>
+
+    	<!--  PushPointStack -->
+    	<div>
+    		<a name="PushPointStack"> </a>
+    		<p class="codeHeader">  PushPointStack   </p>
+    		<p>
+    			Pushes a new point list onto the point stack.  This must always be called before you can append points to the point list.
+    		</p>
+    		
+    		<p class="codeExample"> PushPointStack  <br /> </p>
+    		
+    	</div>     
+     
+
+    	<!--  Point -->
+    	<div>
+    		<a name="Point"> </a>
+    		<p class="codeHeader">  Point : &lt; destination &gt; : &lt; front &gt;  </p>
+    		<p>
+    			Records the Turtle's position in the current point list and or creates a Point in the document. 
+    			The flag "front" is a boolean value used when adding points to the Point Stack.  
+    			It must be provided even if you are not creating a point on the Point Stack (it is ignored if the destination is document).  
+    			Remember that you are responsible for intializing the Point Stack before creating points there.
+    		</p>
+   		<p>    			
+    		
+    		&lt; destination &gt; = 0 for Point Stack, 1 for Document, 2 for both <br />
+    		&lt; front &gt; = boolean: true= point is added to front of point list, false=end of point list (this flag must always be provided)<br />
+
+    		</p>    		
+    		<p class="codeExample"> 
+    			# create a point in the document using pre-defined constants for flags </br>
+    			Point : D_DOC : FALSE <br /> 
+    			
+    			</p>
+    		
+    	</div>       
+     
+     
+     
+     
+    	<!--  PopPointsToCurve -->
+    	<div>
+    		<a name="PopPointsToCurve"> </a>
+    		<p class="codeHeader">  PopPointsToCurve  : &lt; destination &gt; : &lt; close &gt;</p>
+    		<p>
+    			Takes the current point list and builds a curve from the points.  
+    			A list of 2 points will generate a Line.  A list of 3 points will generate a three-point Arc (start, point on cuvrve, end).  
+    			If the list has more than 3 points, an interpolated curve is generated (3rd degree).  
+    			You can also create closed curves.  If a closed curve is specified for 3 points a circle is created instead of an arc. 
+    			The destination controls where the resulting Curve is put: the Curve Stack, the Rhino Document, or both.  
+    			Remember that you are still responsible for calling PushCurveStack before any curves are placed on the stack.<br />
+    		</p>
+  			<p>
+
+    			&lt; destination &gt; = 0 for Curve Stack, 1 for Document, 2 for both <br />
+    			&lt; close &gt; = 0 for open curve, 1 for closed curve <br />
+
+ 
+    		</p>    		
+    		<p class="codeExample"> 
+    			#creates and open curve in document and push the curve to curve stack <br />
+    			PopPointsToCurve : 2 : 0 <br />
+    			
+    		 </p>
+    		
+    	</div>       
+     
+    	<!--  PopPointsToPolyline -->
+    	<div>
+    		<a name="PopPointsToPolyline"> </a>
+    		<p class="codeHeader">  PopPointsToPolyline  : &lt; destination &gt; : &lt; close &gt;</p>
+    		<p>
+    			Takes the current point list and builds a polyline from the points.  
+    			The destination controls where the resulting Curve is put: the Curve Stack, the Rhino Document, or both.  
+    			Remember that you are still responsible for calling PushCurveStack before any curves are placed on the stack.<br />
+    		</p>
+  			<p>
+
+    			&lt; destination &gt; = 0 for Curve Stack, 1 for Document, 2 for both <br />
+    			&lt; close &gt; = 0 for open curve, 1 for closed curve <br />
+
+ 
+    		</p>    		
+    		<p class="codeExample"> 
+    			#create a closed polyline on the curve stack <br />
+    			PopPointsToPolyline : 0 : 1 <br />
+    			
+    		 </p>
+    		
+    	</div>      
+     
+    	<!--  PopPointsToPolygons -->
+    	<div>
+    		<a name="PopPointsToPolygons"> </a>
+    		<p class="codeHeader">  PopPointsToPolygons   </p>
+    		<p>
+    			*** This is currently a work in progress -  Three point faces work well. *** </br>
+    			Takes the current point list and builds a mesh from the points.  
+    			The point list must contain at least 3 points to generate a mesh.  Currently, a best fit planar texture mapping is applied.  
+    			This command takes no arguments.
+    			<br />
+    		</p>
+   		
+    		<p class="codeExample"> 
+    			#create a mesh from the current point stack<br />
+    			PopPointsToPolygons<br />
+    			
+    		 </p>
+    		
+    	</div>      
+          
+       <!--  PopPointsToMeshBorder -->
+    	<div>
+    		<a name="PopPointsToMeshBorder"> </a>
+    		<p class="codeHeader">  PopPointsToMeshBorder   </p>
+    		<p>
+    			This is the equivalent to the Rhino Command for creating a mesh from a closed polyline.  
+    			The points are used to create a closed polyline which is used as the mesh border.  
+    			Currently, a best fit planar texture mapping is applied.  
+    			This command takes no arguments.
+    			<br />
+    		</p>
+   		
+    		<p class="codeExample"> 
+    			#create a mesh from a closed polyline built from the current point stack<br />
+    			PopPointsToMeshBorder<br />
+    			
+    		 </p>
+    		
+    	</div>
+     
+    	<div>
+    		<a  href="#TOPOFPAGE"> Contents </a>
+	</div>    		
+    	<!-- 
+			
+		================================  Curve Stack ===============================
+			
+	-->	      
+     
+     	<div>
+		<h2> Curve Stack </h2> 
+		</div>
+		
+         	<!--  PushCurveStack -->
+    	<div>
+    		<a name="PushCurveStack"> </a>
+    		<p class="codeHeader">  PushCurveStack   </p>
+    		<p>
+    			Creates a new Curve List on the Curve Stack.  This command takes no arguments.
+    			<br />
+    		</p>
+   		
+    		<p class="codeExample"> 
+    			#push new curve list to stack<br />
+    			PushCurveStack<br />
+    			
+    		 </p>
+    		
+    	</div>   
+     
+        <!--  PopCurveStackToLoft -->
+    	<div>
+    		<a name="PopCurveStackToLoft"> </a>
+    		<p class="codeHeader">  PopCurveStackToLoft  : &lt; normalize seam &gt; : </p>
+    		<p>
+    			Pops the current curve list and builds a lofted surface from the curves.  There must be at least two curve in the Curve List.  
+    			You can use normalize seam to unify the indvidual curve's seam points with minimal twisting.  This operation will take longer.
+    			
+    			<br />
+    		</p>
+    		<p>
+    			&lt; normalize &gt; = 1 true, 0 for false: normalizes the surface seam <br />
+    		</p>
+   		
+    		<p class="codeExample"> 
+    			#create a loft from the curves on the stack with a normalized seam<br />
+    			PopCurveStackToLoft : TRUE <br />
+    			
+    		 </p>
+    		
+    	</div>   
+    	
+    	
+        <!--  PopCurveStackToSweep -->
+    	<div>
+    		<a name="PopCurveStackToSweep"> </a>
+    		<p class="codeHeader">  PopCurveStackToSweep   </p>
+    		<p>
+    			Pops the current curve list and builds a sweep surface with one or two rails from the curves.  If there are two curves on the stack, then first is the rail and the second is the shape.  
+    			If there are three curves on the stack, then first and second are the rails and the second is the shape.  
+    			This command takes no arguments.
+    			<br />
+    		</p>
+   		
+    		<p class="codeExample"> 
+    			#create sweep surface<br />
+    			PopCurveStackToSweep<br />
+    			
+    		 </p>
+    		
+    	</div>      	
+    	
+    	
+    	
+        <!--  PopCurveStackToRevolve -->
+    	<div>
+    		<a name="PopCurveStackToRevolve"> </a>
+    		<p class="codeHeader">  PopCurveStackToRevolve : &lt; axis &gt; : &lt; start angle &gt; : &lt; end angle &gt;  </p>
+    		<p>
+    			Pops the current curve list and builds a revolve surface with it by rotating around a local access from start to end angle.  
+    			There can be only one curve on the stack.  
+    			<br />
+    		</p>
+   		    <p>    			
+    			&lt; axis &gt; = 0 for x axis, 1 for y axis, 2 for z axis <br />
+    			&lt; start angle &gt; = start angle of revolution <br />
+    			&lt; end angle &gt; = end angle of revolution <br />
+    			
+    		</p>
+    		<p class="codeExample"> 
+    			#create a revolve surface by revolving a curve around z axis from 45-135 degrees<br />
+    			PopCurveStackToRevolve : 2 : rad(45) : rad(135)<br />
+    			
+    		 </p>
+    		
+    	</div>       	
+    	
+    	
+        <!--  PopCurveStackToExtrude -->
+    	<div>
+    		<a name="PopCurveStackToExtrude"> </a>
+    		<p class="codeHeader">  PopCurveStackToExtrude : &lt; height &gt; : &lt; cap &gt;  </p>
+    		<p>
+    			Pops the current curve list and extrudes the curve.  There should be only one curve in the curve list.
+    			You can cap the extrude to create a solid form.   
+    			<br />
+    		</p>
+   		    <p>    			
+    			&lt; height &gt; = height of the extrusion <br />
+    			&lt; cap &gt; = create cap: 1 = caps, 0 = no caps <br />
+    			
+    		</p>
+    		<p class="codeExample"> 
+    			#extrudes the curve in the current curve list stack<br />
+    			#shape is 5 units high with caps </br>
+    			PopCurveStackToExtrude : 5 : 1 <br />
+    			
+    		 </p>
+    		
+    	</div>     	
+    	
+    	<div>
+    		<a  href="#TOPOFPAGE"> Contents </a>
+	</div>    	
+    	<!-- 
+			
+		================================  Solids ===============================
+			
+	-->	
+	<div>
+		<h2> Solids </h2> 
+	</div>
+
+    	<div>
+    		<a name="Sphere"> </a>
+    		<p class="codeHeader">  Sphere : &lt; radius &gt;  </p>
+    		<p>
+    			Creates a Sphere at the Turtle's origin.
+    			<br />
+    		</p>
+   		<p>    			
+    			&lt; radius &gt; = radius of the sphere <br /> 
+    			
+    		</p>
+    		<p class="codeExample"> 
+    			# create a sphere with a radius of 10 <br />
+    			Sphere : 10 <br />
+    			
+    		 </p>
+    		
+    	</div> 
+
+    	<div>
+    		<a name="Cube"> </a>
+    		<p class="codeHeader">  Cube : &lt; plane &gt;  : &lt; size x &gt; : &lt; size y &gt; : &lt; size z &gt;   </p>
+    		<p>
+    			Creates a Cube centered at the local plane's origin.   The Cube is created using the z,y,z dimensions.
+    			<br />
+    		</p>
+    		<p>
+    			&lt; plane &gt; = 0 for xy plane, 1 for yz plane, 2 for xz plane <br /> 
+    			&lt; size x &gt; = x dimension of cube <br />
+    			&lt; size y &gt; = y dimension of cube <br />
+    			&lt; size z &gt; = z dimension of cube <br />
+    		</p>
+    		<p class="codeExample"> 
+    			# create a uniform cube of 3 units in the local YZ plane <br />
+    			Cube : 1 : 3 : 3 : 3 <br />
+    			
+    		 </p>
+    		
+    	</div>     	
+    	
+    	<div>
+    		<a name="Cylinder"> </a>
+    		<p class="codeHeader">  Cylinder : &lt; plane &gt;  : &lt; radius &gt; : &lt; height &gt;  </p>
+    		<p>
+    			Creates a Cylinder with it's base centered at the local plane's origin.  The cylinder's height is in the plane's z positive direction. 
+    			<br />
+    		</p>
+    		<p>
+    			&lt; plane &gt; = 0 for xy plane, 1 for yz plane, 2 for xz plane <br /> 
+    			&lt; radius &gt; = radius of cylinder <br />
+    			&lt; height &gt; = height of the cylinder <br />
+    		</p>
+    		<p class="codeExample"> 
+    			# create a cylinder in the local XY plane </br>
+    			# with a radius of 2 and height of 5 <br />
+    			Cylinder : 0 : 2 : 5 <br />
+    			
+    		 </p>
+    		
+    	</div>      	
+    	
+    	
+    	<div>
+    		<a name="Cone"> </a>
+    		<p class="codeHeader">  Cone : &lt; plane &gt;  : &lt; radius &gt; : &lt; height &gt;  </p>
+    		<p>
+    			Creates a Cone centered at the local plane's origin.  The cone's apex is in the plane's z positive direction, base at origin. 
+    			<br />
+    		</p>
+    		<p>
+    			&lt; plane &gt; = 0 for xy plane, 1 for yz plane, 2 for xz plane <br /> 
+    			&lt; radius &gt; = radius of cone's base circle <br />
+    			&lt; height &gt; = height of the cone <br />
+    		</p>
+    		<p class="codeExample"> 
+    			# create a cone in the local XY plane <br/>
+    			# with a radius of 2 and height of 5 <br />
+    			Cone : 0 : 2 : 5 <br />
+    			
+    		 </p>
+    		
+    	</div>     	
+    	
+    	<div>
+    		<a  href="#TOPOFPAGE"> Contents </a>
+	</div>    	
+    	<!-- 
+			
+			================================  Blocks ===============================
+			
+	-->	      
+
+	<div>
+		<h2> Blocks </h2> 
+	</div>
+
+    	<div>
+    		<a name="InsertBlock"> </a>
+    		<p class="codeHeader">  InsertBlock : &lt; plane &gt; : &lt; id &gt; : &lt; scale x &gt; : &lt; scale y &gt; : &lt; scale z &gt;   </p>
+    		<p>
+    			Inserts a block reference into the model oriented to the local Turtle plane specified.  The Turtle's position is used as the insertion point,  
+    			and the block is scaled according to the x,y,z scale inputs.  
+    			The block name is composed of  the prefix: "LSystemBlockRef" with 'id' (an integer value) appended to the end.  
+    			I.e.: "LSystemBlockRef1", "LSystemBlockRef45106".   If the block does not exit in the model, it will be created so you may redefine the geometry after the LSystem has executed. 
+    			<br />
+    		</p>
+   		    <p>    			
+    			&lt; plane &gt; = 0 for xy plane, 1 for yz plane, 2 for xz plane <br /> 
+    			&lt; id &gt; = integer value to append to name prefix forming the block name <br />
+    			&lt; scale x &gt; = x scale factor of block <br />
+    			&lt; scale y &gt; = y scale factor of block <br />
+    			&lt; scale z &gt; = z scale factor of block <br />
+    			
+    		</p>
+    		<p class="codeExample"> 
+    			#insert block LSystemBlockRef33 in the local xy plane<br />
+    			# scale block by 1,4,2 in x,y,z <br />
+    			InsertBlock : 0 : 33 : 1 : 4 : 2 <br />
+    			
+    		 </p>
+    		
+    	</div> 
+    	
+    	<div>
+    		<a  href="#TOPOFPAGE"> Contents </a>
+	</div>
+    	
+    	<!-- 
+			
+			================================  Parametric Objects ===============================
+			
+	-->	      
+
+	<div>
+		<h2> Parametric Objects </h2> 
+	</div>    	
+    	
+	    	<!--  BranchSection -->
+    	<div >
+    		<a name="BranchSection"> </a>
+    		<p class="codeHeader">  BranchSection : &lt; plane &gt; : &lt; radius &gt; : &lt; randomness &gt; : &lt; detail &gt; </p>
+    		<p>  
+    		  Experimental parametric object designed for use with loft surfaces.   This creates a closed curve with randomess directly into the Turtle's curve stack.  
+    		  The curve is basically a circle with randomness applied.  The amount of detail (number of points) determines the final shape based on the randomness.  
+    		  Remember that you are responsible for creating a curve list before this is called (PushCurveStack).
+
+    		  <br />
+    		</p>
+    		<p>    	
+		&lt; plane &gt; = 0 for xy plane, 1 for yz plane, 2 for xz plane <br /> 		
+    		&lt; radius &gt; = rough radius of closed curve  <br />
+    		&lt; randomness &gt; = randomness of closed curve from 0 to 1 <br />
+    		&lt; detail &gt; = number of points in curve, min=3 <br />
+    		
+    		</p>
+
+		<p class="codeExample"> 
+			#create a branch section on the curve stack <br />
+			# section has a rough radius of 2 with 0.2 randomness and five control points <br />
+			BranchSection : 0 : 2 : 0.2 : 5 <br /> 
+		</p>
+    		
+    	</div> 
+	
+	    	<!--  StraightTube -->
+    	<div >
+    		<a name="StraightTube"> </a>
+    		<p class="codeHeader">  StraightTube : &lt; radius &gt; : &lt; length &gt; : &lt; radius factor &gt; : &lt; cap &gt; </p>
+    		<p>  
+    		  Creates a straight tube with a taper and optional half sphere cap.
+
+    		  <br />
+    		</p>
+    		<p>    	
+			&lt; radius &gt; = radius of tube in radians at base <br /> 		
+			&lt; length &gt; = length of tube  <br />
+			&lt; radius factor &gt; = multiplier for end radius of tube (scales radius)  <br />
+			&lt; cap &gt; = creates semi-spherical cap: 1=cap, 0=no cap <br />
+    		
+    		</p>
+
+		<p class="codeExample"> 
+			
+			# create a tube with a radius of 2 and length of dist <br />
+			#tube will be straight since factor is 1.0 (no taper), also cap is created <br />
+			StraightTube : 2 : dist : 1.0 : 1 <br /> 
+		</p>
+    		
+    	</div>     	
+	
+	</div>    	
+    	
+	    	<!--  Petal -->
+    	<div >
+    		<a name="Petal"> </a>
+    		<p class="codeHeader">  Petal : &lt; length &gt; : &lt; width &gt; : &lt; width bias &gt; : &lt; curl &gt; : &lt; detail &gt; </p>
+    		<p>  
+    		  Experimental parametric object designed as a general purpose petal or leaf.   This creates a petal shape (Surface) along the Turtle's heading (x axis).  
+    		  The petal is a general oval based on length and width.  The width bias controls where the buldge of the oval is (0=beginning, 1 = tip).  
+    		  Curl controls how much the petal curls into itself - this is the overall value in radians.  The detail will effect this final shape.  
+    		  Too little detail with a large curl makes segmented objects.
+
+    		  <br />
+    		</p>
+    		<p>    	
+		&lt; length &gt; = length of the petal <br /> 		
+    		&lt; width &gt; = width of the petal  <br />
+    		&lt; width bias &gt; = where width is applied to petal: 0=base, 0.5 = middle, 1 = end <br />
+    		&lt; curl &gt; = amount of curl in petal in radians (overall rotation)<br />
+    		&lt; detail &gt; = amount of detail in final petal surface, the more detail there is, the smoother the curled shape: min=3 <br />
+    		
+    		</p>
+
+		<p class="codeExample"> 
+			#create a petal along the turtle's heading <br />
+			# use variables len, wid, bias, and curl, with a constant detail of 6 <br />
+			Petal : len : wid : bias : curl : 6 <br /> 
+		</p>
+    		
+    	</div> 	
+    	
+    	<div>
+    		<a  href="#TOPOFPAGE"> Contents </a>
+	</div>
+    	
+    	<!-- 
+			
+			================================  Presentation ===============================
+			
+	-->	      
+
+	<div>
+		<h2> Presentation </h2> 
+	</div>
+
+    	<!--  SetColor -->
+    	<div >
+    		<a name="SetColor"> </a>
+    		<p class="codeHeader">  SetColor : &lt; r &gt; : &lt; g &gt; : &lt; b &gt; </p>
+    		<p>  Sets the display color of created document objects using 0-255 integer valuse for red, green and blue components.<br />
+    		</p>
+    		<p>    			
+    		&lt; r &gt; = red  <br />
+    		&lt; g &gt; = green <br />
+    		&lt; b &gt; = blue <br />
+    		
+    		</p>
+
+			<p class="codeExample"> 
+				#set the display color to blue<br /> 
+				SetColor : 0 : 0 : 255 <br /> 
+			</p>
+    		
+    	</div>     
+     
+    	<!--  SetPlotColor -->
+    	<div >
+    		<a name="SetPlotColor"> </a>
+    		<p class="codeHeader">  SetPlotColor : &lt; r &gt; : &lt; g &gt; : &lt; b &gt; </p>
+    		<p>  Sets the plot color of created document objects using 0-255 integer valuse for red, green and blue components.<br />
+    		</p>
+    		<p>    			
+    		&lt; r &gt; = red  <br />
+    		&lt; g &gt; = green <br />
+    		&lt; b &gt; = blue <br />
+    		
+    		</p>
+
+			<p class="codeExample"> 
+				#set the plot color to a dark grey<br /> 
+				SetColor : 20 : 20 : 20 <br /> 
+			</p>
+    		
+    	</div>     
+          
+    	<!--  SetLineWeight -->
+    	<div >
+    		<a name="SetLineWeight"> </a>
+    		<p class="codeHeader">  SetLineWeight : &lt; weight &gt; </p>
+    		<p>  Sets the line weight of created document objects.  This is the width of the plotted line using document set units.<br />
+    		</p>
+    		<p>    			
+    		&lt; weight &gt; = line weight  <br />
+
+    		
+    		</p>
+
+			<p class="codeExample"> 
+				#set the linweight to 0.5 (mm set in document)<br /> 
+				SetLineWeight : 0.5 <br /> 
+			</p>
+    		
+    	</div>  
+    	
+    	
+    	<!--  SetLayer -->
+    	<div >
+    		<a name="SetLayer"> </a>
+    		<p class="codeHeader">  SetLayer : &lt; id &gt; </p>
+    		<p>  Sets the layer that document objects are created on.  The name of the layer is derived from the prefix: "LSystemLayer" with the ID provided appended to the end.  
+    			If the layer does not exist, it is created.<br />
+    		</p>
+    		<p>    			
+    		&lt; id  &gt; = layer name ID  <br />
+    		</p>
+
+			<p class="codeExample"> 
+				#set the layer to "LSystemLayer11235" <br /> 
+				SetLayer : 11235 <br /> 
+			</p>
+    		
+    	</div>    
+    	
+    	<!--  SetMaterial -->
+    	<div >
+    		<a name="SetMaterial"> </a>
+    		<p class="codeHeader">  SetMaterial : &lt; id &gt; </p>
+    		<p>  Sets the material that document objects are created with.  The name of the material is derived from the prefix: "LSystemMaterial" with the ID provided appended to the end.  
+    			If the material does not exist, it is created. <br />
+    		</p>
+    		<p>    			
+    		&lt; id  &gt; = material name ID  <br />
+    		</p>
+
+			<p class="codeExample"> 
+				#set the material to "LSystemMaterial3" <br /> 
+				SetMaterial : 3 <br /> 
+			</p>
+    		
+    	</div>  
+
+    	<div>
+    		<a  href="#TOPOFPAGE"> Contents </a>
+	</div>
+    	
+    	<!-- 
+			
+			================================  Debugging ===============================
+			
+	-->	      
+
+	<div>
+		<h2> Debugging </h2> 
+	</div>
+    	
+    	<!--  PlaneAxes -->
+    	<div>
+    		<a name="PlaneAxes"> </a>
+    		<p class="codeHeader">  PlaneAxes : &lt; scale &gt;  </p>
+    		<p>
+    			Draws a line with an arrow for each of the Turtle's plane axes (red = x, green=y, blue = z).  Lines are drawn from the Turtle's current position (origin).  
+    			This is intended as a helper to show how the turtle is moving.
+    		</p>
+    		<p>
+    			&lt; scale &gt; = scale of x,y,z plane vector lines<br />
+    		</p>
+    		
+    		<p class="codeExample"> 
+    			#draw each axis of the turtle at a scale of 3<br /> 
+    			PlaneAxes : 3 <br /> 
+    			</p>
+    		
+    	</div>     	  	
+    	       
+    	<div>
+    		<a  href="#TOPOFPAGE"> Contents </a>
+	</div>
+    	
+    </body>
+</html>

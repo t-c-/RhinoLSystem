@@ -1,0 +1,12 @@
+
+
+#
+#  Example showing a Cylinder
+#
+
+
+lsystem : cylinder
+
+	axiom : C
+	alias : C : Cylinder : 0 : 2 : 10
+

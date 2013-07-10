@@ -1,0 +1,119 @@
+
+# based on the book:
+#  The Algorithmic Beauty of Plants
+#
+# by:
+#  Przemyslaw Prusinkiewicz
+#  Aristid Lindenmayer
+#
+
+
+#
+#  Example a, Figure 1.16 on page 17
+#
+
+
+lsystem : abop_pg17_a_116
+
+
+	define : theta : rad(90)
+	define : dist : 1
+
+	derivations : 3
+
+	axiom : -L
+
+	production :*: L :*:*: LF+RFR+FL-F-LFLFL-FRFR+
+	production :*: R :*:*: -LFLF+RFRFR+F+RF-LFL-FR
+
+
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	alias : R : null
+	alias : L : null
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+
+
+
+#
+#  this does not come out as expected... 
+#  not sure why (error in ABOP def?)
+#
+#  Example b, Figure 1.16 on page 17
+#
+lsystem : abop_pg17_b_116_invalid
+
+
+	define : theta : rad(90)
+	define : dist : 1
+
+	derivations : 2
+
+	axiom : -L
+
+	production :*: L :*:*: LFLF+RFR+FLFL-FRF-LFLFR+F+RF-LFL-FRFRFR+
+	production :*: R :*:*: -LFLFLF+RFR+FL-F-LF+RFR+FLF+RFRF-LFL-FRFR
+
+
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	alias : R : null
+	alias : L : null
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+
+#
+#  Example a, Figure 1.17 on page 17
+#
+lsystem : abop_pg17_a_117
+
+
+	define : theta : rad(90)
+	define : dist : 1
+
+	derivations : 2
+
+	axiom : L
+
+	production :*: L :*:*: LFRFL-F-RFLFR+F+LFRFL
+	production :*: R :*:*: RFLFR+F+LFRFL-F-RFLFR
+
+
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	alias : R : null
+	alias : L : null
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+
+
+
+
+#
+#  this does not come out as expected... 
+#  not sure why (error in ABOP def?)
+#
+#
+#  Example b, Figure 1.17 on page 17
+#
+lsystem : abop_pg17_b_117_invalid
+
+
+	define : theta : rad(45)
+	define : dist : 1
+
+	derivations : 2
+
+	axiom : L
+
+
+	production :*: L :*:*: L+F+R-F-L+F+R-F-L-F-R+F+L-F-R-F-L+F+R-F-L-F-R-FL+F+R+F+L+F+R-F-L+F+R+F+L-R-F+F+L+F+R-F-L+F+R-F-L
+	production :*: R :*:*: R-F-L+F+R-F-L+F+R+F+L-F-R+F+L+F+R-F-L+F+R+F+L+F+R-F-L-F-R-F-L+F+R-F-L-F-R+F+L-F-R-F-L+F+R-F-L+F+R
+
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	alias : R : null
+	alias : L : null
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+
+
+
+

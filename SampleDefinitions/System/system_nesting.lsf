@@ -1,0 +1,78 @@
+
+
+#
+#  Example demonstrating nested LSystems
+#  and variable passing through the chain
+#
+
+#
+#  The vaiable RAD is defined in all systems 
+#   and overridden on the way down by each subsystem
+#
+
+lsystem : root
+
+	define : RAD : 1
+
+	axiom : S(RAD)
+	group : S(r) : C(r)N(r)
+	alias : C(r) : Circle : PLANE_XY : D_DOC : r
+	subsystem : N(r) : 1 : RAD : r + 1
+
+
+lsystem : 1
+
+	define : RAD : 1
+
+	axiom : S(RAD)
+	group : S(r) : C(r)N(r)
+	alias : C(r) : Circle : PLANE_XY : D_DOC : r
+	subsystem : N(r) : 2 : RAD : r + 1
+
+lsystem : 2
+
+	define : RAD : 1
+
+	axiom : S(RAD)
+	group : S(r) : C(r)N(r)
+	alias : C(r) : Circle : PLANE_XY : D_DOC : r
+	subsystem : N(r) : 3 : RAD : r + 1
+
+lsystem : 3
+
+	define : RAD : 1
+
+	axiom : S(RAD)
+	group : S(r) : C(r)N(r)
+	alias : C(r) : Circle : PLANE_XY : D_DOC : r
+	subsystem : N(r) : 4 : RAD : r + 1
+
+lsystem : 4
+
+	define : RAD : 1
+
+	axiom : S(RAD)
+	group : S(r) : C(r)N(r)
+	alias : C(r) : Circle : PLANE_XY : D_DOC : r
+	subsystem : N(r) : 5 : RAD : r + 1
+
+lsystem : 5
+
+	define : RAD : 1
+
+	axiom : S(RAD)
+	group : S(r) : C(r)N(r)
+	alias : C(r) : Circle : PLANE_XY : D_DOC : r
+	subsystem : N(r) : 6 : RAD : r + 1
+
+lsystem : 6
+
+	define : RAD : 1
+	axiom : L(RAD,0)L(0,RAD)L(-RAD,0)L(0,-RAD)
+	alias : L(x,y) : Line : PLANE_XY : D_DOC : x : y : 0
+
+
+	
+
+
+	

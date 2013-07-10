@@ -1,0 +1,36 @@
+
+
+#
+#  Example showing Ellipses
+#
+
+lsystem : ellipses
+
+
+	axiom : EFEFEFEFE
+
+
+	alias : F : MoveOnAxis : 0 : 3
+	alias : E : Ellipse : 1 : 1 : 1 : 2
+
+
+#
+#  Example showing ellipses in creating a surface
+#
+
+lsystem : ellipse_surface
+
+	
+	define : theta : rad(60)
+
+	axiom: {E+UE+UE+UE+UE}
+	
+
+	alias : E : Ellipse : PLANE_XY : D_STACK : 1 : 2
+	alias : + : RotateOnAxis : AXIS_Z : theta
+	alias : U : MoveOnAxis : AXIS_Z : 1.5
+	alias : { : PushCurveStack
+	alias : } : PopCurveStackToLoft : FALSE
+	
+	
+

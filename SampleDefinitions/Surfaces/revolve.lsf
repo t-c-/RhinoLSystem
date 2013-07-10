@@ -1,0 +1,21 @@
+
+
+
+
+lsystem : revolve
+
+
+	axiom : {[FA]}
+
+
+
+	alias : F : MoveOnAxis : 1 : -1
+	alias : A : Arc : 1 : 2 : 1 : rad(75) : rad(275)
+
+	alias : { : PushCurveStack
+	alias : } : PopCurveStackToRevolve : 2 : rad(0) : rad(90)
+
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+

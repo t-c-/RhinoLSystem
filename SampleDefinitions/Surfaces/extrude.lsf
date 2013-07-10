@@ -1,0 +1,47 @@
+
+
+
+
+#
+#  Example extrudes an ellipse
+#  
+
+lsystem : extrude_example1
+
+
+	axiom : <e>
+
+	alias : e : Ellipse : 0 : 2 : 4 : 2
+
+	alias : < : PushCurveStack
+	alias : > : PopCurveStackToExtrude : 10 : 1
+
+
+#
+#  Extrudes a free form curve
+#  
+
+
+lsystem : extrude_example2
+
+
+
+	define : dist : 5
+	define : theta : rad(45)
+
+
+	axiom : <{.+G.+G.+G.+G.+G.+G.+G.+G.}>
+
+
+
+	alias : { : PushPointStack
+	alias : . : Point : D_STACK : FALSE
+	alias : } : PopPointsToCurve : 2: 1
+
+	alias : G : MoveOnAxis : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta 
+
+
+	alias : < : PushCurveStack
+	alias : > : PopCurveStackToExtrude : 20 : 1
+

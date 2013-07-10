@@ -1,0 +1,38 @@
+
+
+
+#
+# 3d tree test - tree 'o cubes!
+#
+lsystem : cube_tree
+
+
+	define : dist : 1
+	define : theta : rad(35)
+
+	derivations : 3
+
+	axiom : Fr
+
+	production :*: F :*: rnd() <  0.33 : F[+FF]F[-FF]F
+	production :*: F :*: rnd() <  0.33 : F[+FF]F
+	production :*: F :*: rnd() <= 1.00 : F[-FF]F
+
+
+	group : F : rX[AC]
+
+	alias : C : Cube : 0 : dist * rnd(0.7, 1.2) : dist * rnd(0.7, 1.2) : dist * rnd(0.7, 1.2)
+
+	alias : X : MoveOnAxis : 2 : dist
+	alias : A : AlignToPlane : 0
+	#tau * rnd(-1,1)
+	alias : r : RotateOnAxis : 2 : rnd(0, tau)
+	alias : + : RotateOnAxis : 0 : theta 
+	alias : - : RotateOnAxis : 0 : -theta
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+	
+
+
+

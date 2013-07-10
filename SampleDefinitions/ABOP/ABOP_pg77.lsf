@@ -1,0 +1,53 @@
+# based on the book:
+#  The Algorithmic Beauty of Plants
+#
+# by:
+#  Przemyslaw Prusinkiewicz
+#  Aristid Lindenmayer
+#
+
+#not if this will work - last productions are different - guessing at what is beig done...
+
+lsystem : abop_pg77
+
+
+
+	define : d : 13  #delay for sendig florigen
+	define : e : 3   #delay for creating branches
+	define : m : 2   #plastochron - lateral axis
+	define : n : 3   #plastochron - lareal axis
+	define : u : 1   #signal delay - main axis
+	define : v : 1   #signal delay - lateral axis
+
+	derivations : 2 #for starting...
+
+	axiom : S(0)a(1,0)
+
+	production :*:      a(t,c) :*: t<m          : a(t+1,c)
+	production :*:      a(t,c) :*: (t==m)&(c<e) : I(0,u)[L]a(1,c+1)
+	production :*:      a(t,c) :*: (t==m)&(c==e): I(0,u)[L][b(1)]a(1,c)
+	production :*:      b(t)   :*: t<n          : b(t+1)
+	production :*:      b(t)   :*: t==n         : I(0,v)[L]b(1)
+	production :*:      S(t)   :*: *            : S(t+1)
+	production :S(t):   I(i,j) :*: t==d         : I(1,j)	
+	production :*:      I(i,j) :*: (0<i)&(i<j)  : I(i+1,j)	
+	production :I(i,j): I(k,l) :*: (i==j)&(k==0): I(1,l)
+	production :I(i,j): a(k,l) :*: i>0          : I(i,j)[L][b(1)]B
+	production :I(i,j): b(k)   :*: i>0          : I(i,j)[L]B
+	production :*:      B      :*: *            : I(0,v)[K]B
+
+
+
+
+	alias : a :  #apex pg
+	alias : b :
+	alias : B :
+	alias : I :
+	alias : K :
+	alias : L :
+
+
+
+
+
+

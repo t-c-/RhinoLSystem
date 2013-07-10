@@ -1,0 +1,30 @@
+
+#
+#  This is the Phyllotaxis example from ABOP pg100
+#  using the Petal Command.
+#  
+
+
+lsystem : flower
+
+
+	define : a : rad(137.5)
+	define : crl : rad(1)
+
+	define : lr : 0.25
+
+	derivations : 100
+
+	axiom : A(0, rad(100), 10)
+	
+	production :*: A(n,c,l) :*:*: +(a)[f(pow(n,0.5))P(c, l)]A(n+1, c - crl, l + lr)
+
+
+	alias : A(x) : null
+	alias : P(i, pl) : Petal : pl : 6 : 0.2 : i : 6
+	alias : f(d) : MoveOnAxis : 0 : d
+	alias : +(theta) : RotateOnAxis : 2 : theta 
+	alias : -(theta) : RotateOnAxis : 2:  theta
+	alias : [ : PushStack
+	alias : ] : PopStack
+

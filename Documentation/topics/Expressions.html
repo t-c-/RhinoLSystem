@@ -1,0 +1,300 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>LSystem Engine - Expressions</title>
+        
+        <link rel="stylesheet" href="../css/master.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+    </head>
+    <body>
+
+    	<div>
+    		<a name="home" href="../LSystemEngine.html"> Home </a>
+    		<h1 >LSystem Expressions</h1>
+    		<h2>Overview </h2>
+    		<p>
+    			This is an overview of the expression syntax for the LSystem Engine.  Expressions are used in "define" statements, parametric letters, and for conditions in productions.
+    		</p>
+    		<p> in a "define" statement </p>
+    		<p class="codeExample" >
+				define : theta : pi * 0.25 <br />
+				define : dist : 3 * cos(theta) <br />
+
+			</p>
+			<p>in a parameteric letter</p>
+    		<p class="codeExample" >
+				+(theta + inc)  <br />
+				F(dist * n) <br />
+
+			</p>
+    		
+			<p>in a "production" condition</p>
+    		<p class="codeExample" >
+				production :*: F(x) :*: x &lt; 3 : F+F+  <br />
+				production : F(a) : F(x) : F(b) : x &gt; 3 &amp; a &lt; b : F+F+ <br />
+
+			</p>    		
+    		
+    	</div>
+
+
+    	<div>
+    		<h2>Variables </h2>
+    		<p>
+    			Variables are declared in "define" statements.  Variable names may contain any combination of alpha-numeric characters and underscores, but variable names must start with a letter or an underscore.  <br />
+    			Legal variable names: <br />
+    			
+    		</p>
+    		<p class="codeExample" >
+				_a = 3 <br />
+				_1a = 3 <br />
+				a_1 = 3 <br />
+				a1 = 3 <br />
+			</p>
+			<p>
+				(also legal...)
+			</p>
+			<p class="codeExample" >
+				__a1x_y2_ = 3 <br />
+			</p>
+			<p>
+				Illegal variable names (start with any number):
+			</p>
+			<p class="codeExample" >
+				1_a = 3 <br />
+				1a = 3  <br /> 			
+    		</p>
+    		
+    		<h2> Pre-Defined Variables </h2>
+    		<p>
+    			The following variables are available. </br>
+    			***Important*** </br>
+    			These variables are not read-only and can be overwritten if you are not carefull. </br>
+    		</p>
+    		<p class="codeExample">
+
+			pi = 3.14159 <br />
+			hpi = pi * 0.5 <br />
+			qpi = pi * 0.25 <br />
+			tau = pi * 2 <br />
+			<br />
+			(natural log base) <br />
+			e = 2.71828 <br />
+			<br />
+			(golden ratio) <br />
+			phi = (1 + sqrt(5)) / 2   <br />  		
+    		
+    		</p>
+    	
+    		<h2> Convenience Variables  </h2>
+    		<p>
+    			The following variables are available as a convenience for specifing common Turtle command arguments.  </br>
+    			***Important*** </br>
+    			These variables are not read-only and can be overwritten if you are not carefull. </br>
+    		</p>
+    		<p class="codeExample">
+
+    			(plane indices) </br>
+			PLANE_XY = 0 </br>
+			PLANE_YZ = 1 </br>
+			PLANE_XZ = 2 </br>
+			</br>
+			(axis indices) </br>
+			AXIS_X = 0 </br>
+			AXIS_Y = 1 </br>
+			AXIS_Z = 2 </br>
+			</br>
+			(destination indices) </br>
+			D_STACK = 0 </br>
+			D_DOC = 1 </br>
+			D_BOTH = 2 </br>
+			</br>
+			(boolean values) </br>
+			TRUE = 1 </br>
+			FALSE = 0 </br>
+    		
+    		</p>    		
+    	</div>
+
+
+    	<div>
+    		<h2> Operators </h2>
+    		<p>
+    			Additive Operators
+    		</p>
+    		<p class="codeExample" >
+				+	(a+3)		add <br />
+				-	(a-3)		subtract <br />
+			</p>
+			<p>
+				Multiplicative Operators
+			</p>
+			<p class="codeExample" >
+				*	(a*3)		multiply <br />
+				/	(a/3)		divide <br />
+				%	(a%3)		modulus <br />
+			</p>
+			<p>
+				Assignment Operators
+			</p>
+			<p>
+				Standard assignment operators. <br />
+				Please note:  While these operators are provided, they are not recommended for use within any LSystem expression (Parametric Letters, Productions, Groups, Aliases, etc).  
+				The usual methodology to set values in a parametric system is in the passing of parameters.  
+				These operators can be used, but please understand the side-effects of doing so. 
+			</p>
+			<p class="codeExample" >
+				=	(a=3)		assignment <br />
+				+=	(a+=3)		add assignment <br />
+				-=	(a-=3)		subtract assignment <br />
+				*=	(a*=3)		multiply assignment <br />
+				/=	(a/=3)		divide assignment <br />
+				%=	(a%=3)		modulo assignment <br />	
+    		</p>
+			<p>
+				Logical Operators
+			</p>
+			<p>
+				All logic operations return either a one (1=true) or zero (0=false).
+			</p>
+			<p class="codeExample" >
+				==		(a == b)		equals <br />
+				!=		(a != b)		not equal to <br />
+				&gt;	(a &gt; b)		greater than <br />
+				&ge;	(a &ge; b)		greater than or equal to <br />
+				&lt;	(a &lt; b)		less than <br />
+				&le;	(a &le; b)		less than or equal to <br />
+			</p>    		
+    	
+			
+			<p>
+				Conditional Operators
+			</p>
+			<p class="codeExample" >
+				|		(a==b | a==c)		or <br />
+				&amp;	(a==b &amp; a==c)	and <br />
+			</p>    		
+    	
+			<p>
+				Unary Operators
+			</p>
+			<p class="codeExample" >
+				!	(!a)	not <br />
+				-	(-a)	negative <br />
+				++	(++a)	increment (caution! this will set variable values)<br />
+				--	(—a)	decrement (caution! this will set variable values)<br />
+			</p>    		
+    				
+			
+		</div>
+
+
+		<div>
+			
+				<h2>Nested expressions</h2>
+
+				<p>
+					Parentheses can be used to control evaluation.  Expressions can be nested in sets of parentheses to any level.
+				</p>			
+				<p class="codeExample" >
+					(&lt; expression&gt; )		a = 3 * ( 4 -  ( ( b * n ) / c ) ) + 1.75 ) <br />
+				</p>  		
+			
+			
+		</div>
+
+
+    	<div>
+    		<h2> Functions </h2>
+    		
+    		<p>
+    			General
+    		</p>
+    		<p class="codeExample" >
+				sqrt(a) 	square root of a<br />
+				pow(a,b) 	power of a to b<br />
+				mod(a,b)	modulus of a divided by b <br />
+				exp(a,b) 	exponential of a to b<br />
+			</p>
+    		
+    		<p>
+    			Log
+    		</p>    		
+    		<p class="codeExample" >
+				log(n) 		natural (base e) logarithm of n<br />
+				log10(n) 	base 10 logarithm of n<br />
+			</p>    		
+    		
+    		<p>
+    			Trig Functions
+    		</p>    		
+    		<p class="codeExample" >
+				cos(t) 		cosine of angle t<br />
+				sin(t) 		sine of angle t <br />
+				tan(t) 		tangent of angle t<br />
+				cosh(t) 	hyperbolic cosine <br />
+				sinh(t) 	hyperbolic sine <br />
+				tanh(t) 	hyperbolic tangent <br />
+				acos(t) 	angle where cosine is t<br />
+				asin(t) 	angle where sine is t<br />
+				atan(t) 	angle where tangent is t<br />
+				atan(y,x) 	angle where tangent is the quotient y x  <br />
+			</p> 
+			
+			
+    		<p>
+    			Angular Units
+    		</p>    		
+    		<p class="codeExample" >
+				deg(r)		Converts radians to degrees <br />
+				rad(d)		Converts degrees to radians <br />
+			</p> 
+				
+    		<p>
+    			Limits &amp; Rounding
+    		</p>    		
+    		<p class="codeExample" >
+				ceil(x)   	smallest whole number from x<br />
+				floor(x)  	largest whole number from x<br />
+				round(x)  	round x to nearest whole number<br />
+				round(x,d)  	round x to decimal places d<br />
+			</p> 						
+			   
+    		<p>
+    			Random
+    		</p>    		
+    		<p class="codeExample" >
+				rnd()	Random float from 0 to 1<br />
+				rnd(x,y)	Random float in range of x to y<br />
+				rndint(x,y)	Random integer in range of x to y<br />
+			</p> 						
+			    				   
+			    		
+    	</div>
+    		
+    		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+</html>

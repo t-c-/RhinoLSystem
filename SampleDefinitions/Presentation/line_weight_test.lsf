@@ -1,0 +1,49 @@
+
+
+lsystem : line_test
+
+
+
+	axiom : F(30,3)F(20,2)F(10,1)
+
+
+	group : F(d,w) : !(w)L(d)
+
+	alias : !(w) : SetLineWidth : w
+	alias : L(d) : Line : 1 : d 
+
+
+
+#
+#  Phyllotaxis
+#  Example from Figure 4.1
+
+lsystem : abop_page_100
+
+
+	define : a : 137.5
+
+	define : bw : 0.707
+
+	derivations : 20
+
+	axiom : A(1, 20)
+	
+
+	production :*: A(n,lw) :*:*: +(a)[!(lw)F(pow(n,0.5))]A(n+1,lw * bw)
+
+
+	alias : !(w) : SetLineWidth : w
+
+	alias : A : null
+	alias : D : Circle : 0 : 1
+	alias : F(d) : Line : 0 : d * 1000
+	alias : +(theta) : RotateOnAxis : 2 : theta 
+	alias : -(theta) : RotateOnAxis : 2:  theta
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+
+
+
+	

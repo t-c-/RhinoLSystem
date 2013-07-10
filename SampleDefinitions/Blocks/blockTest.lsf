@@ -1,0 +1,31 @@
+
+
+#
+#  Example showing the InsertBlock Turtle Command
+# 
+
+
+lsystem : block_test1
+
+	axiom : I
+
+	alias : I : InsertBlock : 0 : 1234314 : 1 : 1 : 1
+
+#
+#  Example showing blocks with scale
+# 
+
+
+lsystem : block_test2
+
+
+	axiom : AFOAFOAFOA
+
+	group : O : R(1,-rad(30))R(2,rad(137.5))
+	group : A : pi	
+
+	alias : R(a,b) : RotateOnAxis : a : -b
+	alias : F : MoveOnAxis : 0 : 10
+	alias : p : PlaneAxes : 2
+	alias : i : InsertBlock : 0 : 3 : 1 : 5 : 1
+	

@@ -1,0 +1,102 @@
+
+#
+#   Example demonstrating a nested structure.
+#   Be carefull with the number of derivations!
+#
+#
+
+#
+#   This is the root of the model, or the top level lsystem
+#   It produces a simple tree stucture
+
+lsystem : model_root
+
+
+	define : dist : 18
+	define : theta : rad(31.5)
+	define : g : 0.8
+
+	derivations : 2
+
+	axiom : X(20)
+
+
+	production :*: X(a) :*:*: F(a * g * 2)[+F(a * g )X(a)K][-F(a * g )X(a)K]F(a * g * 1.5)X(a)K
+
+
+	alias : X : null
+	alias : F(a) : MoveOnAxisWithLine : 0 : a
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+	subsystem : K : model_level_2 : derivations : rndint(2 , 4)
+
+
+
+
+#
+#  This is the second level of the model
+#  It produces a koch snowflake with "spikelets"
+#
+
+
+lsystem : model_level_2
+
+	
+
+	define : theta : rad(60)
+	define : t2 : rad(30)
+	define : dist : 1
+
+	derivations : 0
+
+	axiom : AFX++FX++FX
+
+	production :*: F :*:*: F-FX++F-F
+
+	group : X : [>T(3)]
+	#group : X : [>G[+G][-G]G]
+	#group : G : [B[+B][-B]B]
+	
+	#aliases
+	
+	alias : A : RotateOnAxis : 2 : -t2
+	alias : B : MoveOnAxisWithLine : 0 : dist * 0.25
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta
+	alias : - : RotateOnAxis : 2 : -theta
+	alias : > : RotateOnAxis : 2 : -t2
+	alias : < : RotateOnAxis : 2 :  t2
+	alias : [ : PushStack
+	alias : ] : PopStack
+	
+	#alias : T : null
+	subsystem : T(a) : model_level_3 : theta : rad(rnd(25,45)) : dist : rnd(0.5,2) 
+
+#
+#  This is the third level of the model
+#  It produces a simple "spikelet" of sorts...
+#
+
+lsystem : model_level_3
+
+
+	define : dist : 1
+	define : theta : rad(45)
+
+
+	axiom : X(dist)
+
+	group : X(a) : F(a)[+F(a)][-F(a)]F(a)
+
+
+
+	alias : F(a) : MoveOnAxisWithLine : 0 : a
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+

@@ -1,0 +1,141 @@
+#
+#  This is an example of how to create a basic tree.  
+#  This is a simplistic tree, but hopefully
+#  illustrates some principals
+#
+#  This is based on the example: ABOP Page 56, Example b
+# 
+
+lsystem : basic_tree
+
+	define : r1 : 0.9
+	define : r2 : 0.9
+	define : a0 : rad(45)
+	define : a2 : rad(45)
+	define : d : rad(137.5)
+	define : wr : 0.707
+
+	define : r_t : rad(7) #random wobble +- 15 deg
+	define : prune_p : 0.21
+
+	derivations : 7
+
+	axiom : E{A(5,2)}
+	
+	#do the occassional random prune
+	production :*: B(l,w) :*: prune_p > rnd(0, 1) : F(l,w)[%{-(a2)$C(l*r2,w*wr)}]C(l*r1,w*wr)
+	production :*: C(l,w) :*: prune_p > rnd(0, 1) : F(l,w)[%{+(a2)$B(l*r2,w*wr)}]B(l*r1,w*wr)
+
+	production :*: A(l,w) :*:*: F(l,w)[{&(a2)B(l*r2,w*wr)}]/(d)A(l*r1,w*wr)
+	production :*: B(l,w) :*:*: F(l,w)[{-(a2)$C(l*r2,w*wr)}]C(l*r1,w*wr)
+	production :*: C(l,w) :*:*: F(l,w)[{+(a2)$B(l*r2,w*wr)}]B(l*r1,w*wr)
+	
+
+	group : E : O123
+
+	# drop circle and move
+	#use two sections - reduce second by diff between reductions
+	group : F(l,w) : m(100)c(w)WwM(l)c(w-(0.5*(w-(w*wr))))WwM(l)  
+
+
+	group : A(x,y) : c(y*wr)S(y/wr)
+	group : B(x,y) : c(y*wr)S(y/wr)
+	group : C(x,y) : c(y*wr)S(y/wr)
+
+
+
+	alias : M(x): MoveOnAxis : AXIS_X : x 
+	
+	alias : +(theta) : RotateOnAxis : 2 : theta
+	alias : -(theta) : RotateOnAxis : 2 : -theta
+	alias : &(theta) : RotateOnAxis : 1 : theta	
+	alias : /(theta) : RotateOnAxis : 0 : theta
+	alias : $ : RollToLevel
+	
+	alias : [ : PushStack
+	alias : ] : PopStack
+	alias : % : PruneBranch
+
+	alias : { : PushCurveStack
+	alias : c(r) : Circle : PLANE_YZ : D_STACK : r
+	alias : } : PopCurveStackToLoft : TRUE
+
+	#wobble using theta range...
+	alias : W : RotateOnAxis : 2 : rnd(-r_t,r_t)
+	alias : w : RotateOnAxis : 0 : rnd(-r_t,r_t)
+
+	alias : m(n) : SetMaterial : n
+
+	#environmental setup...  really need "prepare" statement
+	#orient heading to world z
+	alias : O : RotateOnAxis : 1 : -hpi
+	alias : 1 : SetTropismActive : TRUE
+	alias : 2 : SetTropismVector : 0.3 : 0.3 : -1
+	alias : 3 : SetTropismFactor : 0.07 #keep this fairly low... 0.07
+
+	subsystem : S(rad) : small_branch : branchRad : rad
+
+
+
+#  Example fom page 50
+#  equation 1.10
+#  Figure 1.40 b
+#  similar to page 49, figure 1.39
+#  {abop_pg50}
+
+lsystem : small_branch
+
+
+	
+	define : b_len : 1  #branch length
+	define : theta : rad(25)
+
+	#radius of branch segment at start
+	define : branchRad : 0.5
+	define : br : 0.707
+
+	#randomness for  rotation
+	define : t_f_min : 0.5
+	define : t_f_max : 1.5
+
+	
+
+	# material id's
+	define : LMAT : 200
+	define : BMAT : 100
+
+	define : R : 1.2
+
+	define : PP : 0.19
+
+	derivations : 4
+
+	axiom : A(branchRad)
+
+
+	# pruning
+	production :*: A(x) :*: PP > rnd(0,1) : F(b_len, x*br)[%+A(x*br)][-A(x*br)]
+	production :*: A(x) :*: PP > rnd(0,1) : F(b_len, x*br)[+A(x*br)][%-A(x*br)]
+
+	production :*: A(x) :*:*: F(b_len, x*br)[+A(x*br)][-A(x*br)]
+	production :*: F(s, b) :*:*: F(s*R, b)
+
+	group : A(x) : M(LMAT)p
+	group : P : M(LMAT)/p
+
+	group : F(d, b) : M(BMAT)/T(d,b)f(d)
+
+
+	alias : p : Petal : 3 : 1 : 0.2 : 0 : 3
+	#using br*d corrects radius to branchRad
+	alias : T(d,r) : StraightTube : r*br : d : br : FALSE
+	alias : f(d) : MoveOnAxis : AXIS_X : d
+	alias : + : RotateOnAxis : 2 : theta * rnd(t_f_min, t_f_max)  #theta 
+	alias : - : RotateOnAxis : 2 : -theta * rnd(t_f_min, t_f_max)  
+	alias : [ : PushStack
+	alias : ] : PopStack
+	alias : % : PruneBranch
+	alias : / : RotateOnAxis : 1 : rad( rnd(-3.5,3.5) )
+
+	alias : M(n) : SetMaterial : n
+

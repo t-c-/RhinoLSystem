@@ -1,0 +1,20 @@
+
+RhinoLSystem Plugin
+
+
+Download and unpack "RhinoLSystemPlugin.zip". 
+(Please maintain the directory structure when you unpack the .zip file.)
+
+In Rhino, install the plugin: "RhinoLSystem.rhp" 
+
+To run in Rhino, the command name is: "LSystem"
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,60 @@
+# based on the book:
+#  The Algorithmic Beauty of Plants
+#
+# by:
+#  Przemyslaw Prusinkiewicz
+#  Aristid Lindenmayer
+#
+
+#
+#   Page 20, Figure 1.19
+#
+
+
+lsystem : abop_page_20
+
+
+	define : theta : rad(90)
+	define : dist : 2
+
+
+	derivations : 2
+
+
+	# A
+	axiom : A
+
+	production :*: A :*:*: B-F+CFC+F-D&F^D-F+&&CFC+F+B//
+	production :*: B :*:*: A&F^CFB^F^D^^-F-D^|F^B|FC^F^A//
+	production :*: C :*:*: |D^|F^B-F+C^F^A&&FA&F^C+F+B^F^D//
+	production :*: D :*:*: |CFB-F+B|FA&F^A&&FB-F+B|FC//
+
+
+	alias : A : null
+	alias : B : null
+	alias : C : null
+	alias : D : null
+
+	group : F : Tf
+
+	alias : f : MoveOnAxis : 0 : dist
+	alias : T : StraightTube : 0.3 : dist : 1 : 1
+
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+	alias : & : RotateOnAxis : 1 : theta
+	alias : ^ : RotateOnAxis : 1 : -theta
+	alias : \ : RotateOnAxis : 0 : theta
+	alias : / : RotateOnAxis : 0 : -theta
+	alias : | : RotateOnAxis : 2 : pi
+
+	alias : M(m) : SetMaterial : m
+
+
+
+
+
+
+
+
+

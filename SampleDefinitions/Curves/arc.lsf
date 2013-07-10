@@ -1,0 +1,32 @@
+
+#
+#  Example of a simple arc
+#
+
+lsystem : arc
+
+
+	axiom : A
+
+	alias : A : Arc : 0 : 1 : 10 : rad(30) : rad(270)
+
+
+#
+# Example of a simple loft surface made from arcs
+#
+#
+
+lsystem : arc_loft
+
+
+	axiom : {AF+AF+AF+AF+AF+A}
+
+
+	alias : F : MoveOnAxis : 0 : 5
+	alias : + : RotateOnAxis : 2 : rad(15)
+	alias : A : Arc : 1 : 0 : 10 : rad(-30) : rad(110)
+
+	alias : { : PushCurveStack
+	alias : } : PopCurveStackToLoft : FALSE
+
+

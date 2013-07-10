@@ -1,0 +1,128 @@
+# based on the book:
+#  The Algorithmic Beauty of Plants
+#
+# by:
+#  Przemyslaw Prusinkiewicz
+#  Aristid Lindenmayer
+#
+
+
+lsystem : abop_pg25_a
+
+	define : dist : 1
+	define : theta : rad(25.7)
+
+	derivations : 5
+
+	axiom : F
+
+	production :*: F :*:*:  F[+F]F[-F]F
+
+
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+ 
+
+lsystem : abop_pg25_b
+
+	define : dist : 1
+	define : theta : rad(20)
+
+	derivations : 5
+
+	axiom : F
+
+	production :*: F :*:*: F[+F]F[-F][F]
+
+
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+
+
+lsystem : abop_pg25_c
+
+	define : dist : 1
+	define : theta : rad(22.5)
+
+	derivations : 4
+
+	axiom : F
+
+	production :*: F :*:*: FF-[-F+F+F]+[+F-F-F]
+
+
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+
+lsystem : abop_pg25_d
+
+	define : dist : 1
+	define : theta : rad(20)
+
+	derivations : 7
+
+	axiom : X
+
+	production :*: X :*:*: F[+X]F[-X]+X
+	production :*: F :*:*: FF
+
+	alias : X : null
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+
+
+lsystem : abop_pg25_e
+
+	define : dist : 1
+	define : theta : rad(25.7)
+
+	derivations : 7
+
+	axiom : X
+
+	production :*: X :*:*:  F[+X][-X]FX
+	production :*: F :*:*:  FF
+
+	alias : X : null
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+
+
+lsystem : abop_pg25_f
+
+	define : dist : 1
+	define : theta : rad(22.5)
+
+	derivations : 5
+
+	axiom : X
+
+	production :*: X :*:*: F-[[X]+X]+F[+FX]-X
+	production :*: F :*:*: FF
+
+	alias : X : null
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+	alias : [ : PushStack
+	alias : ] : PopStack

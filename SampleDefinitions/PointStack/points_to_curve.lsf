@@ -1,0 +1,29 @@
+
+
+
+
+#
+#  Same LSystem as page 100 
+#   Makes a curve by recording points
+#
+lsystem : abop_page_100_curve
+
+
+	define : a : 137.5
+
+	derivations : 45
+
+	axiom : {A(0)}
+	
+	production :*: A(n) :*:*: +(a)[f(pow(n,0.5))D]A(n+1)
+
+	alias : { : PushPointStack
+	alias : } : PopPointsToCurve : D_DOC : FALSE
+
+	alias : A(x) : null
+	alias : D : Point : D_STACK : FALSE
+	alias : f(d) : MoveOnAxis : 0 : d
+	alias : +(theta) : RotateOnAxis : 2 : theta 
+	alias : -(theta) : RotateOnAxis : 2:  theta
+	alias : [ : PushStack
+	alias : ] : PopStack

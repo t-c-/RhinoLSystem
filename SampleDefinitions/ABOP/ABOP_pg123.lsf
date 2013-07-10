@@ -1,0 +1,49 @@
+# based on the book:
+#  The Algorithmic Beauty of Plants
+#
+# by:
+#  Przemyslaw Prusinkiewicz
+#  Aristid Lindenmayer
+#
+
+#
+# Example for page 123 Figure 5.5
+#
+
+# this works with some artifacts
+# null commands generated invalid meshes
+# ABCG all move turtle
+# still leaves little artifacts...
+
+lsystem : ABOP_pg123
+
+
+
+	define : dist : 12
+	define : theta : rad(8)
+
+	derivations : 19
+
+	axiom : [A][B]
+
+
+	production :*: A :*:*: [+A{.].C.} 
+	production :*: B :*:*: [-B{.].C.}
+	production :*: C :*:*: GC
+
+
+	alias : A : MoveOnAxis : 0 : dist
+	alias : B : MoveOnAxis : 0 : dist
+	alias : C : MoveOnAxis : 0 : dist
+	alias : G : MoveOnAxis : 0 : dist
+
+	alias : { : PushPointStack
+	alias : . : Point : D_STACK : FALSE
+	alias : } : PopPointsToPolygons
+
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+

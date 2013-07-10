@@ -1,0 +1,128 @@
+
+
+/*
+ * 
+ *   Main CSS File for LSystem Documentation Pages
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+
+
+body {
+
+	/*background: #000000; */
+	/*color: #250000; */
+	/* color: #000000; */
+	
+	
+	color: #cccccc; 
+	background-color: #1F1F1F;
+	/* background-color: #778899; */
+	
+	/* font-size: 12pt; */
+	font-family: "Trebuchet MS",  sans-serif;
+	
+	padding: 10px;
+
+}
+
+div {
+	
+	margin: 0px 0px 0px 0px;
+	
+}
+
+h1 {
+	
+	font-size: 24pt;
+}
+
+h2 {
+	font-size: 18pt;
+}
+
+h3 {
+	font-size: 14pt;
+}
+
+p {
+	
+	margin: 10px 10px 10px 30px;
+	font-size: 12pt;
+}
+
+
+/*
+ *  standard links
+*/
+
+a {  	}
+a:link {color : #9FB6CD; text-decoration: underline;  }     
+a:visited {color : #9FB6CD; text-decoration: none;}  
+a:hover {color : #9FB6CD; text-decoration: underline;  font-style: italic;}   
+a:active {color : #9FB6CD; text-decoration: none;} 
+
+/*
+ * Main Title Text
+ * 
+ */
+
+.titleText {
+
+	font-size : 16pt;
+		
+}
+
+/*
+ * Heading Text
+ * 
+ */
+.headingText {
+	
+	font-size: 12pt;
+	
+}
+
+
+/*
+ * Code Example Text
+ */
+.codeExample {
+	
+	/* color: #778899; */
+	color : #9FB6CD;
+	
+	margin: 0px 60px 0px 60px;
+	padding: 2px;
+
+	font-family: "Courier New", "Tahoma", sans-serif;
+	
+}
+
+/*
+ * Code Header
+ */
+
+.codeHeader {
+	
+	margin: 10px 0px 0px 0px;
+	padding: 4px;
+
+	/*color: #ffffff; */
+	/*background-color: #333333; */
+
+
+	
+	font-size: 14pt;
+	font-family: "Courier New", "Tahoma", sans-serif;
+	
+}
+
+
+
+
+
+

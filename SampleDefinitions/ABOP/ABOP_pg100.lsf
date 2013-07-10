@@ -1,0 +1,31 @@
+# based on the book:
+#  The Algorithmic Beauty of Plants
+#
+# by:
+#  Przemyslaw Prusinkiewicz
+#  Aristid Lindenmayer
+#
+
+#
+#  Phyllotaxis - Planar Model
+#  Example from Figure 4.1
+
+lsystem : abop_page_100
+
+
+	define : a : 137.5
+
+	derivations : 100
+
+	axiom : A(0)
+	
+	production :*: A(n) :*:*: +(a)[f(pow(n,0.5))D]A(n+1)
+
+
+	alias : A(x) : null
+	alias : D : Circle : 0 : 1 : 1
+	alias : f(d) : MoveOnAxis : 0 : d
+	alias : +(theta) : RotateOnAxis : 2 : theta 
+	alias : [ : PushStack
+	alias : ] : PopStack
+

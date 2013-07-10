@@ -1,0 +1,67 @@
+# based on the book:
+#  The Algorithmic Beauty of Plants
+#
+# by:
+#  Przemyslaw Prusinkiewicz
+#  Aristid Lindenmayer
+#
+
+#
+#  Example from Page 47
+#  See Figure 1.37 a on page 48
+#
+
+
+lsystem : agop_pg47_a
+
+
+
+	derivations : 8
+
+	define : theta : rad(86)
+	define : c : 1
+	define : p : 0.3
+	define : q : c-p
+	define : h : pow(p*q, 0.5)
+
+	axiom : F(1)
+
+	production :*: F(x) :*:*: F(x*p)+F(x*h)--F(x*h)+F(x*q)
+
+
+	alias : F(a) : MoveOnAxisWithLine : 0 : a
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+
+#
+#  Example from Page 47
+#  See Figure 1.37 b on page 48
+#
+
+lsystem : agop_pg47_b
+
+
+
+	derivations : 8
+
+	define : theta : rad(86)
+	define : c : 1
+	define : p : 0.3
+	define : q : c-p
+	define : h : pow(p*q, 0.5)
+
+	axiom : F(1,0)
+
+	production :*: F(x,t) :*: t==0 : F(x*p,2)+F(x*h,1)--F(x*h,1)+F(x*q,0)
+	production :*: F(x,t) :*: t>0 : F(x,t-1)
+
+
+	alias : F(a,t) : MoveOnAxisWithLine : 0 : a
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+	alias : [ : PushStack
+	alias : ] : PopStack
+

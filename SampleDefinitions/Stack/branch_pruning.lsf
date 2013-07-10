@@ -1,0 +1,69 @@
+
+#
+# based on the book:
+#  The Algorithmic Beauty of Plants
+#
+# by:
+#  Przemyslaw Prusinkiewicz
+#  Aristid Lindenmayer
+#
+
+#  Example fom page 48
+#  equation 1.9: see page 49, figure 1.39
+#
+
+#
+#  This seems to validate the left hand context.
+#  Used to show branch pruning also
+
+
+# benchmarked using 22 derivations
+# produced 33,8778,832 final tokens
+# creating 1,423,559 lines
+# executed in 5min,14s on Win7 64, AMD Phenom II 2.8ghz, 8gb RAM
+
+lsystem : context_colors_agop_pg48_pruning
+
+
+	derivations : 11
+
+	define : theta : rad(85)
+	define : R : 1.456
+
+	define : prune_percent : 0.27
+
+	branchsymbols : []
+	ignore : +-
+	
+
+	axiom : A(1)
+
+	# due some random pruning!
+	production :G(x): A(s) :*: prune_percent > rnd(0,1) : B(s)[%+A(s/R)][-A(s/R)]
+
+	production :R(x): A(s) :*:*: G(s)[+A(s/R)][-A(s/R)]
+	production :G(x): A(s) :*:*: B(s)[+A(s/R)][-A(s/R)]
+	production :B(x): A(s) :*:*: R(s)[+A(s/R)][-A(s/R)]
+	production :*: A(s) :*:*: R(s)[+A(s/R)][-A(s/R)]
+
+
+	group : R(d) : C(255,0,0)F(d)
+	group : G(d) : C(0,255,0)F(d)
+	group : B(d) : C(0,0,255)F(d)
+
+
+	alias : A(a) : null
+	alias : F(a) : MoveOnAxisWithLine : 1 : a
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+	alias : % : PruneBranch
+
+
+	alias : C(r,g,b) : SetColor : r : g : b
+	
+	
+	
+	

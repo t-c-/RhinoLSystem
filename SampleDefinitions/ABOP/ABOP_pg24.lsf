@@ -1,0 +1,57 @@
+# based on the book:
+#  The Algorithmic Beauty of Plants
+#
+# by:
+#  Przemyslaw Prusinkiewicz
+#  Aristid Lindenmayer
+#
+
+#
+# Example Branching from page 24
+#  Figure 1.23
+#
+
+lsystem : page24
+
+
+	define : dist : 1
+	define : theta : rad(45)
+
+	derivations : 1
+
+	axiom : F 
+
+
+	production : * : F :*:*: F[+F][-F[-F]F]F[+F][-F]F
+
+
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta
+	alias : - : RotateOnAxis : 2 : -theta
+	alias : [ : PushStack
+	alias : ] : PopStack 
+
+#
+#expansion of above
+#
+lsystem : page24_test
+
+
+	define : dist : 1
+	define : theta : rad(45)
+
+	derivations : 3
+
+	axiom : F(10) 
+
+
+	production : * : F(a) :*:*: F(a*1.5)[+F(a*1.4)][-F(a*1.2)[-F(a*1.1)]F(a*0.9)]F(a*1.3)[+F(a*0.9)][-F(a*0.95)]F(a*1.05)
+
+
+	alias : F(d) : MoveOnAxisWithLine : 0 : d
+	alias : + : RotateOnAxis : 2 : theta
+	alias : - : RotateOnAxis : 2 : -theta
+	alias : [ : PushStack
+	alias : ] : PopStack 
+
+

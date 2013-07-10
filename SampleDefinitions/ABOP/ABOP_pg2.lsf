@@ -1,0 +1,27 @@
+
+# based on the book:
+#  The Algorithmic Beauty of Plants
+#
+# by:
+#  Przemyslaw Prusinkiewicz
+#  Aristid Lindenmayer
+#
+#  Example from Page 2
+#  Koch Snowflake
+#  
+#
+
+
+lsystem : abop_page2
+
+	define : theta : rad(60)
+	define : dist : 1
+
+	derivations : 4
+	axiom : F++F++F
+
+	production :*: F :*:*: F-F++F-F
+	
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta

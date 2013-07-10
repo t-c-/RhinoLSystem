@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>LSystem Engine</title>
+        
+        <link rel="stylesheet" href="css/master.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+    </head>
+    <body>
+    	<div>
+    		
+    		<h1> LSystem Engine for Rhino</h1>
+    		<h2>Preface</h2>
+    		<p>This document is intended as reference guide to using LSystem Engine for Rhino.  It will not attempt to explain LSystems in general.
+    			  All users are expected to be familiar with LSystems, and for those who are not, it is recommended that they read "The Algorithmic Beauty of Plants" by Przemyslaw Prusinkiewicz and Aristid Lindenmayer.
+    			  The ABOP is the basis for this work and is considered the basic manual if you will.
+    			  A PDF download of the book available: 
+    			    <a href="http://algorithmicbotany.org/papers/#abop">BMV Publications</a>
+    		</p>
+    		
+    		<!--
+    		<h2>General Features</h2>
+    		<p>
+    			&bull; User Defined Grammer (there is no formal grammer, symbols are linked to modeler commands)<br />
+    			&bull; Parametric Letters <br />
+    			&bull; Context Sensitive Productions<br />
+    			&bull; Conditional Productions <br />
+    			&bull; Indirect support for Stochastic Systems<br />
+    			&bull; Groups of Letters (one letter can represent multiple Turtle Commands, or other Groups, LSystems, or any combination thereof)<br />
+    			&bull; Nested LSystems <br />
+    			
+    			&bull; WIP: Sub-Branch specification for context searching in Productions<br />
+
+    		</p>    		
+    		-->
+    		
+    		<h2>Implementation Notes</h2>
+    		<p>This implementation has some specific features that make if different from ones described in ABOP.  
+    			It was designed to have a modular architecture for portability.  
+    			The first difference is that the Turtle is not directly tied to the actual LSystem Engine.  The "Engine" (as I refer to it) is responsible for handling source file parsing and the execution of the actual LSystem, while the Turtle is responsible for moving and generating geometry.
+    			Once all the productions are evaluated on the axiom, a list of letters remains as the final result.  This list is then resolved down to Turtle commands (or other elements) by evaluating the Letters.  
+    			This allows the turtle to be implemented independently of the Engine.  The Engine was written in Windows C# .NET, and the Turtle (in this case) was implemented to use McNeel's Rhinoceros as a host environment for modeling operations.
+    			Any Turtle can be implemented, so that a developer can take the Engine and provide a Turtle that may generate it's own geometry files or be hosted in a modeling environment that has a .NET interface.
+    			Since the modeler componenet is not tied directly to the "Engine", there is no formal grammer: Letters have no fixed definition.  As the letter "F" is described in ABOP, "F" is a turtle command that tells the Turtle to move forward with the drawing pen down, creating a line.
+    			In this implementation, the letter "F" is unknown to the Turtle, but "F" is an alias for a longer command name: "MoveOnAxisWithLine", which the Turtle does recognize.  
+    			Letters can also evaluate to Groups and Sub-Systems, as well as Turtle commands.  Depending on the LSystem definition, "F" could mean go forward with the pen down, or it could be defined as a group of letters representing multiple Turtle commands, or it could execute a Sub-System (nested LSystem).
+ 				
+    		</p>
+    		    		
+    		
+    	</div>
+    	
+    	
+    	<div>
+    		<h2>Topics</h2>
+    		
+    		<a href="topics/EngineParametrics.html">LSystem Engine Parametrics</a><br />
+    		<br />       		
+    		
+    		
+    		<h2>Reference</h2>
+    		<a href="topics/Definitions.html">LSystem Engine Definition Files</a><br />
+    		<br />  		
+  		
+    		<a href="topics/RhinoTurtle.html">Rhino Turtle Commands</a><br />
+    		<br />
+
+    		<a href="topics/Expressions.html" >Expression Evaluator</a><br />
+    		<br /> 
+    		
+    		<h2>Developer</h2>
+    		
+    		<a href="topics/TurtleExtensions.html">Custom Turtle Commands</a><br />
+    		<br />     		
+    		
+    		
+    	</div>
+
+       
+    </body>
+</html>

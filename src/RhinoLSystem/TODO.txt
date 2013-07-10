@@ -1,0 +1,5 @@
+﻿
+
+
+
+think more about branch pruning - variable and property already established

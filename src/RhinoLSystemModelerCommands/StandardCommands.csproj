@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{28A9C824-421D-40BC-8633-05CA83E9A305}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RhinoLSystemModelerCommands</RootNamespace>
+    <AssemblyName>StandardCommands</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'TestConfig|AnyCPU'">
+    <OutputPath>bin\TestConfig\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="RhinoCommon">
+      <HintPath>C:\Program Files\Rhinoceros 5.0 (64-bit)\System\RhinoCommon.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CurveStack\PopCurveStackToExtrude.cs" />
+    <Compile Include="CurveStack\PopCurveStackToRevolve.cs" />
+    <Compile Include="CurveStack\PopCurveStackToSweep.cs" />
+    <Compile Include="Curves\Arc.cs" />
+    <Compile Include="Curves\Ellipse.cs" />
+    <Compile Include="Curves\Line.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Curves\MoveOnAxisWithLine.cs" />
+    <Compile Include="Curves\Polygon.cs" />
+    <Compile Include="Environment\SetTropismActive.cs" />
+    <Compile Include="Environment\SetTropismFactor.cs" />
+    <Compile Include="Environment\SetTropismVector.cs" />
+    <Compile Include="Parametrics\LowPolyLeaf.cs" />
+    <Compile Include="PointStack\Point.cs" />
+    <Compile Include="PointStack\PopPointsToMeshBorder.cs" />
+    <Compile Include="PointStack\PopPointsToPolyline.cs" />
+    <Compile Include="Presentation\SetLayer.cs" />
+    <Compile Include="Presentation\SetMaterial.cs" />
+    <Compile Include="Presentation\SetPlotColor.cs" />
+    <Compile Include="Solids\Cone.cs" />
+    <Compile Include="Solids\Cylinder.cs" />
+    <Compile Include="StateStack\PruneBranch.cs" />
+    <Compile Include="Transforms\AlignToPlane.cs" />
+    <Compile Include="Curves\Circle.cs" />
+    <Compile Include="Solids\Cube.cs" />
+    <Compile Include="Parametrics\BranchSection.cs" />
+    <Compile Include="Blocks\InsertBlock.cs" />
+    <Compile Include="Transforms\MoveInWorld.cs" />
+    <Compile Include="Transforms\MoveOnAxis.cs" />
+    <Compile Include="Transforms\MoveOnPlane.cs" />
+    <Compile Include="Parametrics\Petal.cs" />
+    <Compile Include="Debugging\PlaneAxes.cs" />
+    <Compile Include="CurveStack\PopCurveStackToLoft.cs" />
+    <Compile Include="PointStack\PopPointsToCurve.cs" />
+    <Compile Include="PointStack\PopPointsToPolygons.cs" />
+    <Compile Include="StateStack\PopStack.cs" />
+    <Compile Include="CurveStack\PushCurveStack.cs" />
+    <Compile Include="PointStack\PushPointStack.cs" />
+    <Compile Include="StateStack\PushStack.cs" />
+    <Compile Include="Transforms\RollToLevel.cs" />
+    <Compile Include="Transforms\RotateOnAxis.cs" />
+    <Compile Include="Presentation\SetColor.cs" />
+    <Compile Include="Presentation\SetLineWidth.cs" />
+    <Compile Include="Solids\Sphere.cs" />
+    <Compile Include="Parametrics\StraightTube.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RhinoLSystemModeler\RhinoLSystemModeler.csproj">
+      <Project>{F53F6CAA-55A7-436D-8C2F-86BC4AA85B8D}</Project>
+      <Name>RhinoLSystemModeler</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /Q /Y "$(TargetPath)" "$(ProjectDir)\..\RhinoLSystem\bin\Commands"
+
+</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

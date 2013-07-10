@@ -1,0 +1,36 @@
+
+#
+#  Example showing circles
+#
+
+
+lsystem : circles
+
+
+	axiom : CFCFCFCFC
+
+
+	alias : F : MoveOnAxis : 0 : 3
+	alias : C : Circle : 0 : 1 : 1
+
+
+lsystem : circle_tube
+
+	define : ar : 1.05
+	define : theta : rad(20)
+
+	derivations : 20
+
+	axiom : {A(0,theta,2)}
+	
+	production :*: A(n,t,d) :*:*: C(d)+(t*ar)f(d/ar)A(n+1,t*ar,d/ar)
+
+
+	alias : A(x) : null
+	alias : C(r) : Circle : PLANE_YZ : D_STACK : r
+	alias : f(d) : MoveOnAxis : AXIS_X : d
+	alias : +(t) : RotateOnAxis : 2 : t
+	alias : p : RotateOnAxis : AXIS_Y : rad(15)
+	alias : { : PushCurveStack
+	alias : } : PopCurveStackToLoft : FALSE
+

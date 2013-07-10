@@ -1,0 +1,128 @@
+# based on the book:
+#  The Algorithmic Beauty of Plants
+#
+# by:
+#  Przemyslaw Prusinkiewicz
+#  Aristid Lindenmayer
+
+#
+#  Examples from page 129
+#
+
+
+lsystem : abop_pg_129_a
+
+
+	define : D : 0
+	define : R : 2
+	define : t : rad(45)
+
+
+	derivations : 10
+	axiom : A(0)
+
+	production :*: A(d) :*: d>0  : A(d-1)
+	production :*: A(d) :*: d==0 : F(1)[+A(D)][-A(D)]F(1)A(0)
+	production :*: F(a) :*:  *   : F(a*R)
+
+	alias : A(a) : null
+	alias : F(a) : MoveOnAxisWithLine : 0 : a
+	alias : + : RotateOnAxis : 2  : t
+	alias : - : RotateOnAxis : 2  : -t
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+
+
+lsystem : abop_pg_129_b
+
+
+	define : D : 1
+	define : R : 1.5
+	define : t : rad(45)
+
+
+	derivations : 16
+	axiom : A(0)
+
+	production :*: A(d) :*: d>0  : A(d-1)
+	production :*: A(d) :*: d==0 : F(1)[+A(D)][-A(D)]F(1)A(0)
+	production :*: F(a) :*:  *   : F(a*R)
+
+	alias : A(a) : null
+	alias : F(a) : MoveOnAxisWithLine : 0 : a
+	alias : + : RotateOnAxis : 2  : t
+	alias : - : RotateOnAxis : 2  : -t
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+
+lsystem : abop_pg_129_c
+
+
+	define : D : 2
+	define : R : 1.36
+	define : t : rad(45)
+
+
+	derivations : 21
+	axiom : A(0)
+
+	production :*: A(d) :*: d>0  : A(d-1)
+	production :*: A(d) :*: d==0 : F(1)[+A(D)][-A(D)]F(1)A(0)
+	production :*: F(a) :*:  *   : F(a*R)
+
+	alias : A(a) : null
+	alias : F(a) : MoveOnAxisWithLine : 0 : a
+	alias : + : RotateOnAxis : 2  : t
+	alias : - : RotateOnAxis : 2  : -t
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+
+lsystem : abop_pg_129_d
+
+
+	define : D : 4
+	define : R : 1.23
+	define : t : rad(45)
+
+
+	derivations : 30
+	axiom : A(0)
+
+	production :*: A(d) :*: d>0  : A(d-1)
+	production :*: A(d) :*: d==0 : F(1)[+A(D)][-A(D)]F(1)A(0)
+	production :*: F(a) :*:  *   : F(a*R)
+
+	alias : A(a) : null
+	alias : F(a) : MoveOnAxisWithLine : 0 : a
+	alias : + : RotateOnAxis : 2  : t
+	alias : - : RotateOnAxis : 2  : -t
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+
+lsystem : abop_pg_129_e
+
+
+	define : D : 7
+	define : R : 1.17
+	define : t : rad(45)
+
+
+	derivations : 45
+	axiom : A(0)
+
+	production :*: A(d) :*: d>0  : A(d-1)
+	production :*: A(d) :*: d==0 : F(1)[+A(D)][-A(D)]F(1)A(0)
+	production :*: F(a) :*:  *   : F(a*R)
+
+	alias : A(a) : null
+	alias : F(a) : MoveOnAxisWithLine : 0 : a
+	alias : + : RotateOnAxis : 2  : t
+	alias : - : RotateOnAxis : 2  : -t
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+

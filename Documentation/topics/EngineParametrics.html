@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>LSystem Engine - Rhino Turtle Commands</title>
+        
+        <link rel="stylesheet" href="../css/master.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+    </head>
+    <body>
+    	
+    	<div>
+    		<a name="home" href="../LSystemEngine.html"> Home </a>
+    		<h1> LSystem Engine Parametrics</h1>
+    		<h2>General Rules</h2>
+    		<p>
+    			This LSystem supports parametric Letters.  A Letter may have as as many parameters as you need (maximum is 256) or none at all.  I.e.:  "A(23, 34)", "B(67,0.11,3,0)", "+(1.4)", "F".  
+    			Parameters must be contained with parentheses and be comma separated.  When a letter is used, the number of parameters must match the number of parameters where the Letter is finally resolved.  
+    			</br>
+    			I.e.: The letter "A(3)" is used in the axiom with one parameter: </br>
+    		</p>
+    		<p class="codeExample"> 
+    			axiom : A(3)
+    		</p>
+    		<p>
+    			The Letter "A" points to the Alias "A", so the Alias must be defined using one parameter: </br>
+    		</p>
+    		<p class="codeExample" >
+			alias : A(x) : &lt; turtle command &gt; : ... </br>
+			#this will throw an error (no parameters): </br>
+			alias : A : &lt; turtle command &gt; : ... </br>
+			#this will also throw an error (two parameters): </br>
+			alias : A(x,y) : &lt; turtle command &gt; : ... </br>    		
+    		</p>
+    
+    		<p>
+	    		This rule must be followed for all Letters, where ever they are used: Productions, Groups, Aliases, and Sub-Systems.  There is currently one exception to this rule.  
+	    		This is when a coomand is defined as "null".  Since "null" is checked before the number of arguements, mis-matched parameter counts are not checked.
+    		</p>    		
+    		
+    		<p class="codeExample" >    		
+    			# this is valid </br>
+			axiom : A(1,2,3) </br>
+			alias : A : null </br>
+    		</p>
+    		
+    		<h2>Variable Scope</h2>
+    		<p>
+    			Variables have two basic scopes: global scope and temporary.  </br>
+    			Global: If you define a variable using the "define" statement, that variable will be global, and visible everywhere (as with pre-defined variables: pi, etc).  
+    			Global variables can be referenceed  anywhere execpt in Key Letters for Productions, Groups, Aliases, and SubSystems.</br>
+    			Temporary: Variables used to hold values in Key Letters in Groups, Alias, and SubSystems.  Temporary variables are scoped to the calling statement.  
+    			Once the statement has executed, the variable is cleared.</br>
+    		</p>    		
+    		
+    		
+    		<h2>Parameter Passing</h2>
+    		<p>
+			The Axiom Letters always hold the value of Parametric Letters.  All Productions Letters hold a template value that can reference that value.  
+			Parameters are passed from Letter to Letter in different areas.  The first place this happens is when a Letter matches a production.  </br>
+			So if the current letter being testing in the production cycle is "A(1.3)", and the production is as follows: </br>
+    		</p>
+    		<p class="codeExample" >
+    			production :*: A(x) :*:*: B(x)C(x * 2) </br>  		
+    		</p>    		
+    		<p>
+			The production will produce: "B(1.3)C(2.6)".  The parameter of Letter A (1.3) is assigned to the variable "x" as specified in the production.  
+			Since the production matches, "B" and "C" are produced, and the Letter parameter defintions are treated as expressions to be evaluated against the Expression Evaluator.  
+    		</br>
+			I.e.: "x" in "B(x)" evalutes to 1.3 (the value contained in "A"'s parameter), "x * 2" in "C(x * 2)" evaluates to 2.6 (2 times "A"'s parameter).</br>
+			This same process applies to Groups and Sub-Systems.  </br>
+			If the current letter being resolved (after productions are applied) is "B(2, 3, 2.5)" and "B" is the group is defined as:
+    		</p>
+    		<p class="codeExample" >
+    			group : B(a,b,c) : C(a*2)D(a+b)E(c*b) </br>  		
+    		</p>  
+    		<p>
+    			Letters: "C","D", and "E" will be resolved down further (to an Alias, etc.).  The Letters in the Group definition will contain the values of the evaluated parameter expressions when they resolved down:</br>
+    			"C(4)D(5)E(7.5)"
+    		</p>    		
+    		
+    		
+    		
+
+   			
+    	     		
+   		
+    	
+    		
+    		
+    		
+    	</div>
+    	
+      	  	
+    	          
+    </body>
+</html>

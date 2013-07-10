@@ -1,0 +1,14 @@
+
+#
+#  Example showing a point
+#
+
+lsystem : point
+
+
+	axiom : P
+	alias : P : Point : D_DOC : FALSE
+	
+	
+	
+	

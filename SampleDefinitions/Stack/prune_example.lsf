@@ -1,0 +1,20 @@
+
+
+#
+#  Example showing the use of PruneBranch
+#
+
+lsystem : prune_test
+
+
+	#this will never make the circle
+	axiom : [FFFFFE][[+FFF%FFC]E]
+
+	alias : F : MoveOnAxis: AXIS_X : 1
+	alias : C : Circle : PLANE_XY : D_DOC : 1
+	alias : E : Ellipse : PLANE_XY : D_DOC : 3 : 1.5
+	alias : + : RotateOnAxis : AXIS_Z : rad(45)
+	alias : [ : PushStack
+	alias : ] : PopStack
+	alias : % : PruneBranch
+

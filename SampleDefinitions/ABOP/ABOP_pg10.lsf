@@ -1,0 +1,137 @@
+# based on the book:
+#  The Algorithmic Beauty of Plants
+#
+# by:
+#  Przemyslaw Prusinkiewicz
+#  Aristid Lindenmayer
+#
+
+#
+#  Figure 1.9 Example a
+#
+
+lsystem : abop_pg10_a
+
+	define : theta : rad(90)
+	define : dist : 1
+
+	derivations : 4
+
+	axiom : F-F-F-F
+
+	production :*: F :*:*: FF-F-F-F-F-F+F
+
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+
+#
+#  Figure 1.9 Example b
+#
+
+lsystem : abop_pg10_b
+
+
+
+	define : theta : rad(90)
+	define : dist : 1
+
+	derivations : 4
+
+	axiom : F-F-F-F
+
+	production :*: F :*:*: FF-F-F-F-FF
+
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+
+#
+#  Figure 1.9 Example c
+#
+
+lsystem : abop_pg10_c
+
+
+
+	define : theta : rad(90)
+	define : dist : 1
+
+	derivations : 3
+
+	axiom : F-F-F-F
+
+	production :*: F :*:*: FF-F+F-F-FF
+
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+
+
+#
+#  Figure 1.9 Example d
+#
+
+lsystem : abop_pg10_d
+
+
+
+	define : theta : rad(90)
+	define : dist : 1
+
+	derivations : 4
+
+	axiom : F-F-F-F
+
+	production :*: F :*:*: FF-F--F-F
+
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+
+
+
+#
+#  Figure 1.9 Example e
+#
+
+lsystem : abop_pg10_e
+
+
+
+	define : theta : rad(90)
+	define : dist : 1
+
+	derivations : 5
+
+	axiom : F-F-F-F
+
+	production :*: F :*:*: F-FF--F-F
+
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+
+
+
+#
+#  Figure 1.9 Example f
+#
+
+lsystem : abop_pg10_f
+
+
+
+	define : theta : rad(90)
+	define : dist : 1
+
+	derivations : 5
+
+	axiom : F-F-F-F
+
+	production :*: F :*:*: F-F+F-F-F 
+
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+

@@ -1,0 +1,44 @@
+
+#
+#  Example showing some lines
+#
+
+lsystem : line_test
+
+	axiom : LFLFL
+
+	alias : F : MoveOnAxis : 0 : 1
+	alias : L : Line : PLANE_XY : D_DOC :  0 : 12 : 2
+
+#
+#  Example showing lines in the creation of a surface
+#
+
+lsystem : line_test_2
+
+	define : df : 1.11    # distance factor
+	define : ri : rad(25) # rotation increment
+	define : ui : 1       # up increment
+
+	derivations :36
+
+	axiom: {X(ui)}
+
+	production :*: X(d) :*:*: F(d*df)X(d*df)
+
+	group : F(a) : [L(a)]+(ri)U(ui)
+	
+
+	alias : X : null
+	alias : [ : PushStack
+	alias : ] : PopStack
+	alias : L(d) : Line : PLANE_XY : D_STACK : d : 0 : 0
+	alias : U(d) : MoveOnAxis : 2 : d
+	alias : +(t) : RotateOnAxis : 2 : t
+
+	alias : { : PushCurveStack
+	alias : } : PopCurveStackToLoft : FALSE
+	
+	
+
+

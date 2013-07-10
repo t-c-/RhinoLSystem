@@ -1,0 +1,15 @@
+
+#
+#
+#  Example showing the implementation of a custom command
+#
+#
+#
+
+lsystem : exampleCustomCommand
+
+
+	axiom : C
+	alias : C : ExampleCustomTurtleCommand
+
+

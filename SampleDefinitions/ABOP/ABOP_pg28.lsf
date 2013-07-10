@@ -1,0 +1,43 @@
+# based on the book:
+#  The Algorithmic Beauty of Plants
+#
+# by:
+#  Przemyslaw Prusinkiewicz
+#  Aristid Lindenmayer
+#
+
+#
+#  This is an example of how to implement a stochastic lsystem
+#  Stochastic systems are not directly supported, but this 
+#  demonstrates one way to accomplish a close approximate
+#  using conditional statements in productions
+#  
+
+
+
+
+lsystem : stochastic
+
+
+	define : dist : 1
+	define : theta : rad(35)
+
+	derivations : 5
+
+	axiom : F
+
+
+	#the first two productions each have a 33% chance of producing a successor
+	#  and the last ensures at least one production happens
+	production :*: F :*: rnd() <  0.33 : F[+F]F[-F]F
+	production :*: F :*: rnd() <  0.33 : F[+F]F
+	production :*: F :*: * : F[-F]F
+
+
+	alias : F : MoveOnAxisWithLine : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+

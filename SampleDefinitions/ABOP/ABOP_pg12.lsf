@@ -1,0 +1,55 @@
+# based on the book:
+#  The Algorithmic Beauty of Plants
+#
+# by:
+#  Przemyslaw Prusinkiewicz
+#  Aristid Lindenmayer
+#
+
+
+#
+#
+#
+
+lsystem : abop_pg12_a
+
+	define : theta : rad(60)
+	define : dist : 1
+
+	derivations : 4
+
+	axiom : L
+
+	production :*: L :*:*: L+R++R-L--LL-R+
+	production :*: R :*:*: -L+RR++R+L--L-R
+
+	alias : L : MoveOnAxisWithLine : 0 : dist
+	alias : R : MoveOnAxisWithLine : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta
+	alias : - : RotateOnAxis : 2 : -theta
+
+
+
+lsystem : abop_pg12_b
+
+
+	define : theta : rad(90)
+	define : dist : 1
+
+	derivations : 2
+
+	axiom : -R
+
+	production :*: L :*:*: LL-R-R+L+L-R-RL+R+LLR-L+R+LL+R-LR-R-L+L+RR-
+	production :*: R :*:*: +LL-R-R+L+LR+L-RR-L-R+LRR-L-RL+L+R-R-L+L+RR
+
+	alias : R : MoveOnAxisWithLine : 0 : dist
+	alias : L : MoveOnAxisWithLine : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta
+	alias : - : RotateOnAxis : 2 : -theta
+	
+
+
+
+
+

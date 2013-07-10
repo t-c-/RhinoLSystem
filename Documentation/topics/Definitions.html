@@ -1,0 +1,290 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>LSystem Engine - Definitions</title>
+        
+        <link rel="stylesheet" href="../css/master.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+    </head>
+    <body>
+    	<div>
+    		<a name="home" href="../LSystemEngine.html"> Home </a>
+    		<h1> LSystem Engine File Structure</h1>
+    		<h2>General File Rules</h2>
+    		<p>The LSystem Engine file specification was intended to be simple and use as few control characters as possible.  LSystem definitions are stored in a file with the extension ".lsf".
+    			  Definition files are read on a line by line basis with statements and their arguments delimited by ':' (colon) characters.    Multiple LSystems can be defined in one file.
+    			  Comments are allowed in definition files: any line starting with "#" is ignored during parsing.  Comments ("#") can also appear at the end of a line, but not within any statement.  
+    			  Please see the provided example LSystem files for further reference.
+    		</p>
+    		
+    	</div>
+    	
+    	<div>
+    		
+    		<h2> Statements </h2>
+    		
+    		<p>
+    			An LSystem file is composed of statements.  Statements are declared at the begining of a line and are followed by their arguments.
+    			The first statement will always be to declare an LSystem with the "lsystem" statement followed by a semi-colon ":" and a user specified name.
+    			By convention, statements are declared in the order listed in this document.  Statements can appear in any order under an opening "lsystem" statement.  
+    			An important rule to note with the "production" statement is that the order in which productions are declared, are the order in which they are applied.  
+    			Not all statements need to be included in a definition for that definition to be valid.   All LSystem definitions need an "axiom" and at least one "alias" in order to be valid.
+    			To define multiple LSystems, simply use the "lsystem" statement to begin defining a new LSystem.
+    			
+    			
+    			
+    		</p>
+    		
+    		<p>
+    			<a href="#lsystem">lsystem</a> &nbsp;&nbsp;
+    			<a href="#define">define</a> &nbsp;&nbsp;
+    			<a href="#derivations">derivations</a> &nbsp;&nbsp;
+    			<a href="#axiom">axiom</a> &nbsp;&nbsp;
+    			<a href="#ignore">ignore</a> &nbsp;&nbsp;
+    			<a href="#branchsymbols">branchsymbols</a> &nbsp;&nbsp;
+    			<a href="#production">production</a> &nbsp;&nbsp;
+    			<a href="#group">group</a> &nbsp;&nbsp;
+    			<a href="#alias">alias</a> &nbsp;&nbsp;
+    			<a href="#subsystem">subsystem</a> &nbsp;&nbsp;
+    			
+   
+    		</p>
+    		<br /> <br />
+    	</div>
+    	<!--  lsystem -->
+    	<div >
+    		<a name="lsystem"> </a>
+    		<p class="codeHeader">  lsystem : &lt; lsystem name &gt; </p>
+    		<p>  Declares an LSystem.  Opening statement for each LSystem defined in the file.  <br />
+    		&lt; lsystem name &gt; = the name of the LSystem <br />
+    		
+    		</p>
+
+			<p class="codeExample"> lsystem : koch_snowflake <br /> </p>
+    		
+    	</div>
+    	
+    	<!--  define -->
+    	<div >
+    		<a name="define"> </a>
+    		<p class="codeHeader">  define : &lt; variable name &gt;  : &lt; variable expression &gt;  </p>
+    		<p>  Defines a variable in the Expression Evaluator. <br />
+    		</p>
+    			<p>
+				&lt; variable name &gt;  = The name of the variable <br />
+				&lt; variable expression &gt;  = The value of the variable is the result of the expression evaluated by the 
+				Expression Evaluator.  Any valid expression can be used here.
+    		</p>
+
+			<p class="codeExample"> define : theta : rad(45) <br /> </p>
+    		
+    	</div>
+    	
+    	<!--  derivations -->
+    	<div>
+    		<a name="derivations"> </a>
+    		<p class="codeHeader">  derivations : &lt; value &gt;  </p>
+    		<p>
+    			Specifies the number of derivations for the LSystem. If no derivations are specified, the system will not evaluate any productions.  <br />
+    		</p>
+    		<p>    			
+    			&lt; value &gt;  = An integer value specifiying the number of deriviations.
+    		</p>
+    		
+    		<p class="codeExample"> derivations : 5 </p>
+    		
+    	</div>
+    	 
+
+    	<!--  axiom -->
+    	<div>
+    		<a name="axiom"> </a>
+    		<p class="codeHeader">  axiom : &lt; letter sequence &gt;  </p>
+    		<p>
+    			Specifies the axiom of the LSystem.  This is the base letter string that all productions are applied to. <br />
+    		</p>
+    		<p>    			
+    			&lt; letter sequence &gt;  = Axiom letter sequence. 
+    		</p>
+    		
+    		<p class="codeExample"> axiom : F+F+F+F <br /> </p>
+    		
+    	</div>
+
+
+    	<!--  ignore -->
+    	<div>
+    		<a name="ignore"> </a>
+    		<p class="codeHeader">  ignore : &lt; string &gt;   </p>
+    		<p>
+    			String that represents list of letters (single characters) to ignore during context matching.  
+    			These letters will be ignored when considering right and left context in the current production.  
+    			This only applies to context matching. <br />
+    		</p>
+    		<p>    			
+    			&lt; string &gt;  = all of the letters to ignore (no spaces between).
+    		</p>
+    		
+    		<p class="codeExample"> ignore : +-f <br /> </p>
+    		
+    	</div>
+
+
+    	<!--  branchSymbols -->
+    	<div>
+    		<a name="branchsymbols"> </a>
+    		<p class="codeHeader">  branchsymbols : &lt; string &gt;   </p>
+    		<p>
+    			String that represents list of two (only two) characters that represent the branch open and branch close letters (no spaces between).  
+    			The branch open and branch close letters represent the turtle commands: PushStack and PopStack respectivley.   
+    			Due to the open architecture of this LSystem,  these symbols need to be declared explicitly for recognition during context matching.  
+    			Declaring these letters will enable branch skipping and sub-branch searches in production context matching.   
+    			These symbols don't need to be declared if you are not specifing left or right contexts. <br />
+    		</p>
+    		<p>    			 
+    			&lt; string &gt;  = branch characters that represent opening '[' and closing ']' of a branch
+    		</p>
+    		
+    		<p class="codeExample"> branchsymbols : [] <br /> </p>
+    		
+    	</div>
+
+
+
+
+    	<!--  production -->
+    	<div>
+    		<a name="production"> </a>
+    		<p class="codeHeader">  production : &lt; left context &gt;  : &lt; predecessor &gt;  : &lt; right context &gt;  : &lt; condition &gt;  : &lt; successor &gt;   </p>
+    		<p>
+    			Production specification.  An LSystem can contain any number of productions (or none).  
+    			Productions are executed in the order in which they are specified in the file - order does matter.  
+    			<br />
+    			</p>
+    			<p>    			
+    			
+				&lt; left context &gt;  = The specification for the left context.  This can be any number of letters and/or sub branches to match or the symbol '*' denotes any context. <br />
+				
+				&lt; predecessor &gt;  = Single letter to match against axiom letter.<br />
+				
+				&lt; right context &gt;  = The specification for the left context.  This can be any number of letters and/or sub branches to match or the symbol '*' denotes any context. <br />
+				
+				&lt; condition &gt;  = Condition for the production.  This can be any expression that is valid for the Expression Evaluator. Conditions only apply to parametric Lsystems. <br />
+				
+				&lt; successor &gt;  = Letter Sequence that this production produces.  The axiom letter is replace with this sequence. <br />
+    			
+    		</p>
+    		
+    		<p class="codeExample"> 
+				production :*: F :*:*: F+F+FF <br /> 
+				production : B : A : C :*: BBAAB <br /> 
+				production : B(i) : A(j) : C(k) : i+j  &gt; = k : B(i * 1.1)B(i * 1.7)A(k+j)A(k+j)B(i+j+k) <br /> 
+			 </p>
+    		
+    	</div>
+    	
+    	    	<!--  group -->
+    	<div>
+    		<a name="group"> </a>
+    		<p class="codeHeader">  group : &lt; letter &gt;  : &lt; letter sequence &gt;   </p>
+    		<p>
+    			Groups are a feature of this implementation of an LSystem and are not described in ABOP. 
+    			Groups are a series of lettters with a key letter.  The letters specified in a group must be defined as a Group, Alias, or a SubSystem. 
+    			You may reference other groups from within a group, allowing for nested execution of groups.
+    			They are designed as a mechanism to combine multiple Turtle instructions into a single letter.    
+    			Instead of having to repeat series of Turtle instructions to describe a compound action a group can be defined.  
+    			  <br />
+    			</p>
+    			<p>    			  
+    			&lt; letter &gt;  = The letter the Group is referenced by <br />
+    			&lt; letter sequence &gt;  = The sequence of letters to evaluate <br />
+    			
+    		</p>
+    		
+    		<p class="codeExample"> 
+    			group : q : FRFRFRF <br /> 
+    			#where dist &amp; theta are defined variables<br />
+    			group : q : F(dist)R(theta)F(dist)R(theta)F(dist)R(theta)F(dist) <br />
+    			#parametric form <br />
+    			group : q(d,t) : F(d)R(t)F(d)R(t)F(d)R(t)F(d) <br />
+    			
+    			</p>
+    		
+    	</div>
+    	
+    	
+    	    	<!--  alias -->
+    	<div>
+    		<a name="alias"> </a>
+    		<p class="codeHeader">  alias : &lt; letter &gt;  : &lt; turtle command &gt;  : &lt; argument &gt; : &lt; argument &gt; : ...  </p>
+    		<p>
+    			Aliases are a feature of this implementation of an LSystem and are not described in ABOP.  
+    			Aliases are used to execute commands in a Turtle.  Instead using letters as direct Turtle functions, aliases define letters over explicit Turtle commands.  
+    			It's import to note that a special key word: "null" may be used as a Turtle command.   
+    			This creates a "null" alias that is intercepted by the resolver and not called as a command on the turtle.
+    			This implements the functionality described on page 16 of ABOP where the Turtle ignores letters.  
+    		</p>
+    		<p>    			
+    			&lt; letter &gt;  = The letter the Alias is referenced by <br />
+    			&lt; turtle command &gt;  = The name of the command to pass to the Turtle<br />
+    			&lt; argument &gt;  = The argument is an optional parameter to pass along with the command.  The number of arguments will depend on the command, please the Turtle Command reference.
+    			  All values specified are preprocessed through the expression evaluator, so any variable or expression can be used as an argument. <br />
+    			
+    			
+    		</p>
+    		
+    		<p class="codeExample">  
+
+    			alias : F : MoveOnAxisWithLine : 0 : 1 <br /> 
+    			#where dist is a defined variable<br />
+    			alias : F : MoveOnAxisWithLine : 0 : dist <br /> 
+    			#parametric form <br />
+    			alias : F(x) : MoveOnAxisWithLine : 0 : x <br />
+    			#null letter <br />
+    			alias : F : null <br />
+    			#parametric nulls are permited <br />
+    			alias : F(x,y,z) : null <br />
+    			
+    			</p>
+    		
+    	</div>
+    	
+    	
+    	
+    	<!--  subsystem -->
+    	
+    	<div>
+    		<a name="subsystem"> </a>
+    		<p class="codeHeader">subsystem : &lt; letter &gt;  : &lt; lsystem name &gt;  : &lt; variable name &gt;  : &lt; variable expression &gt; : ... </p>
+    		<p>
+    			The subsystem starts the execution of a nested LSystem.  Variables ("define" statements) can be overridden in the target LSystem by passing pairs of variable names and variable expressions.  
+    			Any number of variables may be overriden.   Variable ovverrides must always be in pairs of: name : expression : name : expression : etc...  The expression is evaluated against the current LSystems Expression Evaluator, 
+    			and the result is passed to the target LSystem.   Derivations can be overriden by using the standard keyword: "derivations".
+
+    		</p>
+    		<p>
+    		&lt; letter &gt;  = The letter the SubSystem is referenced by <br />
+    		&lt; lsystem name &gt;  = The name of the LSystem to execute <br />
+    		&lt; variable name &gt;  = The name of the variable to override <br />	
+    		&lt; variable expression &gt;  = expression to evaluate and apply to variable  <br />	
+    				    			
+    		</p>
+    		
+    		<p class="codeExample"> 
+    		#start a nested lsystem named "tree_model_1" with variable overrides for "derivations" and a variable named "axis_rotation" <br />
+    		subsystem : X : tree_model_1 : derivations : 4 : axis_rotation : rad(theta)  <br /> 
+    		 <br /> 
+    		#subsystem target definition  <br /> 
+    		lsystem : tree_model_1  <br /> 
+    			define : axis_rotation : rad(60)  <br /> 
+    			derivations : 6 v
+    			...  <br /> 
+    		</p>
+    		
+    	</div>
+    	
+   
+     
+    </body>
+</html>

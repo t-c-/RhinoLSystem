@@ -1,0 +1,17 @@
+﻿
+
+
+6/8/2013
+Need to look at using a copy of LSystem definition for running so variables don't get saved from run to run after a system is loaded
+address this by using temporary variables...
+
+
+
+*think about passing information about executing LSystem to modeler
+
+
+
+
+
+
+

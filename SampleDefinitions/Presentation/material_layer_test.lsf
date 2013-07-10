@@ -1,0 +1,32 @@
+
+
+
+lsystem : material_test
+
+
+	axiom : FFFFFF
+
+
+
+	group : F : MCG
+
+	alias : M : SetMaterial : rndint(1,101)
+	alias : C : Cube : 1 : 1 : 1
+	alias : G : MoveOnAxis : rndint(0,2) : 3
+
+
+lsystem : layer_test
+
+
+	axiom : FFFFFF
+
+
+
+	group : F : LCG
+
+	alias : L : SetLayer : 1000 + rndint(1,101)
+	#alias : L : SetLayer : 777 + rndint(1,3)
+	alias : C : Cube : 1 : 1 : 1
+	alias : G : MoveOnAxis : rndint(0,2) : 3
+
+

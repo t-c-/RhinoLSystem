@@ -1,0 +1,64 @@
+# based on the book:
+#  The Algorithmic Beauty of Plants
+#
+# by:
+#  Przemyslaw Prusinkiewicz
+#  Aristid Lindenmayer
+#
+
+#
+#   Page 26, Figure 1.25
+#   This is a re-worked version as "!" and "'" 
+#   (decrement branch width & increment color)
+#   are not supported functions.  Instead a parametric 
+#   system is developed to accompish the same thing
+#
+
+lsystem : abop_page_26_parametric
+
+
+	define : theta : rad(22.5)
+	define : dist : 2
+
+	# branch radius
+	define : br : 0.5
+	# reduction rate
+	define : rr : 0.707
+
+	derivations : 7
+
+
+	axiom : OA(br)
+	production :*: A(a) :*:*: [&F(a * rr)LA(a*rr)]/////[&F(a*rr)LA(a*rr)]///////[&F(a*rr)LA(a*rr)]
+	production :*: F(x) :*:*: S(x) ///// F(x)
+	production :*: S(x) :*:*: F(x) L
+	production :*: L :*:*: [^^l]
+
+	group : F(a) : M(0)t(a)f
+	group : l : M(1)P
+
+	alias : L : null
+	alias : A : null
+	alias : S : null
+
+	alias : f : MoveOnAxis : 0 : dist
+	alias : t(b) : StraightTube : b : dist : 1 : 1
+
+	# Petal used as leaf
+	# alias : P : Petal : dist * 3 : dist * 1.3 : 0.2 : -0.2 : 3
+	# Low Poly Leaf 
+	alias : P : LowPolyLeaf : PLANE_XY : dist * 3 : dist * 1.3 : -0.2
+
+	alias : & : RotateOnAxis : 1 : theta
+	alias : ^ : RotateOnAxis : 1 : -theta
+	alias : / : RotateOnAxis : 0 : -theta
+
+
+	alias : M(m) : SetMaterial : m
+
+	#tilts up to draw upward
+	alias : O : RotateOnAxis : 1 : pi * -0.5
+
+	alias : [ : PushStack
+	alias : ] : PopStack
+

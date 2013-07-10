@@ -1,0 +1,158 @@
+# based on the book:
+#  The Algorithmic Beauty of Plants
+#
+# by:
+#  Przemyslaw Prusinkiewicz
+#  Aristid Lindenmayer
+#
+
+
+#  
+#  Trees from page 60  
+#  Examples of the effect of tropism
+#
+
+
+
+lsystem : abop_pg60_a
+
+	define : d1 : rad(94.74)
+	define : d2 : rad(132.63)
+	define : a  : rad(18.95)
+	define : lr : 1.109
+	define : vr : 1.732
+
+	derivations : 6
+
+	axiom : E!(1)F(200)/(rad(45))A
+
+	production :*: A :*:*: !(vr)F(50)[&(a)F(50)A]/(d1)[&(a)F(50)A]/(d2)[&(a)F(50)A]
+	production :*: F(l) :*:*: F(l*lr)
+	production :*: !(w) :*:*: !(w*vr)
+
+	#environment settings
+	group : E : 123O
+
+	#use this to orient upright
+	alias : O : RotateOnAxis : 1 : -0.5 * pi
+	alias : A : null
+	alias : !(w) : SetLineWidth : w * 0.05
+	alias : F(x): MoveOnAxisWithLine : 0 : x * 100
+	alias : &(theta) : RotateOnAxis : 1 : theta	
+	alias : /(theta) : RotateOnAxis : 0 : theta
+
+	alias : [ : PushStack
+	alias : ] : PopStack
+	
+	alias : 1 : SetTropismActive : 1
+	alias : 2 : SetTropismVector : 0 : -1 : 0
+	alias : 3 : SetTropismFactor : 0.22
+
+
+
+lsystem : abop_pg60_b
+
+	define : d1 : rad(137.5)
+	define : d2 : rad(137.5)
+	define : a  : rad(18.95)
+	define : lr : 1.109
+	define : vr : 1.732
+
+	derivations : 8
+
+	axiom : E!(1)F(200)/(rad(45))A
+
+	production :*: A :*:*: !(vr)F(50)[&(a)F(50)A]/(d1)[&(a)F(50)A]/(d2)[&(a)F(50)A]
+	production :*: F(l) :*:*: F(l*lr)
+	production :*: !(w) :*:*: !(w*vr)
+
+	#environment settings
+	group : E : 123O
+
+	#use this to orient upright
+	alias : O : RotateOnAxis : 1 : -0.5 * pi
+	alias : A : null
+	alias : !(w) : SetLineWidth : w * 0.05
+	alias : F(x): MoveOnAxisWithLine : 0 : x * 100
+	alias : &(theta) : RotateOnAxis : 1 : theta	
+	alias : /(theta) : RotateOnAxis : 0 : theta
+
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+	alias : 1 : SetTropismActive : 1
+	alias : 2 : SetTropismVector : 0 : -1 : 0
+	alias : 3 : SetTropismFactor : 0.14
+
+lsystem : abop_pg60_c
+
+	define : d1 : rad(112.5)
+	define : d2 : rad(157.5)
+	define : a  : rad(22.5)
+	define : lr : 1.79
+	define : vr : 1.732
+
+	derivations : 8
+
+	axiom : E!(1)F(200)/(rad(45))A
+
+	production :*: A :*:*: !(vr)F(50)[&(a)F(50)A]/(d1)[&(a)F(50)A]/(d2)[&(a)F(50)A]
+	production :*: F(l) :*:*: F(l*lr)
+	production :*: !(w) :*:*: !(w*vr)
+
+	#environment settings
+	group : E : 123O
+
+	#use this to orient upright
+	alias : O : RotateOnAxis : 1 : -0.5 * pi
+	alias : A : null
+	alias : !(w) : SetLineWidth : w * 0.05
+	alias : F(x): MoveOnAxisWithLine : 0 : x * 100
+	alias : &(theta) : RotateOnAxis : 1 : theta	
+	alias : /(theta) : RotateOnAxis : 0 : theta
+
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+	alias : 1 : SetTropismActive : 1
+	#alias : 2 : SetTropismVector : -0.02 : -1 : 0
+	alias : 2 : SetTropismVector : -0.02 : -0.01 : -1
+	alias : 3 : SetTropismFactor : 0.27
+
+lsystem : abop_pg60_d
+
+	define : d1 : rad(180)
+	define : d2 : rad(252)
+	define : a  : rad(36)
+	define : lr : 1.070
+	define : vr : 1.732
+
+	derivations : 6
+
+	axiom : E!(1)F(200)/(rad(45))A
+
+
+	production :*: A :*:*: !(vr)F(50)[&(a)F(50)A]/(d1)[&(a)F(50)A]/(d2)[&(a)F(50)A]
+	production :*: F(l) :*:*: F(l*lr)
+	production :*: !(w) :*:*: !(w*vr)
+
+	#environment settings
+	group : E : 123O
+
+	alias : A : null
+	alias : !(w) : SetLineWidth : w * 0.05
+	alias : F(x): MoveOnAxisWithLine : 0 : x * 100
+	alias : &(theta) : RotateOnAxis : 1 : theta	
+	alias : /(theta) : RotateOnAxis : 0 : theta
+
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+	#use this to orient upright
+	alias : O : RotateOnAxis : 1 : -0.5 * pi
+
+	alias : 1 : SetTropismActive : 1
+	alias : 2 : SetTropismVector : -0.61 : 0.77 : -0.19
+	alias : 3 : SetTropismFactor : 0.44
+
+

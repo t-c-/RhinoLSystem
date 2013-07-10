@@ -1,0 +1,56 @@
+# based on the book:
+#  The Algorithmic Beauty of Plants
+#
+# by:
+#  Przemyslaw Prusinkiewicz
+#  Aristid Lindenmayer
+#
+
+
+# not working yet....
+#
+#  Examples from Page 124, Figure 5.6
+#
+#
+
+
+
+lsystem : abop_pg124_a
+
+	define : LA : 5  # initial length - main segment 
+	define : RA : 1  # growth rate - main segment 
+	define : LB : 1  # initial length - lateral segment
+	define : RB : 1  # growth rate - lateral segment 
+	define : PD : 0  # growth potential decrement 
+
+	define : theta : rad(60)
+
+	derivations : 20
+
+	axiom : {.A(0)}
+
+
+	production :*: A(t)   :*:   *  : G(LA,RA)[-B(t).][A(t+1)][+B(t).]
+	production :*: B(t)   :*:  t>0 : G(LB,RB)B(t-PD)
+	production :*: G(s,r) :*:   *  : G(s*r,r)
+
+
+	alias : A(x) : MoveOnAxis : AXIS_X : x
+	alias : B(x) : null
+	#alias : B(x) : MoveOnAxis : AXIS_X : x
+	alias : C(x) : null
+	#alias : C(x) : MoveOnAxis : AXIS_X : x
+
+	alias : G(a,b) : MoveOnAxis : AXIS_X : a
+
+	alias : { : PushPointStack
+	alias : . : Point : D_STACK : FALSE
+	alias : } : PopPointsToPolygons
+
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+
+

@@ -1,0 +1,22 @@
+
+#
+#  Example showing a cube
+#
+
+lsystem : cube
+
+
+	axiom : C
+	alias : C : Cube : 0 : 2 : 2 : 12
+
+
+lsystem : cubes
+
+
+	define : dist : 3
+	define : size : 2
+
+	axiom : CFCFCFCFCFCFC
+
+	alias : F : MoveOnAxis : 0 : dist
+	alias : C : Cube : 0   : size : size : size

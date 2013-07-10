@@ -1,0 +1,53 @@
+
+# based on the book:
+#  The Algorithmic Beauty of Plants
+#
+# by:
+#  Przemyslaw Prusinkiewicz
+#  Aristid Lindenmayer
+#
+
+#  Example from Page 11, Figure 1.10
+#  Dragon Curve &
+#  Sierpinski gasket
+#  
+#
+
+
+lsystem : abop_pg11_a
+
+	define : theta : rad(90)
+	define : dist : 1
+
+	derivations : 10
+	axiom : L
+
+	production :*: L :*:*: L+R+
+	production :*: R :*:*: -L-R
+
+	alias : L : MoveOnAxisWithLine : 0 : dist
+	alias : R : MoveOnAxisWithLine : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+
+
+
+lsystem : abop_pg11_b
+
+	define : theta : rad(60)
+	define : dist : 1
+
+	derivations : 6 
+
+	axiom : R
+
+	production :*: L :*:*: R+L+R
+	production :*: R :*:*: L-R-L
+
+	alias : R : MoveOnAxisWithLine : 0 : dist
+	alias : L : MoveOnAxisWithLine : 0 : dist
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+
+
+

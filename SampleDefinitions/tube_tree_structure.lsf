@@ -1,0 +1,68 @@
+
+#
+#  This example uses more "structural" elements to show the use of parametric groups
+#  This is a simple ternary tree with each branch 
+#  being made of smaller parametric groups
+#  which generate three "legs" that can be controlled through group parameters
+#  
+#
+
+
+
+lsystem : tube_tree
+
+	define : a_r : rad(360/3)  # axial rotation
+	define : a_r2 : a_r / 2      # half axial for staggering rotations
+
+
+ 	define : ar1 : 1.3 # 0.707  # angle reduction 1 for off-axis rotation
+	define : ar2 : 1.3   # angle increment for spread
+	
+
+	define : lr : 0.707   # length reduction
+
+
+	define : scale : 10   # overall scale or length to start with
+	define : s0 : 0.12     # large sphere scale
+	define : s1 : 0.1     # small sphere scale
+	define : r1 : 0.05     # cylinder radius scale
+
+	derivations : 5
+
+	axiom : OS(scale*s0)[T(scale, rad(10) )A(scale, rad(10) , rad(30), 0 )
+
+	# offset odd iterations
+	production :*: A(l,sa,aa, n) :*: n % 2 ==1 : [/(a_r+a_r2)^(aa*ar1)T(l*lr,sa*ar2)A(l*lr,sa*ar2,aa*ar1,n+1)][/(a_r*2+a_r2)^(aa*ar1)T(l*lr,sa*ar2)A(l*lr,sa*ar2,aa*ar1,n+1)][/(a_r*3+a_r2)^(aa*ar1)T(l*lr,sa*ar2)A(l*lr,sa*ar2,aa*ar1,n+1)]
+	production :*: A(l,sa,aa, n) :*:*: [/(a_r)^(aa*ar1)T(l*lr,sa*ar2)A(l*lr,sa*ar2,aa*ar1,n+1)][/(a_r*2)^(aa*ar1)T(l*lr,sa*ar2)A(l*lr,sa*ar2,aa*ar1,n+1)][/(a_r*3)^(aa*ar1)T(l*lr,sa*ar2)A(l*lr,sa*ar2,aa*ar1,n+1)]
+
+
+	# three legs and move (length / scale, spread angle)
+	group : T(ls, sa) : [L(sa,ls,ls*r1,ls*s1)]/(a_r)[L(sa,ls,ls*r1,ls*s1)]/(a_r)[L(sa,ls,ls*r1,ls*s1)]M(ls*cos(sa)*2)S(ls*s0)
+
+	#  leg (spread angle, cylinder length, cylinder radius, sphere radius)
+	group : L(sa,cl,cr,sr) : ^(sa)C(cr,cl)M(cl)S(sr)&(sa)&(sa)C(cr,cl)
+
+	alias : A : null
+
+	alias : M(d) : MoveOnAxis : AXIS_X : d
+
+
+	alias : C(r,l) : Cylinder : PLANE_YZ : r : l
+	alias : S(r) : Sphere : r
+
+	alias : O : RotateOnAxis : AXIS_Y : rad(-90)
+
+	alias : +(t) : RotateOnAxis : AXIS_Z : t
+	alias : -(t) : RotateOnAxis : AXIS_Z : -t
+	alias : &(t) : RotateOnAxis : AXIS_Y : t
+	alias : ^(t) : RotateOnAxis : AXIS_Y : -t
+	alias : \(t) : RotateOnAxis : AXIS_X : t	
+	alias : /(t) : RotateOnAxis : AXIS_X : -t
+	
+	alias : $ : RollToLevel
+	
+	alias : [ : PushStack
+	alias : ] : PopStack	
+
+
+

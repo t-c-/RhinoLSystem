@@ -1,0 +1,163 @@
+# based on the book:
+#  The Algorithmic Beauty of Plants
+#
+# by:
+#  Przemyslaw Prusinkiewicz
+#  Aristid Lindenmayer
+#
+
+
+#
+#  Examples for page 59, figure 2.7
+#  Using Table 2.2 on page 58
+#
+
+#
+#  example a
+#
+
+lsystem : abop_page59_a
+
+	define : r1 : 0.9
+	define : r2 : 0.7
+	define : a1 : rad(5)
+	define : a2 : rad(65)
+	define : wr : 0.707
+
+	derivations : 10
+
+	axiom : OA(1,10)
+	
+	production :*: A(l,w) :*:*: !(w)F(l)[&(a1)B(l*r1, w*wr)]/(pi)[&(a2)B(l*r2, w*wr)]
+	production :*: B(l,w) :*:*: !(w)F(l)[+(a1)$B(l*r1,w*wr)] [-(a2)$B(l*r2,w*wr)]
+
+	#orient heading to world z
+	alias : O : RotateOnAxis : 1 : -hpi
+
+	alias : A : null
+	alias : B : null
+	alias : !(w) : SetLineWidth : w * 0.2
+	alias : F(x): MoveOnAxisWithLine : 0 : x 
+	
+	alias : +(theta) : RotateOnAxis : 2 : theta
+	alias : -(theta) : RotateOnAxis : 2 : -theta
+	alias : &(theta) : RotateOnAxis : 1 : theta	
+	alias : /(theta) : RotateOnAxis : 0 : theta
+	alias : $ : RollToLevel
+	
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+
+#
+#  example b
+#
+
+
+lsystem : abop_page59_b
+
+	define : r1 : 0.9
+	define : r2 : 0.7
+	define : a1 : rad(10)
+	define : a2 : rad(60)
+	define : wr : 0.707
+
+	derivations : 10
+
+	axiom : OA(1,10)
+	
+	production :*: A(l,w) :*:*: !(w)F(l)[&(a1)B(l*r1, w*wr)]/(pi)[&(a2)B(l*r2, w*wr)]
+	production :*: B(l,w) :*:*: !(w)F(l)[+(a1)$B(l*r1,w*wr)] [-(a2)$B(l*r2,w*wr)]
+
+	#orient heading to world z
+	alias : O : RotateOnAxis : 1 : -hpi
+
+	alias : A : null
+	alias : B : null
+	alias : !(w) : SetLineWidth : w * 0.2
+	alias : F(x): MoveOnAxisWithLine : 0 : x 
+	
+	alias : +(theta) : RotateOnAxis : 2 : theta
+	alias : -(theta) : RotateOnAxis : 2 : -theta
+	alias : &(theta) : RotateOnAxis : 1 : theta	
+	alias : /(theta) : RotateOnAxis : 0 : theta
+	alias : $ : RollToLevel
+	
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+
+#
+#  example c
+#
+
+
+lsystem : abop_page59_c
+
+	define : r1 : 0.9
+	define : r2 : 0.8
+	define : a1 : rad(20)
+	define : a2 : rad(50)
+	define : wr : 0.707
+
+	derivations : 10
+
+	axiom : OA(1,10)
+	
+	production :*: A(l,w) :*:*: !(w)F(l)[&(a1)B(l*r1, w*wr)]/(pi)[&(a2)B(l*r2, w*wr)]
+	production :*: B(l,w) :*:*: !(w)F(l)[+(a1)$B(l*r1,w*wr)] [-(a2)$B(l*r2,w*wr)]
+
+	#orient heading to world z
+	alias : O : RotateOnAxis : 1 : -hpi
+
+	alias : A : null
+	alias : B : null
+	alias : !(w) : SetLineWidth : w * 0.2
+	alias : F(x): MoveOnAxisWithLine : 0 : x 
+	
+	alias : +(theta) : RotateOnAxis : 2 : theta
+	alias : -(theta) : RotateOnAxis : 2 : -theta
+	alias : &(theta) : RotateOnAxis : 1 : theta	
+	alias : /(theta) : RotateOnAxis : 0 : theta
+	alias : $ : RollToLevel
+	
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+
+#
+#  example d
+#
+
+
+lsystem : abop_page59_d
+
+	define : r1 : 0.9
+	define : r2 : 0.8
+	define : a1 : rad(35)
+	define : a2 : rad(35)
+	define : wr : 0.707
+
+	derivations : 10
+
+	axiom : OA(1,10)
+	
+	production :*: A(l,w) :*:*: !(w)F(l)[&(a1)B(l*r1, w*wr)]/(pi)[&(a2)B(l*r2, w*wr)]
+	production :*: B(l,w) :*:*: !(w)F(l)[+(a1)$B(l*r1,w*wr)] [-(a2)$B(l*r2,w*wr)]
+
+	#orient heading to world z
+	alias : O : RotateOnAxis : 1 : -hpi
+
+	alias : A : null
+	alias : B : null
+	alias : !(w) : SetLineWidth : w * 0.2
+	alias : F(x): MoveOnAxisWithLine : 0 : x 
+	
+	alias : +(theta) : RotateOnAxis : 2 : theta
+	alias : -(theta) : RotateOnAxis : 2 : -theta
+	alias : &(theta) : RotateOnAxis : 1 : theta	
+	alias : /(theta) : RotateOnAxis : 0 : theta
+	alias : $ : RollToLevel
+	
+	alias : [ : PushStack
+	alias : ] : PopStack

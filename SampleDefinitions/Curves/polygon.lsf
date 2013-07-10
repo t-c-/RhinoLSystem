@@ -1,0 +1,15 @@
+
+
+#
+#  Example showing  a polygon
+#
+
+lsystem : polygon
+
+
+	axiom : P
+	alias : P : Polygon : PLANE_XY : D_DOC : 5 : 7
+
+
+
+

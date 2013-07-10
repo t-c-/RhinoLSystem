@@ -1,0 +1,14 @@
+
+#
+#  Example showing a cone
+#
+
+lsystem : cone
+
+	axiom : C
+
+	alias : C : Cone : 0 : 3 : 6
+
+
+
+

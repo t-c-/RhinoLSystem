@@ -1,0 +1,71 @@
+
+#
+#  Examples showing the use of points, curves, and sweeps
+#
+#
+#
+#
+
+
+#
+#  Example showing sweep 1 rail
+#
+
+lsystem : sweep1
+
+
+	axiom : <[+{.pF.PF.pF.PF.}]{.pF.PF.pF.PF.}>
+
+	#create a polyline and pop to curves
+	group : R : [+{.F.F.F.F.}]
+
+	alias : < : PushCurveStack
+	alias : > : PopCurveStackToSweep
+
+	alias : { : PushPointStack
+	alias : } : PopPointsToCurve : 2 : 0
+	alias : . : Point : D_STACK : FALSE
+
+	alias : + : RotateOnAxis : 2 : rad(90)
+	alias : p : RotateOnAxis : 1 : rad(30)
+	alias : P : RotateOnAxis : 1 : -rad(30)
+	alias : F : MoveOnAxis : 0 : 5
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+
+#
+#  Example showing sweep twp rails
+#
+
+lsystem : sweep2
+
+	#dont't pop the center curve until
+	#the second R is done since the center curve
+	#needs to be the third (shape) for sweep 2 rails
+	axiom : <LLL-R+{.lZ.zl.Zl.zl.l.+R}>
+
+
+	#create a polyline and pop to curves
+	group : R : [{.pF.PF.pF.pF.PF.}]
+
+
+	alias : Z : MoveOnAxis : 2 : 2
+	alias : z : MoveOnAxis : 2 : -2
+
+	alias : < : PushCurveStack
+	alias : > : PopCurveStackToSweep
+
+	alias : { : PushPointStack
+	alias : } : PopPointsToCurve : 2 : 0
+	alias : . : Point : D_STACK : FALSE
+
+	alias : L : MoveOnAxis : 1 : 5
+	alias : l : MoveOnAxis : 1 : -5
+	alias : + : RotateOnAxis : 2 : rad(30)
+	alias : - : RotateOnAxis : 2 : -rad(30)
+	alias : p : RotateOnAxis : 1 : rad(30)
+	alias : P : RotateOnAxis : 1 : -rad(30)
+	alias : F : MoveOnAxis : 0 : 5
+	alias : [ : PushStack
+	alias : ] : PopStack

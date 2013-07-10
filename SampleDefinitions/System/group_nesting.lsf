@@ -1,0 +1,43 @@
+
+#
+#  Technical Example showing group nesting.
+#  Groups will nest down unless they encounter a circular reference
+#
+
+
+lsystem : group_nesting
+
+
+	axiom : A
+
+
+	group : A : B
+	group : B : C
+	group : C : D
+	group : D : E
+	group : E : F
+	group : F : G
+	group : G : H
+	group : H : I
+	group : I : J
+	group : J : K
+	group : K : ! # add any letter here from the referencing a group 
+	              #   above and you will trigger a circular reference
+
+
+
+	alias : A : null
+	alias : B : null
+	alias : C : null
+	alias : D : null
+	alias : E : null
+	alias : F : null
+	alias : G : null
+	alias : H : null
+	alias : I : null
+	alias : J : null
+	alias : K : null
+
+	alias : ! : Circle : PLANE_XY : D_DOC : 1
+
+

@@ -1,0 +1,35 @@
+
+#
+# based on the book:
+#  The Algorithmic Beauty of Plants
+#
+# by:
+#  Przemyslaw Prusinkiewicz
+#  Aristid Lindenmayer
+#
+
+#  Example fom page 48
+#  equation 1.9: see page 49, figure 1.39
+#
+
+lsystem : agop_pg48
+
+
+	derivations : 12
+
+	define : theta : rad(85)
+	define : R : 1.456
+
+	axiom : A(1)
+
+	production :*: A(s) :*:*: F(s)[+A(s/R)][-A(s/R)]
+
+
+	alias : A(a) : null
+	alias : F(a) : MoveOnAxisWithLine : 1 : a
+	alias : + : RotateOnAxis : 2 : theta 
+	alias : - : RotateOnAxis : 2 : -theta
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+

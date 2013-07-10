@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>LSystem Engine - Custom Turtle Commands</title>
+        
+        <link rel="stylesheet" href="../css/master.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+    </head>
+    <body>
+    	
+    	<div>
+    		<a name="home" href="../LSystemEngine.html"> Home </a>
+    		<h1> Custom Turtle Commands</h1>
+    		<h2>Overview</h2>
+    		<p>
+    			This portion of the LSystem Engine for Rhino is a work in progress, this will be tested further in the future.  This feature is designed to allow developers to create their own custom Turtle Commands.  
+    			Largely, the idea was focused on custom parametric objects that could serve as plant organs or similar.    
+    			This works by referencing the Modeler Library in a Microsoft Visual Studio Project, and creating a new sub-class of the Modeler Command Class.  
+    			Once this Class is compiled, the Assembly can be copied to the local Commands directory and will be loaded at run-time.  
+    			The area of custom Rhino Commands has not been developed fully, and some areas will need some more thought and cleanup.  More work and study will be done in the future, especially regarding the practical aspects of debugging custom commands.  
+    			Please be carefull with some of the standard Turtle functions - some methods can lead to invalidating a system if you are not carefull (internally calling PopStack, without a matching PushStack, etc.).  
+    			It is advised that you only read values from the Turtle (Position, Orientation) if you are not sure of what the effects will be.
+    			
+    		</p>
+    		
+    		<h2>General Requirements</h2>
+    		<p>
+    			This project is written in C#, but any .Net language should work .  Extensions have only been tested using C# Visual Studio Express 2010, and the following will outline setup in that environment. </br>
+    			An extension project should be started as a general "Class Library". </br>
+    			You will need to establish two references: the first to "RhinoCommon.dll", and the second to the "RhinoLSystemModeler.dll". </br>
+    			Your class should be a subclass of "ModelerCommand" from the RhinoLSystemModeler.dll library. </br>
+    			So far the namespace used seems to be of no consequence, but this needs to be looked into further. </br>
+    			***Remember to make sure your class is public or it won't load! </br>
+    			This is the basic setup for a new project.
+
+    		</p>    		
+    		
+    		<h2>Class Requirements</h2>
+    		<p>
+    			The "ModelerCommand" class has three methods that need to be overridden: </br>
+    			"CommandName()" returns the name of the Modeler Command.  This name is how the command is defined in the LSystem File.</br>
+    			"NumberOfArguments()" returns an integer value that reports the number of arguments required by the command.  
+    			The number that is returned is the number of arguments that will checked for before arguemnts are passed to your command.  
+    			If your command is specified with an inccorect number of arguments in the defintion file, an error will be thrown. < /br>
+    			"Execute(turtle, document, arguments)" is where your command is executed.  A reference to the Turtle and the current document are handed off to the command (this should look familiar to Rhino Developers).  
+    			Arguments are passed as an array of floats.  There are some static helper funtions defined in RhinoLSystemModeler.dll for checking standard arguments.
+    			
+    		</p>      		
+    		
+    		<p class="codeExample"> 
+			 using System;
+			
+			using RhinoLSystem; </br>
+			using Rhino; </br>
+			using Rhino.Geometry; </br>
+			 </br>
+			 </br>
+			namespace ExampleCustomTurtleCommand { </br>
+			&nbsp; public class ExampleCustomTurtleCommandClass : RhinoLSystem.ModelerCommand { </br>
+			    </br>
+				&nbsp;/// Name the command is referenced by. </br>
+				&nbsp;public override string CommandName() { </br>
+				&nbsp;&nbsp;&nbsp;return "ExampleCustomTurtleCommand"; </br>
+				} </br>
+				</br>
+				&nbsp;/// Always override this or their will be an error. </br>
+				&nbsp;/// This is the number of arguments your command requires.  There is no support for commands with variable number of arguments. </br> 
+				&nbsp;public override int NumberOfArguments() { </br>
+				&nbsp;&nbsp;&nbsp;return 0; </br>
+				&nbsp;} </br>
+				</br>
+				 </br>
+				&nbsp;/// Executes the command. </br>			
+				&nbsp;public override void Execute(RhinoTurtle turtle, Rhino.RhinoDoc document, float[] args) { </br>
+				</br>
+				&nbsp;&nbsp;&nbsp;TextDot td = new TextDot("Hello Rhino", turtle.Position); </br>
+				    </br>
+				&nbsp;&nbsp;&nbsp;//always use the current turtle attributes when adding objects </br>
+				&nbsp;&nbsp;&nbsp;//if you want current decoration/layer state </br>
+				&nbsp;&nbsp;&nbsp;//this is the default behaviour in all standard commands </br>
+				&nbsp;&nbsp;&nbsp;document.Objects.AddTextDot(td, turtle.Attributes); </br>
+				    </br>
+				&nbsp;}//end execute </br>
+			    }//end class </br>
+			}//end namespace </br>
+    		</p>
+      		
+    		<p>
+    			You reference your custom comand in your definition file like any other Turtle command:
+    		</p>
+    		<p class="codeExample">
+    		
+    			# the command can be referenced like any other command </br>
+    			alias : E : ExampleCustomTurtleCommand </br>
+    		
+    		</p>
+    		
+    		<h2>Installing a new Command</h2>
+    		<p>
+    			Copy your compiled dll to the local "Commands" directory.  The dll will be loaded when the RhinoLSystem plugin is run and you can use it in your definition files.
+    			
+    		</p>       		
+    		
+    	</div>
+    	
+      	  	
+    	          
+    </body>
+</html>

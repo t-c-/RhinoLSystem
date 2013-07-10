@@ -1,0 +1,105 @@
+
+
+
+#simple left context parametric test
+#
+#  Parametric
+#
+
+lsystem : parametric
+
+    derivations : 1
+    branchsymbols : []
+
+    axiom : F(1)B(2)[Z(3)]H(5)G(11)[BGGG]H
+
+    production : B(i)H(j) : G(a) : [BG]H : a==11 & j==5 : !(a)
+
+
+    alias : F : null
+    alias : B : null
+    alias : G : null
+    alias : H : null
+    alias : Z : null
+    alias : !(r) : Circle : 0 : 1 : r
+
+    alias : [ : PushStack
+    alias : ] : PopStack
+
+
+#
+#  Testing sub-branch specifications in context searching
+#
+
+lsystem : sub_branches
+
+    derivations : 1
+    branchsymbols : []
+
+	#6-18-2013  nested specification needs to look not left, but to base of branch...
+	
+    axiom : F(1)B(2)[G(1)G(1)][Z(3)B(1)]G(5)G(6)[BGG]H
+
+    production : B(i)[Z(z)]G(j) : G(a) : [BG]H : a==6 & j==5 : !(z)
+	
+
+    alias : F : null
+    alias : B : null
+    alias : G : null
+    alias : H : null
+    alias : Z : null
+    alias : !(r) : Circle : PLANE_XY : D_DOC : r
+
+    alias : [ : PushStack
+    alias : ] : PopStack
+
+
+#
+#  Testing skipping over branches
+#
+
+lsystem : branch_skipping
+
+    derivations : 1
+    branchsymbols : []
+
+    axiom : FB[ZH]GGH[BGFF]FZ
+
+    production : FBG : G : HFZ : * : !
+
+
+    alias : F : null
+    alias : B : null
+    alias : G : null
+    alias : H : null
+    alias : Z : null
+    alias : ! : Circle : PLANE_XY : D_DOC : 2
+
+    alias : [ : PushStack
+    alias : ] : PopStack
+
+
+lsystem : branch_skipping_ignore
+
+    derivations : 1
+    branchsymbols : []
+    ignore : +-f
+
+    axiom : +ffF-ffB[ZH]G-f+G+f+H[BGFF]+ff-FffZ
+
+    production : FBG : G : HFZ : * : !
+
+
+    alias : + : null
+    alias : - : null
+    alias : f : null
+    alias : F : null
+    alias : B : null
+    alias : G : null
+    alias : H : null
+    alias : Z : null
+    alias : ! : Circle : PLANE_XY : D_DOC : 2
+
+    alias : [ : PushStack
+    alias : ] : PopStack
+

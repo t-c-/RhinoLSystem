@@ -1,0 +1,45 @@
+
+# based on the book:
+#  The Algorithmic Beauty of Plants
+#
+# by:
+#  Przemyslaw Prusinkiewicz
+#  Aristid Lindenmayer
+#
+
+
+# 
+# Example from Page 111, Figure 4.11 
+# cyndrical phyllotaxis
+#
+
+
+lsystem : abop_page111
+
+
+
+	define : a : rad(137.5281)
+	define : h : 35.3
+	define : r : 500
+
+
+	derivations : 123
+
+	axiom : A
+
+	production :*: A :*:*: [&(rad(90))f(r)D]f(h)/(a)A
+
+	group : D : P
+
+	alias : A : null
+	alias : C : Circle : 1 : 1 : 180
+	#alias : P : PlaneAxes : 100
+	alias : P : InsertBlock : 1 : 2 : 400 : 400 : 400
+	alias : f(d) : MoveOnAxis : 0 : d
+	alias : /(t) : RotateOnAxis : 0 : t
+	alias : &(t) : RotateOnAxis : 1 : t
+	alias : [ : PushStack
+	alias : ] : PopStack 
+
+
+	

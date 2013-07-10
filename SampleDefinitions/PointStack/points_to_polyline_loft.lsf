@@ -1,0 +1,29 @@
+
+
+#
+#  Example showing the creation of a surface (flat plane)
+#  By creating points, polylines, and then the final surface
+#
+
+
+lsystem : points_to_polyline_loft
+
+
+	axiom : <RFRFRFRFR>
+
+	#create a polyline and pop to curves
+	group : R : [+{.F.F.F.F.}]
+
+	alias : < : PushCurveStack
+	alias : > : PopCurveStackToLoft : FALSE
+
+	alias : { : PushPointStack
+	alias : } : PopPointsToPolyline : D_BOTH : FALSE
+	alias : . : Point : D_STACK : FALSE
+
+	alias : + : RotateOnAxis : 2 : rad(90)
+	alias : F : MoveOnAxis : 0 : 5
+
+	alias : [ : PushStack
+	alias : ] : PopStack
+
