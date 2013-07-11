@@ -105,7 +105,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Q /Y "$(TargetPath)" "$(ProjectDir)\..\RhinoLSystem\bin\Commands"
+    <PostBuildEvent>mkdir -p "$(ProjectDir)\..\RhinoLSystem\bin\Commands" 
+xcopy /Q /Y "$(TargetPath)" "$(ProjectDir)\..\RhinoLSystem\bin\Commands"
 
 </PostBuildEvent>
   </PropertyGroup>

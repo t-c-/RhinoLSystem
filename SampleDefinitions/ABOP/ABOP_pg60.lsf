@@ -24,17 +24,19 @@ lsystem : abop_pg60_a
 
 	derivations : 6
 
-	axiom : E!(1)F(200)/(rad(45))A
+	axiom : !(1)F(200)/(rad(45))A
 
 	production :*: A :*:*: !(vr)F(50)[&(a)F(50)A]/(d1)[&(a)F(50)A]/(d2)[&(a)F(50)A]
 	production :*: F(l) :*:*: F(l*lr)
 	production :*: !(w) :*:*: !(w*vr)
 
-	#environment settings
-	group : E : 123O
 
-	#use this to orient upright
-	alias : O : RotateOnAxis : 1 : -0.5 * pi
+	prepare : RotateOnAxis : AXIS_Y : -0.5 * pi
+	prepare : SetTropismActive : TRUE
+	prepare : SetTropismVector : 0 : -1 : 0
+	prepare : SetTropismFactor : 0.22  #0.15 better...
+
+
 	alias : A : null
 	alias : !(w) : SetLineWidth : w * 0.05
 	alias : F(x): MoveOnAxisWithLine : 0 : x * 100
@@ -44,9 +46,7 @@ lsystem : abop_pg60_a
 	alias : [ : PushStack
 	alias : ] : PopStack
 	
-	alias : 1 : SetTropismActive : 1
-	alias : 2 : SetTropismVector : 0 : -1 : 0
-	alias : 3 : SetTropismFactor : 0.22
+
 
 
 
@@ -60,17 +60,18 @@ lsystem : abop_pg60_b
 
 	derivations : 8
 
-	axiom : E!(1)F(200)/(rad(45))A
+	axiom : !(1)F(200)/(rad(45))A
 
 	production :*: A :*:*: !(vr)F(50)[&(a)F(50)A]/(d1)[&(a)F(50)A]/(d2)[&(a)F(50)A]
 	production :*: F(l) :*:*: F(l*lr)
 	production :*: !(w) :*:*: !(w*vr)
 
-	#environment settings
-	group : E : 123O
+	prepare : RotateOnAxis : AXIS_Y : -0.5 * pi
+	prepare : SetTropismActive : TRUE
+	prepare : SetTropismVector : 0 : -1 : 0
+	prepare : SetTropismFactor : 0.14  
 
-	#use this to orient upright
-	alias : O : RotateOnAxis : 1 : -0.5 * pi
+
 	alias : A : null
 	alias : !(w) : SetLineWidth : w * 0.05
 	alias : F(x): MoveOnAxisWithLine : 0 : x * 100
@@ -80,9 +81,7 @@ lsystem : abop_pg60_b
 	alias : [ : PushStack
 	alias : ] : PopStack
 
-	alias : 1 : SetTropismActive : 1
-	alias : 2 : SetTropismVector : 0 : -1 : 0
-	alias : 3 : SetTropismFactor : 0.14
+
 
 lsystem : abop_pg60_c
 
@@ -94,17 +93,18 @@ lsystem : abop_pg60_c
 
 	derivations : 8
 
-	axiom : E!(1)F(200)/(rad(45))A
+	axiom : !(1)F(200)/(rad(45))A
 
 	production :*: A :*:*: !(vr)F(50)[&(a)F(50)A]/(d1)[&(a)F(50)A]/(d2)[&(a)F(50)A]
 	production :*: F(l) :*:*: F(l*lr)
 	production :*: !(w) :*:*: !(w*vr)
 
-	#environment settings
-	group : E : 123O
+	prepare : RotateOnAxis : AXIS_Y : -0.5 * pi
+	prepare : SetTropismActive : TRUE
+	prepare : SetTropismVector : -0.02 : -0.01 : -1
+	prepare : SetTropismFactor : 0.27  
 
-	#use this to orient upright
-	alias : O : RotateOnAxis : 1 : -0.5 * pi
+
 	alias : A : null
 	alias : !(w) : SetLineWidth : w * 0.05
 	alias : F(x): MoveOnAxisWithLine : 0 : x * 100
@@ -114,10 +114,7 @@ lsystem : abop_pg60_c
 	alias : [ : PushStack
 	alias : ] : PopStack
 
-	alias : 1 : SetTropismActive : 1
-	#alias : 2 : SetTropismVector : -0.02 : -1 : 0
-	alias : 2 : SetTropismVector : -0.02 : -0.01 : -1
-	alias : 3 : SetTropismFactor : 0.27
+
 
 lsystem : abop_pg60_d
 
@@ -129,15 +126,17 @@ lsystem : abop_pg60_d
 
 	derivations : 6
 
-	axiom : E!(1)F(200)/(rad(45))A
+	axiom : !(1)F(200)/(rad(45))A
 
 
 	production :*: A :*:*: !(vr)F(50)[&(a)F(50)A]/(d1)[&(a)F(50)A]/(d2)[&(a)F(50)A]
 	production :*: F(l) :*:*: F(l*lr)
 	production :*: !(w) :*:*: !(w*vr)
 
-	#environment settings
-	group : E : 123O
+	prepare : RotateOnAxis : AXIS_Y : -0.5 * pi
+	prepare : SetTropismActive : TRUE
+	prepare : SetTropismVector : -0.61 : 0.77 : -0.19
+	prepare : SetTropismFactor : 0.44 
 
 	alias : A : null
 	alias : !(w) : SetLineWidth : w * 0.05
@@ -148,11 +147,6 @@ lsystem : abop_pg60_d
 	alias : [ : PushStack
 	alias : ] : PopStack
 
-	#use this to orient upright
-	alias : O : RotateOnAxis : 1 : -0.5 * pi
 
-	alias : 1 : SetTropismActive : 1
-	alias : 2 : SetTropismVector : -0.61 : 0.77 : -0.19
-	alias : 3 : SetTropismFactor : 0.44
 
 

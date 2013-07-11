@@ -58,6 +58,8 @@ namespace LSystemEngine {
         //group dictionary
         private Dictionary<Char,LSystemGroup> _groups;
 
+        //prepare statemnts - turtle setup
+        private List<LSystemModelerPrepare> _prepare;
 
         //alias dictionary
         private Dictionary<Char, LSystemAlias> _aliases;
@@ -85,7 +87,12 @@ namespace LSystemEngine {
 
 
 
-
+        /// <summary>
+        /// Constructor - Initializes the LSystem
+        /// </summary>
+        /// <param name="lse">Reference to Engine above - used for calling Subsystems</param>
+        /// <param name="sysModeler">Reference to the Modeler</param>
+        /// <param name="listener">Listener for notification of Parsing and Execution progress or errors</param>
         public LSystem(LSystemEvaluationEngine lse, ILSystemModeler sysModeler,  ILSystemListener listener) {
 
             _engine = lse;
@@ -103,6 +110,8 @@ namespace LSystemEngine {
             _lang = new LSystemExpressionEvaluator();
 
             _groups = new Dictionary<Char, LSystemGroup>();
+
+            _prepare = new List<LSystemModelerPrepare>();
 
             _aliases = new Dictionary<Char, LSystemAlias>();
 
@@ -466,6 +475,27 @@ namespace LSystemEngine {
             //for future...  allow preset turtle preparation calls 
             // to set tropism, alignment, default decoration, etc..
 
+            /*
+             *          Modeler Prepare Commands
+             * */
+
+            foreach (LSystemModelerPrepare mp in _prepare) {
+
+                string[] cmdArgs = mp.Arguments;
+
+                //evaluate all arguments in command
+                float[] argVals = new float[cmdArgs.Length];
+
+                //evaluate the srguments
+                for (int n = 0; n < cmdArgs.Length; n++) {
+                    argVals[n] = _lang.Evaluate(cmdArgs[n]);
+
+                }//end for 
+
+                //issue command to modeler
+                _modeler.Command(mp.Command, argVals);
+
+            }//end foreach
 
             //prepare object caller stack
             //this is used for circular reference check since objects can be reference other objects
@@ -918,7 +948,21 @@ namespace LSystemEngine {
                     throw new Exception("Group already defined: " + tmpGrp);
                 }
 
-            } else if (keyToken.Equals("alias")) {
+            } else if (keyToken.Equals("prepare")) {
+
+                LSystemModelerPrepare tmpPrepare = new LSystemModelerPrepare();
+                tmpPrepare.Parse(tokens);
+
+                int args = tmpPrepare.Arguments.Length;
+                string name = tmpPrepare.Command;
+
+                //check the command, make sure it is valid
+                VerifyCommand(name, args, false);
+
+                //add the prepare statement
+                _prepare.Add(tmpPrepare);
+            
+        } else if (keyToken.Equals("alias")) {
 
                 LSystemAlias tmpAlias = new LSystemAlias();
                 tmpAlias.Parse(tokens);
@@ -926,35 +970,8 @@ namespace LSystemEngine {
                 int args =  tmpAlias.Arguments.Length;
                 string name = tmpAlias.Command;
 
-
-                //verify the alias against the modeler command
-                //this is so we don't have to wait for a runtime error in the Resolver cycle
-                //null commands are not verified (they don't exit in modeler)
-                if (name != NULL_COMMAND_NAME) {
-
-                    int verify = _modeler.VerifyCommand(name);
-
-                    if (verify == -1) {
-
-                        throw new Exception("Invalid alias: Modeler Command: " + name + " is not defined in the current modeler.");
-
-                    } else if (verify == Int32.MinValue) {
-
-                        throw new Exception("Invalid alias: Modeler Command: " + name + " has an error in it's definition: it has not defined the number of arguments.");
-
-                    } else if (verify < 0) {
-
-                        throw new Exception("Invalid alias: Modeler Command: " + name + " has an error in it's definition: invalid number of arguments: " + verify);
-
-                    } else if (verify != args) {
-
-                        //string msg = "The Command: " + name + " is expecting: " + verify + " arguments.  ";
-                        throw new Exception("Invalid alias: Modeler Command: " + name + " is expecting: " + verify + " arguments.  ");
-
-                    }
-
-                }//end if verify non-null
-
+                //check the command, make sure it is valid
+                VerifyCommand(name, args, true);
 
 
                 if (!_aliases.ContainsKey(tmpAlias.KeyLetter.key)) {
@@ -981,6 +998,62 @@ namespace LSystemEngine {
 
 
         }//end parseString
+
+
+        /// <summary>
+        /// Verify the command is specified correctly in it's basic form
+        /// </summary>
+        /// <param name="name">command name</param>
+        /// <param name="args">number of srguemnts provided</param>
+        /// <param name="is_alias">is context alias? (or prepare=false)</param>
+        private void VerifyCommand(string name, int args, bool is_alias) {
+
+            bool allow_null = false;
+            string context = "<undef>";
+            if (is_alias) {
+                allow_null = true;
+                context = "alias";
+            } else {
+                context = "prepare";
+
+            }
+
+            //verify the alias against the modeler command
+            //this is so we don't have to wait for a runtime error in the Resolver cycle
+            //null commands are not verified (they don't exit in modeler)
+            if (name != NULL_COMMAND_NAME) {
+
+                int verify = _modeler.VerifyCommand(name);
+
+                if (verify == -1) {
+
+                    throw new Exception("Invalid " + context + ": Modeler Command: " + name + " is not defined in the current modeler.");
+
+                } else if (verify == Int32.MinValue) {
+
+                    throw new Exception("Invalid " + context + ": Modeler Command: " + name + " has an error in it's definition: it has not defined the number of arguments.");
+
+                } else if (verify < 0) {
+
+                    throw new Exception("Invalid " + context + ": Modeler Command: " + name + " has an error in it's definition: invalid number of arguments: " + verify);
+
+                } else if (verify != args) {
+
+
+                    throw new Exception("Invalid " + context + ": Modeler Command: " + name + " is expecting: " + verify + " arguments.  ");
+
+                }
+
+            } else {
+                //are nulls permitted in context?
+                if (!allow_null) {
+                    throw new Exception("Invalid " + context + ": " + NULL_COMMAND_NAME + " , null commands are not allowed in a prepare statements");
+                }
+
+            }//end if verify non-null
+
+        }
+
 
 
         /// <summary>
@@ -1125,6 +1198,10 @@ namespace LSystemEngine {
 
             }
 
+            foreach (LSystemModelerPrepare mp in _prepare) {
+
+                sysText += "prepare: " + mp + "\n";
+            }
 
             foreach (LSystemAlias sa in _aliases.Values) {
 

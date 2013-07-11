@@ -153,6 +153,7 @@ namespace LSystemEngine {
         /// <param name="args"></param>
         public void ExecuteSubSystem(string name, string[] arguments) {
 
+            //check the call stack for circular references
             if (!_systemCallStack.Contains(name)) {
 
                 if (_systems.ContainsKey(name)) {

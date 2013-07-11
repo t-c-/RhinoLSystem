@@ -1,0 +1,28 @@
+
+
+
+lsystem : prep_test
+
+
+	derivations : 5
+	axiom : FX
+
+	production :*: F :*:*: FFFFX
+
+	# not valid here
+	#prepare : null 
+	
+	#valid prepare statements
+	prepare : RotateOnAxis : AXIS_Z : rad(45)
+	prepare : RotateOnAxis : AXIS_Y : -rad(45)
+	prepare : SetLayer : 3 
+	prepare : SetColor : 0 : 255 : 0
+	prepare : SetLineWidth : 0.2
+
+	
+	prepare : SetTropismActive : TRUE
+	prepare  : SetTropismVector : 0 : -1 : 0
+	prepare  : SetTropismFactor : 0.001
+
+	alias : F : MoveOnAxisWithLine : AXIS_X : 10
+	alias : X : null

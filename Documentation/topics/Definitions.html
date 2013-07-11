@@ -44,6 +44,7 @@
     			<a href="#ignore">ignore</a> &nbsp;&nbsp;
     			<a href="#branchsymbols">branchsymbols</a> &nbsp;&nbsp;
     			<a href="#production">production</a> &nbsp;&nbsp;
+    			<a href="#prepare">prepare</a> &nbsp;&nbsp;
     			<a href="#group">group</a> &nbsp;&nbsp;
     			<a href="#alias">alias</a> &nbsp;&nbsp;
     			<a href="#subsystem">subsystem</a> &nbsp;&nbsp;
@@ -183,6 +184,45 @@
 			 </p>
     		
     	</div>
+    	
+    	    	<!--  prepare -->
+    	<div>
+    		<a name="prepare"> </a>
+    		<p class="codeHeader">  prepare :  &lt; turtle command &gt;  : &lt; argument &gt; : &lt; argument &gt; : ...  </p>
+    		<p>
+    			Prepare statements are a feature of this implementation of an LSystem and are not described in ABOP.  
+    			Prepare statements are used to execute commands in the Turtle before the resolver cycle, but once the production cycle has completed.  
+    			This allows for the opportunity to set the basic state of the Turtle prior to executing the final letters. 
+    			You can orient the Turtle to a specific heading, set Tropism, or establish a default Layer, Color, etc.  Note that "null" commands are not permitted in prepare.
+    		</p>
+    		<p>    			
+    			&lt; turtle command &gt;  = The name of the command to pass to the Turtle<br />
+    			&lt; argument &gt;  = The argument is an optional parameter to pass along with the command.  The number of arguments will depend on the command, please the Turtle Command reference.
+    			  All values specified are preprocessed through the expression evaluator, so any variable or expression can be used as an argument. <br />
+    			</br>
+    			
+    		</p>
+    		
+    		<p class="codeExample">  
+
+
+			#valid prepare statements <br/>
+			prepare : RotateOnAxis : AXIS_Y : -rad(45) <br/>
+			prepare : SetLayer : 3  <br/>
+			prepare : SetColor : 0 : 255 : 0 <br/>
+
+			<br/>
+			prepare : SetTropismActive : TRUE <br/>
+			prepare  : SetTropismVector : 0 : -1 : 0 <br/>
+			prepare  : SetTropismFactor : 0.01 <br/>
+    			
+    		</p>
+    		
+    	</div>    	
+    	
+    	
+    	
+    	
     	
     	    	<!--  group -->
     	<div>

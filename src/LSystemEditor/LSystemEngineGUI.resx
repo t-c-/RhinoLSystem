@@ -130,10 +130,10 @@
   <data name="exitToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACwwAAAsMAT9AIsgAAAAGYktHRAD/AP8A/6C9p5MAAAAHdElNRQfdAwQFGgb1M9XT
-        AAAAHWlUWHRDb21tZW50AAAAAABDcmVhdGVkIHdpdGggR0lNUGQuZQcAAABeSURBVDhP7Y1BCsAgEMT2
-        /59WBJWturNpD720ARFMGO2nPDwhabCABv2tQK2XKqTdJk8xaSbZAPngQiTbu3Ihrwz6t8xvrJIM4EEV
-        0m5KGXVQ2yQZG6T9CO6e72JWASpPS7V8EbSLAAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAACw8AAAsPAZL5A6UAAAAGYktHRAD/AP8A/6C9p5MAAAAHdElNRQfdBwsEJiIW4pRc
+        AAAAHWlUWHRDb21tZW50AAAAAABDcmVhdGVkIHdpdGggR0lNUGQuZQcAAABoSURBVDhP1YxBDoAwDMP2
+        /0/DmCgSpU29iQNY6qVx0n7Jdl4F8kyqZOT5MJOpFwb+R5wbqqAyCS1Gv5RKnhozstLS2MGrg1VpajSS
+        6e+BKqoshBSIc+GDTKTewEIpdag3QFKHep+itR2u6GOdySMSKgAAAABJRU5ErkJggg==
 </value>
   </data>
   <metadata name="HelpMenuContextStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -144,17 +144,18 @@
   </metadata>
   <data name="definitionBox.Text" xml:space="preserve">
     <value>#
-#  *** Getting Started ***
+#  =====  Getting Started  =====
 #
 # -Use the File Menu Button (upper left) to open an
 #  existing defintion file or define a new LSystem in
 #  the Editor (use File-&gt;New to clear this message).
 #
 # -Once you a have an LSystem defintion, 
-#  use the Load Button to parse the LSystem from text.
+#  use the Load Button to Parse the LSystem from
+#  the text in the Editor.
 #
 # -Use the Execute Button to run the LSystem
-#  selected in the loaded LSystem List.
+#  selected in the Loaded LSystems List.
 #
 # -Help and Reference documents are accessible through
 #  the Help Menu Button (upper right)

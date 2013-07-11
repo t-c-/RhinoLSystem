@@ -29,27 +29,11 @@
             this.ProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.ProgressBar2 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolPanel = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.findReplaceCB = new System.Windows.Forms.CheckBox();
-            this.helpBttn = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.fileBttn = new System.Windows.Forms.Button();
-            this.parseBttn = new System.Windows.Forms.Button();
-            this.executeBttn = new System.Windows.Forms.Button();
             this.LoadedSystemsList = new System.Windows.Forms.ComboBox();
             this.FilePopupMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.openToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.plainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.solarizedLightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.solarizedDarkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.replaceBox = new System.Windows.Forms.TextBox();
             this.wholeWordCheck = new System.Windows.Forms.CheckBox();
@@ -59,9 +43,7 @@
             this.findBox = new System.Windows.Forms.TextBox();
             this.replaceAllBttn = new System.Windows.Forms.Button();
             this.HelpMenuContextStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLineCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusMessage = new System.Windows.Forms.ToolStripStatusLabel();
@@ -70,9 +52,25 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.definitionBox = new System.Windows.Forms.RichTextBox();
             this.progressDisplayPanel = new LSystemEditor.LSystemProgressContainer();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.findReplaceCB = new System.Windows.Forms.CheckBox();
+            this.helpBttn = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.fileBttn = new System.Windows.Forms.Button();
+            this.parseBttn = new System.Windows.Forms.Button();
+            this.executeBttn = new System.Windows.Forms.Button();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.plainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.solarizedLightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.solarizedDarkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.FilePopupMenuStrip.SuspendLayout();
             this.HelpMenuContextStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -85,6 +83,8 @@
             this.textPanelContainer.Panel2.SuspendLayout();
             this.textPanelContainer.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -119,81 +119,6 @@
             this.toolPanel.Size = new System.Drawing.Size(634, 33);
             this.toolPanel.TabIndex = 9;
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::LSystemEditor.Properties.Resources.sep02;
-            this.pictureBox2.Location = new System.Drawing.Point(355, 4);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(3, 24);
-            this.pictureBox2.TabIndex = 15;
-            this.pictureBox2.TabStop = false;
-            // 
-            // findReplaceCB
-            // 
-            this.findReplaceCB.Appearance = System.Windows.Forms.Appearance.Button;
-            this.findReplaceCB.Image = global::LSystemEditor.Properties.Resources.find;
-            this.findReplaceCB.Location = new System.Drawing.Point(34, 4);
-            this.findReplaceCB.Name = "findReplaceCB";
-            this.findReplaceCB.Size = new System.Drawing.Size(24, 24);
-            this.findReplaceCB.TabIndex = 14;
-            this.toolTip1.SetToolTip(this.findReplaceCB, "Show/Hide: Find & Replace Text");
-            this.findReplaceCB.UseVisualStyleBackColor = true;
-            this.findReplaceCB.CheckedChanged += new System.EventHandler(this.findReplaceCB_CheckedChanged);
-            // 
-            // helpBttn
-            // 
-            this.helpBttn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.helpBttn.Image = global::LSystemEditor.Properties.Resources.help2;
-            this.helpBttn.Location = new System.Drawing.Point(604, 4);
-            this.helpBttn.Name = "helpBttn";
-            this.helpBttn.Size = new System.Drawing.Size(24, 24);
-            this.helpBttn.TabIndex = 10;
-            this.toolTip1.SetToolTip(this.helpBttn, "Help Menu - Click to display Help menu");
-            this.helpBttn.UseVisualStyleBackColor = true;
-            this.helpBttn.Click += new System.EventHandler(this.helpBttn_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::LSystemEditor.Properties.Resources.sep02;
-            this.pictureBox1.Location = new System.Drawing.Point(66, 4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(3, 24);
-            this.pictureBox1.TabIndex = 8;
-            this.pictureBox1.TabStop = false;
-            // 
-            // fileBttn
-            // 
-            this.fileBttn.Image = global::LSystemEditor.Properties.Resources.file;
-            this.fileBttn.Location = new System.Drawing.Point(4, 4);
-            this.fileBttn.Name = "fileBttn";
-            this.fileBttn.Size = new System.Drawing.Size(24, 24);
-            this.fileBttn.TabIndex = 7;
-            this.toolTip1.SetToolTip(this.fileBttn, "File Menu - Click to display File menu");
-            this.fileBttn.UseVisualStyleBackColor = true;
-            this.fileBttn.Click += new System.EventHandler(this.fileBttn_Click);
-            // 
-            // parseBttn
-            // 
-            this.parseBttn.Image = global::LSystemEditor.Properties.Resources.parse;
-            this.parseBttn.Location = new System.Drawing.Point(76, 4);
-            this.parseBttn.Name = "parseBttn";
-            this.parseBttn.Size = new System.Drawing.Size(24, 24);
-            this.parseBttn.TabIndex = 6;
-            this.toolTip1.SetToolTip(this.parseBttn, "Load LSystems (Parse Editor contents)");
-            this.parseBttn.UseVisualStyleBackColor = true;
-            this.parseBttn.Click += new System.EventHandler(this.parseBttn_Click);
-            // 
-            // executeBttn
-            // 
-            this.executeBttn.Image = global::LSystemEditor.Properties.Resources.execute1;
-            this.executeBttn.Location = new System.Drawing.Point(106, 4);
-            this.executeBttn.Name = "executeBttn";
-            this.executeBttn.Size = new System.Drawing.Size(24, 24);
-            this.executeBttn.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.executeBttn, "Execute LSystem (Executes the selected LSystem)");
-            this.executeBttn.UseVisualStyleBackColor = true;
-            this.executeBttn.Click += new System.EventHandler(this.executeBttn_Click);
-            // 
             // LoadedSystemsList
             // 
             this.LoadedSystemsList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -221,91 +146,20 @@
             this.FilePopupMenuStrip.Name = "contextMenuStrip1";
             this.FilePopupMenuStrip.Size = new System.Drawing.Size(149, 154);
             // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Image = global::LSystemEditor.Properties.Resources.new_icon;
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(148, 22);
-            this.toolStripMenuItem2.Text = "New";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
-            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
-            // 
-            // openToolStripMenuItem1
-            // 
-            this.openToolStripMenuItem1.Image = global::LSystemEditor.Properties.Resources.open_icon;
-            this.openToolStripMenuItem1.Name = "openToolStripMenuItem1";
-            this.openToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
-            this.openToolStripMenuItem1.Text = "Open";
-            this.openToolStripMenuItem1.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
-            // 
-            // saveToolStripMenuItem1
-            // 
-            this.saveToolStripMenuItem1.Image = global::LSystemEditor.Properties.Resources.save_icon;
-            this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
-            this.saveToolStripMenuItem1.Text = "Save";
-            this.saveToolStripMenuItem1.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-            // 
-            // saveAsToolStripMenuItem1
-            // 
-            this.saveAsToolStripMenuItem1.Image = global::LSystemEditor.Properties.Resources.saveas_icon;
-            this.saveAsToolStripMenuItem1.Name = "saveAsToolStripMenuItem1";
-            this.saveAsToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
-            this.saveAsToolStripMenuItem1.Text = "Save As";
-            this.saveAsToolStripMenuItem1.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(145, 6);
             // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.plainToolStripMenuItem,
-            this.solarizedLightToolStripMenuItem,
-            this.solarizedDarkToolStripMenuItem});
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
-            this.toolStripMenuItem1.Text = "Color Scheme";
-            // 
-            // plainToolStripMenuItem
-            // 
-            this.plainToolStripMenuItem.Name = "plainToolStripMenuItem";
-            this.plainToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.plainToolStripMenuItem.Text = "System";
-            this.plainToolStripMenuItem.Click += new System.EventHandler(this.SystemToolStripMenuItem_Click);
-            // 
-            // solarizedLightToolStripMenuItem
-            // 
-            this.solarizedLightToolStripMenuItem.Name = "solarizedLightToolStripMenuItem";
-            this.solarizedLightToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.solarizedLightToolStripMenuItem.Text = "Light";
-            this.solarizedLightToolStripMenuItem.Click += new System.EventHandler(this.LightToolStripMenuItem_Click);
-            // 
-            // solarizedDarkToolStripMenuItem
-            // 
-            this.solarizedDarkToolStripMenuItem.Name = "solarizedDarkToolStripMenuItem";
-            this.solarizedDarkToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.solarizedDarkToolStripMenuItem.Text = "Dark";
-            this.solarizedDarkToolStripMenuItem.Click += new System.EventHandler(this.DarkToolStripMenuItem_Click);
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(145, 6);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exitToolStripMenuItem.Image")));
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // replaceBox
             // 
@@ -404,28 +258,10 @@
             this.HelpMenuContextStrip.Name = "HelpMenuContextStrip";
             this.HelpMenuContextStrip.Size = new System.Drawing.Size(108, 54);
             // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.Image = global::LSystemEditor.Properties.Resources.help_icon;
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.ShortcutKeyDisplayString = "";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.helpToolStripMenuItem.Text = "Help";
-            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
-            // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(104, 6);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Image = global::LSystemEditor.Properties.Resources.about_icon;
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.ShortcutKeyDisplayString = "";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // statusStrip
             // 
@@ -552,6 +388,174 @@
             this.progressDisplayPanel.Size = new System.Drawing.Size(297, 430);
             this.progressDisplayPanel.TabIndex = 0;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::LSystemEditor.Properties.Resources.sep02;
+            this.pictureBox2.Location = new System.Drawing.Point(355, 4);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(3, 24);
+            this.pictureBox2.TabIndex = 15;
+            this.pictureBox2.TabStop = false;
+            // 
+            // findReplaceCB
+            // 
+            this.findReplaceCB.Appearance = System.Windows.Forms.Appearance.Button;
+            this.findReplaceCB.Image = global::LSystemEditor.Properties.Resources.find;
+            this.findReplaceCB.Location = new System.Drawing.Point(34, 4);
+            this.findReplaceCB.Name = "findReplaceCB";
+            this.findReplaceCB.Size = new System.Drawing.Size(24, 24);
+            this.findReplaceCB.TabIndex = 14;
+            this.toolTip1.SetToolTip(this.findReplaceCB, "Show/Hide: Find & Replace Text");
+            this.findReplaceCB.UseVisualStyleBackColor = true;
+            this.findReplaceCB.CheckedChanged += new System.EventHandler(this.findReplaceCB_CheckedChanged);
+            // 
+            // helpBttn
+            // 
+            this.helpBttn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.helpBttn.Image = global::LSystemEditor.Properties.Resources.help2;
+            this.helpBttn.Location = new System.Drawing.Point(604, 4);
+            this.helpBttn.Name = "helpBttn";
+            this.helpBttn.Size = new System.Drawing.Size(24, 24);
+            this.helpBttn.TabIndex = 10;
+            this.toolTip1.SetToolTip(this.helpBttn, "Help Menu - Click to display Help menu");
+            this.helpBttn.UseVisualStyleBackColor = true;
+            this.helpBttn.Click += new System.EventHandler(this.helpBttn_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::LSystemEditor.Properties.Resources.sep02;
+            this.pictureBox1.Location = new System.Drawing.Point(66, 4);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(3, 24);
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
+            // 
+            // fileBttn
+            // 
+            this.fileBttn.Image = global::LSystemEditor.Properties.Resources.file;
+            this.fileBttn.Location = new System.Drawing.Point(4, 4);
+            this.fileBttn.Name = "fileBttn";
+            this.fileBttn.Size = new System.Drawing.Size(24, 24);
+            this.fileBttn.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.fileBttn, "File Menu - Click to display File menu");
+            this.fileBttn.UseVisualStyleBackColor = true;
+            this.fileBttn.Click += new System.EventHandler(this.fileBttn_Click);
+            // 
+            // parseBttn
+            // 
+            this.parseBttn.Image = global::LSystemEditor.Properties.Resources.parse;
+            this.parseBttn.Location = new System.Drawing.Point(76, 4);
+            this.parseBttn.Name = "parseBttn";
+            this.parseBttn.Size = new System.Drawing.Size(24, 24);
+            this.parseBttn.TabIndex = 6;
+            this.toolTip1.SetToolTip(this.parseBttn, "Load LSystems (Parse Editor contents)");
+            this.parseBttn.UseVisualStyleBackColor = true;
+            this.parseBttn.Click += new System.EventHandler(this.parseBttn_Click);
+            // 
+            // executeBttn
+            // 
+            this.executeBttn.Image = global::LSystemEditor.Properties.Resources.execute1;
+            this.executeBttn.Location = new System.Drawing.Point(106, 4);
+            this.executeBttn.Name = "executeBttn";
+            this.executeBttn.Size = new System.Drawing.Size(24, 24);
+            this.executeBttn.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.executeBttn, "Execute LSystem (Executes the selected LSystem)");
+            this.executeBttn.UseVisualStyleBackColor = true;
+            this.executeBttn.Click += new System.EventHandler(this.executeBttn_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Image = global::LSystemEditor.Properties.Resources.new_icon;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(148, 22);
+            this.toolStripMenuItem2.Text = "New";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            // 
+            // openToolStripMenuItem1
+            // 
+            this.openToolStripMenuItem1.Image = global::LSystemEditor.Properties.Resources.open_icon;
+            this.openToolStripMenuItem1.Name = "openToolStripMenuItem1";
+            this.openToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
+            this.openToolStripMenuItem1.Text = "Open";
+            this.openToolStripMenuItem1.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem1
+            // 
+            this.saveToolStripMenuItem1.Image = global::LSystemEditor.Properties.Resources.save_icon;
+            this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
+            this.saveToolStripMenuItem1.Text = "Save";
+            this.saveToolStripMenuItem1.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // saveAsToolStripMenuItem1
+            // 
+            this.saveAsToolStripMenuItem1.Image = global::LSystemEditor.Properties.Resources.saveas_icon;
+            this.saveAsToolStripMenuItem1.Name = "saveAsToolStripMenuItem1";
+            this.saveAsToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
+            this.saveAsToolStripMenuItem1.Text = "Save As";
+            this.saveAsToolStripMenuItem1.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.plainToolStripMenuItem,
+            this.solarizedLightToolStripMenuItem,
+            this.solarizedDarkToolStripMenuItem});
+            this.toolStripMenuItem1.Image = global::LSystemEditor.Properties.Resources.colors_icon;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
+            this.toolStripMenuItem1.Text = "Color Scheme";
+            // 
+            // plainToolStripMenuItem
+            // 
+            this.plainToolStripMenuItem.Image = global::LSystemEditor.Properties.Resources.color_sys;
+            this.plainToolStripMenuItem.Name = "plainToolStripMenuItem";
+            this.plainToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.plainToolStripMenuItem.Text = "System";
+            this.plainToolStripMenuItem.Click += new System.EventHandler(this.SystemToolStripMenuItem_Click);
+            // 
+            // solarizedLightToolStripMenuItem
+            // 
+            this.solarizedLightToolStripMenuItem.Image = global::LSystemEditor.Properties.Resources.color_light;
+            this.solarizedLightToolStripMenuItem.Name = "solarizedLightToolStripMenuItem";
+            this.solarizedLightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.solarizedLightToolStripMenuItem.Text = "Light";
+            this.solarizedLightToolStripMenuItem.Click += new System.EventHandler(this.LightToolStripMenuItem_Click);
+            // 
+            // solarizedDarkToolStripMenuItem
+            // 
+            this.solarizedDarkToolStripMenuItem.Image = global::LSystemEditor.Properties.Resources.color_dark;
+            this.solarizedDarkToolStripMenuItem.Name = "solarizedDarkToolStripMenuItem";
+            this.solarizedDarkToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.solarizedDarkToolStripMenuItem.Text = "Dark";
+            this.solarizedDarkToolStripMenuItem.Click += new System.EventHandler(this.DarkToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exitToolStripMenuItem.Image")));
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Image = global::LSystemEditor.Properties.Resources.help_icon;
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.ShortcutKeyDisplayString = "";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Image = global::LSystemEditor.Properties.Resources.about_icon;
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.ShortcutKeyDisplayString = "";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
             // LSystemEngineGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -569,8 +573,6 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LSysEngineGUI_FormClosing);
             this.Load += new System.EventHandler(this.LSysEngineGUI_Load);
             this.toolPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.FilePopupMenuStrip.ResumeLayout(false);
             this.HelpMenuContextStrip.ResumeLayout(false);
             this.statusStrip.ResumeLayout(false);
@@ -585,6 +587,8 @@
             this.textPanelContainer.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

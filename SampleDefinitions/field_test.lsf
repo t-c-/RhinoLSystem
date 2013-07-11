@@ -1,0 +1,102 @@
+#
+#  Example showing the creation of a surface (flat plane)
+#  By creating points, polylines, and then the final surface
+#
+
+
+lsystem : field_of_trees
+
+	define : main_dist : 6
+	define : variance : 0.2
+
+
+	derivations : 6
+
+	axiom : <R(0)>
+
+	production :*: R(n) :*:*: [+{S(n+1)}]FR(n+1)
+	production :*: S(n) :*:*: S(n+1)
+
+	#create a polyline and pop to curves
+	alias : R : null
+	#alias : C : null
+
+	alias : < : PushCurveStack
+	alias : > : PopCurveStackToLoft : FALSE
+
+	alias : { : PushPointStack
+	alias : } : PopPointsToCurve : D_STACK : FALSE
+	alias : . : Point : D_STACK : FALSE
+
+	alias : + : RotateOnAxis : AXIS_Z : rad(90)
+	alias : F : MoveOnAxis : AXIS_X : main_dist
+
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+	subsystem : S(d) : column : derivations : d : dist : main_dist : r_f : variance
+
+
+# column lsystem actually drops the points for the surface
+# being created above
+lsystem : column
+
+	define : dist : 5
+	define : r_f : 0.13
+
+	derivations : 5
+	
+	axiom : G
+
+	production :*: G :*:*: FG
+
+	group : F : [u.S(rndint(4,7))]f
+	alias : G : null
+	
+	alias : u : MoveOnAxis : AXIS_Z : rnd(-dist*r_f,dist*r_f)
+	alias : f : MoveOnAxis : AXIS_X : dist
+	alias : . : Point : D_STACK : FALSE
+
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+
+	subsystem : S(n) : abop_page56_b : derivations : n
+
+
+lsystem : abop_page56_b
+
+	define : r1 : 0.9
+	define : r2 : 0.9
+	define : a0 : rad(45)
+	define : a2 : rad(45)
+	define : d : rad(137.5)
+	define : wr : 0.707
+
+	derivations : 10
+
+	axiom : OA(1,10)
+	
+	production :*: A(l,w) :*:*: !(w)F(l)[&(a2)B(l*r2,w*wr)]/(d)A(l*r1,w*wr)
+	production :*: B(l,w) :*:*: !(w)F(l)[-(a2)$C(l*r2,w*wr)]C(l*r1,w*wr)
+	production :*: C(l,w) :*:*: !(w)F(l)[+(a2)$B(l*r2,w*wr)]B(l*r1,w*wr)
+
+	#orient heading to world z
+	alias : O : RotateOnAxis : 1 : -hpi
+
+	alias : A : null
+	alias : B : null
+	alias : C : null
+	alias : !(w) : SetLineWidth : w * 0.2
+	alias : F(x): MoveOnAxisWithLine : 0 : x 
+	
+	alias : +(theta) : RotateOnAxis : 2 : theta
+	alias : -(theta) : RotateOnAxis : 2 : -theta
+	alias : &(theta) : RotateOnAxis : 1 : theta	
+	alias : /(theta) : RotateOnAxis : 0 : theta
+	alias : $ : RollToLevel
+	
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+

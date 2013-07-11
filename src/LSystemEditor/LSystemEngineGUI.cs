@@ -679,6 +679,8 @@ namespace LSystemEditor {
                 _editor_dirty = false;
                 setTitle();
 
+                definitionBox.Focus();
+
             }//end if editorCheck
 
 
@@ -734,6 +736,8 @@ namespace LSystemEditor {
 
                          statusMessage.Text = "Opened: " + fileName;
 
+                         definitionBox.Focus();
+
                     } catch (Exception ex) {
 
                         definitionBox.Text = "Error reading file: " + ex.Message;
@@ -761,7 +765,6 @@ namespace LSystemEditor {
             if (_current_file != String.Empty) {
 
 
-
                 try {
 
                     //get a new stream writer
@@ -778,6 +781,8 @@ namespace LSystemEditor {
                     setTitle();
 
                     statusMessage.Text = "File Saved.";
+
+                    definitionBox.Focus();
 
                 } catch (Exception ex) {
 

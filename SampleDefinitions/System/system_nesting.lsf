@@ -2,8 +2,9 @@
 
 #
 #  Example demonstrating nested LSystems
-#  and variable passing through the chain
-#
+#  and variable passing through the chain.
+#  Also used prepare statements to demonstrate
+#  basic state inheritance.
 
 #
 #  The vaiable RAD is defined in all systems 
@@ -15,6 +16,9 @@ lsystem : root
 	define : RAD : 1
 
 	axiom : S(RAD)
+
+	prepare : SetColor : 255 : 0 : 0
+
 	group : S(r) : C(r)N(r)
 	alias : C(r) : Circle : PLANE_XY : D_DOC : r
 	subsystem : N(r) : 1 : RAD : r + 1
@@ -43,6 +47,9 @@ lsystem : 3
 	define : RAD : 1
 
 	axiom : S(RAD)
+
+	prepare : SetColor : 0: 255 : 0 
+
 	group : S(r) : C(r)N(r)
 	alias : C(r) : Circle : PLANE_XY : D_DOC : r
 	subsystem : N(r) : 4 : RAD : r + 1
@@ -69,6 +76,8 @@ lsystem : 6
 
 	define : RAD : 1
 	axiom : L(RAD,0)L(0,RAD)L(-RAD,0)L(0,-RAD)
+
+	prepare : SetColor : 0 : 0 : 255
 	alias : L(x,y) : Line : PLANE_XY : D_DOC : x : y : 0
 
 

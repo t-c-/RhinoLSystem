@@ -51,7 +51,7 @@ namespace LSystemEngine {
 
 
         /// <summary>
-        /// 
+        /// Parses Alias definition from Text.
         /// </summary>
         /// <param name="tokens"></param>
         public void Parse(string[] tokens) {

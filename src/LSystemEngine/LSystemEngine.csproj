@@ -54,6 +54,7 @@
     <Compile Include="LSystemGroup.cs" />
     <Compile Include="LSystemLetter.cs" />
     <Compile Include="LSystemLetterSequence.cs" />
+    <Compile Include="LSystemModelerPrepare.cs" />
     <Compile Include="LSystemProduction.cs" />
     <Compile Include="LSystemSubSystem.cs" />
     <Compile Include="LSystem.cs" />

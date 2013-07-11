@@ -11,20 +11,20 @@
 
 lsystem : tube_tree
 
-	define : a_r : rad(360/3)  # axial rotation
+	define : a_r : rad(360/3)    # axial rotation
 	define : a_r2 : a_r / 2      # half axial for staggering rotations
 
 
  	define : ar1 : 1.3 # 0.707  # angle reduction 1 for off-axis rotation
-	define : ar2 : 1.3   # angle increment for spread
+	define : ar2 : 1.3          # angle increment for spread
 	
 
-	define : lr : 0.707   # length reduction
+	define : lr : 0.707    # length reduction
 
 
-	define : scale : 10   # overall scale or length to start with
+	define : scale : 10    # overall scale or length to start with
 	define : s0 : 0.12     # large sphere scale
-	define : s1 : 0.1     # small sphere scale
+	define : s1 : 0.1      # small sphere scale
 	define : r1 : 0.05     # cylinder radius scale
 
 	derivations : 5
@@ -32,7 +32,7 @@ lsystem : tube_tree
 	axiom : OS(scale*s0)[T(scale, rad(10) )A(scale, rad(10) , rad(30), 0 )
 
 	# offset odd iterations
-	production :*: A(l,sa,aa, n) :*: n % 2 ==1 : [/(a_r+a_r2)^(aa*ar1)T(l*lr,sa*ar2)A(l*lr,sa*ar2,aa*ar1,n+1)][/(a_r*2+a_r2)^(aa*ar1)T(l*lr,sa*ar2)A(l*lr,sa*ar2,aa*ar1,n+1)][/(a_r*3+a_r2)^(aa*ar1)T(l*lr,sa*ar2)A(l*lr,sa*ar2,aa*ar1,n+1)]
+	production :*: A(l,sa,aa, n) :*: n % 2 == 1 : [/(a_r+a_r2)^(aa*ar1)T(l*lr,sa*ar2)A(l*lr,sa*ar2,aa*ar1,n+1)][/(a_r*2+a_r2)^(aa*ar1)T(l*lr,sa*ar2)A(l*lr,sa*ar2,aa*ar1,n+1)][/(a_r*3+a_r2)^(aa*ar1)T(l*lr,sa*ar2)A(l*lr,sa*ar2,aa*ar1,n+1)]
 	production :*: A(l,sa,aa, n) :*:*: [/(a_r)^(aa*ar1)T(l*lr,sa*ar2)A(l*lr,sa*ar2,aa*ar1,n+1)][/(a_r*2)^(aa*ar1)T(l*lr,sa*ar2)A(l*lr,sa*ar2,aa*ar1,n+1)][/(a_r*3)^(aa*ar1)T(l*lr,sa*ar2)A(l*lr,sa*ar2,aa*ar1,n+1)]
 
 
