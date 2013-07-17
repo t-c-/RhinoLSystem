@@ -47,7 +47,7 @@ lsystem : abop_page_26_parametric
 	# Petal used as leaf
 	# alias : P : Petal : dist * 3 : dist * 1.3 : 0.2 : -0.2 : 3
 	# Low Poly Leaf 
-	alias : P : LowPolyLeaf : PLANE_XY : dist * 3 : dist * 1.3 : -0.2
+	alias : P : LowPolyLeaf : dist * 3 : dist * 1.3 : 0.5 : -0.2
 
 	alias : & : RotateOnAxis : 1 : theta
 	alias : ^ : RotateOnAxis : 1 : -theta

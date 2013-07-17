@@ -510,7 +510,7 @@
             // 
             this.plainToolStripMenuItem.Image = global::LSystemEditor.Properties.Resources.color_sys;
             this.plainToolStripMenuItem.Name = "plainToolStripMenuItem";
-            this.plainToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.plainToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.plainToolStripMenuItem.Text = "System";
             this.plainToolStripMenuItem.Click += new System.EventHandler(this.SystemToolStripMenuItem_Click);
             // 
@@ -518,7 +518,7 @@
             // 
             this.solarizedLightToolStripMenuItem.Image = global::LSystemEditor.Properties.Resources.color_light;
             this.solarizedLightToolStripMenuItem.Name = "solarizedLightToolStripMenuItem";
-            this.solarizedLightToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.solarizedLightToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.solarizedLightToolStripMenuItem.Text = "Light";
             this.solarizedLightToolStripMenuItem.Click += new System.EventHandler(this.LightToolStripMenuItem_Click);
             // 
@@ -526,13 +526,13 @@
             // 
             this.solarizedDarkToolStripMenuItem.Image = global::LSystemEditor.Properties.Resources.color_dark;
             this.solarizedDarkToolStripMenuItem.Name = "solarizedDarkToolStripMenuItem";
-            this.solarizedDarkToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.solarizedDarkToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.solarizedDarkToolStripMenuItem.Text = "Dark";
             this.solarizedDarkToolStripMenuItem.Click += new System.EventHandler(this.DarkToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exitToolStripMenuItem.Image")));
+            this.exitToolStripMenuItem.Image = global::LSystemEditor.Properties.Resources.close_icon3;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.exitToolStripMenuItem.Text = "Exit";

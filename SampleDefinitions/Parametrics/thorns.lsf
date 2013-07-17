@@ -1,0 +1,28 @@
+
+#
+#  Eamples showing the use of the parametric Thorn object.
+#
+#
+
+lsystem : straight_thorn
+
+
+	axiom : T(10,0.5,0.5,0.6,0.6,0)
+
+	alias : T(l,w,h,hb,wb,c) : Thorn : l : w : h : hb : wb : c : L_NORMAL
+
+
+lsystem : rose_thorn
+
+
+	axiom : T(8,0.75,2,0.4,0.6,0.4)
+
+	alias : T(l,w,h,hb,wb,c) : Thorn : l : w : h : hb : wb : c : L_NORMAL
+
+
+lsystem : wrought_iron_fleur
+
+
+	axiom : T(10,2,2,0.7,0.7,-1)T(12,2,2,0.7,0.7,0)T(10,2,2,0.7,0.7,1)
+
+	alias : T(l,w,h,hb,wb,c) : Thorn : l : w : h : hb : wb : c : L_STRAIGHT

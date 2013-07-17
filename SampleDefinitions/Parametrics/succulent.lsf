@@ -1,0 +1,110 @@
+
+#
+#   Work in Progress - new modeler command works!
+#
+#  This is the Phyllotaxis example from ABOP pg100
+#  using the SucculentLeaf Command.
+#  
+
+
+lsystem : succulent
+
+	define : tr : rad(137.5)    # trunk rotation
+	define : r_rng : 0.05 * pi  # random range for branch wobble
+	
+
+	define : rr : 1.07 # circle rate
+	define : lr : 1.19  #  length rate
+
+
+	define : sd : 0.75    # starting dist
+	define : scr : 0.5 # starting radius
+
+
+	derivations : 6
+
+	#axiom : {T(sd,scr)T(sd,scr)T(sd,scr)C(scr*1.3)[A(tr,rad(67),sd,scr,24)]x(sd)T(sd,scr)C(scr)^[F(32)]}
+	axiom : {T(sd,scr)T(sd,scr)T(sd,scr)T(sd,scr)[A(tr,rad(65),sd,scr,24)]T(sd,scr*1.3)T(sd,scr)C(scr)^[F(32)]}
+
+
+	#rotate and branch
+	production :*: A(r,p,d,cr,n) :*:*: B(r+tr,p+rad(11),d*lr, cr*rr,n+1)A(r+tr,p+rad(11),d*lr, cr*rr,n+1)
+
+	production :*: T(d,r) :*:*: T(d*lr,r*rr)
+	production :*: C(r) :*:*: C(r*rr)
+	production :*: B(r,p,d,r1,n) :*:*: B(r,p,d*lr, r1*rr,n+1)
+
+	#orient upwards - heading to world z zxis
+	prepare : RotateOnAxis : AXIS_Y : -rad(90)
+	prepare : SetMaterial : 20
+
+	group : T(d,r) : C(r)+-x(d)
+	# roll/pitch/length/radius/ derivations
+	group : B(r,p,d,r1,n) : [r(r)p(p){C(r1)x(d)C(r1)x(d)C(r1)}p(rad(90))F(n)]
+
+	alias : A : null
+
+
+	# movement
+	alias : x(d) : MoveOnAxis : AXIS_X : d
+	alias : y(d) : MoveOnAxis : AXIS_Y : d
+	alias : z(d) : MoveOnAxis : AXIS_Z : d
+
+	# rotation
+	alias : r(t) : RotateOnAxis : AXIS_X : t
+	alias : p(t) : RotateOnAxis : AXIS_Y : t
+	alias : s(t) : RotateOnAxis : AXIS_Z : t
+
+	alias : ^ : RotateOnAxis : AXIS_Y : rad(90)
+	alias : + : RotateOnAxis : AXIS_Y : rnd(-r_rng ,r_rng )
+	alias : - : RotateOnAxis : AXIS_Z : rnd(-r_rng ,r_rng )
+
+	alias : { : PushCurveStack
+	alias : C(r) : Circle : PLANE_YZ : D_STACK : r
+	alias : } : PopCurveStackToLoft : L_NORMAL : FALSE
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+	#alias : F : null
+	subsystem : F(d) : succulent_flower : derivations : d
+
+
+lsystem : succulent_flower
+
+
+	define : a : rad(137.5)
+	define : crl :0.012
+
+	define : lr : 1.041   #length rate
+	define : wr : 1.071  # 1.06   #width rate  1.017
+	define : cr : 0.97  # 0.987  #curl rate
+	define : tr : 0.95    #thickness rate
+
+	define : b_l : 3    # begining length
+	define : b_w : 0.64    # begining width
+	define : b_c : 0.9  # begining curl
+	define : b_t : 1.2  # begining thickness
+
+	define : h_inc : 0.023  #height increment	
+
+	derivations : 31
+
+	axiom : A(b_l, b_w, b_c, b_t)
+	
+	production :*: A(l,w,c,t) :*:*: +(a)U(h_inc)[^(rad(-pi*c*12))S(l,w,c,t)]A(l*lr,w*wr,c*cr,t*tr)
+
+	
+	prepare : SetMaterial : 100
+
+	#group : F(d) : f(d)U(d*4)
+
+	alias : A : null
+	# length/width/thickness/edge thickness factor/curl/cup/width bias/loft type
+	alias : S(l,w,c,t) : SucculentLeaf : l : w : t : 0.1 : c : (1 - c) * 1.07  : 0.85 : L_LOOSE
+	alias : F(d) : MoveOnAxis : 0 : d
+	alias : U(d) : MoveOnAxis : AXIS_Z : -d
+	alias : +(theta) : RotateOnAxis : AXIS_Z : theta 
+	alias : ^(theta) : RotateOnAxis : AXIS_Y : theta
+	alias : [ : PushStack
+	alias : ] : PopStack
+

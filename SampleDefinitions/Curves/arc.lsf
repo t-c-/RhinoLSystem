@@ -27,6 +27,6 @@ lsystem : arc_loft
 	alias : A : Arc : 1 : 0 : 10 : rad(-30) : rad(110)
 
 	alias : { : PushCurveStack
-	alias : } : PopCurveStackToLoft : FALSE
+	alias : } : PopCurveStackToLoft : L_NORMAL : FALSE
 
 

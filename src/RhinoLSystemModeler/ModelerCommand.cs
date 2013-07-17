@@ -34,7 +34,7 @@ namespace RhinoLSystem {
 
 
        /// <summary>
-       /// DO NOT OVERRIDE this method.  Only one Command needs to override this and it has handled as part of the Standard Library.
+       /// DO NOT OVERRIDE this method.  Only one Command needs to override this and it is handled as part of the Standard Library.
        /// </summary>
        /// <returns></returns>
         public virtual bool ReleasesPrune() {
@@ -42,7 +42,7 @@ namespace RhinoLSystem {
         }
 
         /// <summary>
-        /// DO NOT OVERRIDE this method.  Only one Command needs to override this and it has handled as part of the Standard Library.
+        /// DO NOT OVERRIDE this method.  Only one Command needs to override this and it is handled as part of the Standard Library.
         /// </summary>
         /// <returns></returns>
         public virtual bool PruneDeeper() {
@@ -69,7 +69,7 @@ namespace RhinoLSystem {
        /// Execute performs the command withprovided arguements.
        /// </summary>
        /// <param name="args">Array of floats passed from the LSystem Engine as argumetns for the command.</param>
-       public virtual void Execute(RhinoTurtle refTurtle , RhinoDoc doc, float[] args) { }
+       public virtual void Execute(RhinoTurtle turtle , RhinoDoc document, float[] args) { }
 
 
        #region "Static Helpers"
@@ -170,6 +170,104 @@ namespace RhinoLSystem {
 
        }
 
+       /// <summary>
+       /// Helper Function to do checking on an integer.  Minimum and maximum may be specified.  
+       /// To specify unlimited minimum or maximum values, use int.MinValue for min and/or int.MaxValue for max.
+       /// </summary>
+       /// <param name="int_val">argument value for integer </param>
+       /// <param name="min">minimum allowed integer, use int.MinValue for unlimited minimum</param>
+       /// <param name="max">maximum allowed integer, use int.MaxValue for unlimited maximum</param>
+       /// <param name="cmdName"></param>
+       /// <returns></returns>
+       public static int IntegerValueFromArgument(float int_val, int min, int max, string cmdName) {
+
+           int final_int = (int)int_val;
+           
+           //check for basic validity 3.1 != 3.0
+           if (int_val - final_int != 0) {
+               throw new Exception("Invalid integer value of: " + int_val + ", in: " + cmdName);
+           }
+
+           if (final_int < min ) {
+               throw new Exception("Invalid integer value of: " + int_val + ", in: " + cmdName + ", minimum value exceeded: " + min);
+           }
+
+           if (final_int > max ) {
+               throw new Exception("Invalid integer value of: " + int_val + ", in: " + cmdName + ", maximum value exceeded: " + max);
+           }
+
+           return final_int;
+
+       }
+
+       /// <summary>
+       /// Helper function to constrain a float argument to within a range.
+       /// 
+       /// </summary>
+       /// <param name="float_val">float argument value</param>
+       /// <param name="min">minimum allowed float, use float.MinValue for unlimited minimum</param>
+       /// <param name="max">maximum allowed float, use float.MaxValue for unlimited maximum</param>
+       /// <param name="cmdName">calling command</param>
+       /// <returns></returns>
+       public static float FloatValueFromArgument(float float_val, float min, float max, string cmdName) {
+
+           float final_float = float_val;
+
+           if (float.IsNaN(float_val)) {
+               throw new Exception("Invalid float of NaN (Not a Number) in :" + cmdName);
+           }
+
+           if (final_float < min) {
+               final_float = min;
+           }
+
+           if (final_float > max) {
+               final_float = max;
+           }
+
+           return final_float;
+
+       }//end float value from argument
+
+       /// <summary>
+       /// Checks the Loft Type specified by the integer value.
+       /// </summary>
+       /// <param name="lt_val">loft type value</param>
+       /// <param name="cmdName">calling command</param>
+       /// <returns></returns>
+       public static Rhino.Geometry.LoftType LoftTypeFromArgument(float lt_val, string cmdName) {
+
+           //get the integer - this will filter to an appropriate value for switch
+           int loft_t_i = IntegerValueFromArgument(lt_val, 0, 5, cmdName);
+
+           Rhino.Geometry.LoftType loft_type = LoftType.Normal;
+
+           switch (loft_t_i) {
+
+               case 0:
+                   loft_type = LoftType.Normal;
+                   break;
+               case 1:
+                   loft_type = LoftType.Loose;
+                   break;
+               case 2:
+                   loft_type = LoftType.Tight;
+                   break;
+               case 3:
+                   loft_type = LoftType.Straight;
+                   break;
+               case 4:
+                   loft_type = LoftType.Developable;
+                   break;
+               case 5:
+                   loft_type = LoftType.Uniform;
+                   break;
+
+           }//end switch
+
+           return loft_type;
+
+       }
 
        /// <summary>
        /// Helper function to do the checking on a passed boolean.

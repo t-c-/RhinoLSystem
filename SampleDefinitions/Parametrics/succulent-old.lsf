@@ -1,0 +1,100 @@
+
+#
+#   Work in Progress - new modeler command works!
+#
+#  This is the Phyllotaxis example from ABOP pg100
+#  using the SucculentLeaf Command.
+#  
+
+
+lsystem : succulent
+
+	define : tr : rad(137.5)    # trunk rotation
+	define : r_rng : 0.05 * pi  # random range for branch wobble
+	
+	define : c_r : 1   # circle radius
+	define : rr : 1.05 # circle rate
+
+	define : ls : 3    #  length step
+	define : lr : 1.1  #  length rate
+
+	define : bp : 0.4  # proportion of branch radius to length
+
+	define : sd : 2    # starting dist
+	define : scr : 0.5 # starting radius
+
+
+	derivations : 1
+
+	axiom : {T(scr)T(scr)T(scr)c(sd)[B(12,sd*bp)]m(sd)T(scr)c(sd*bp)^[F(32)]}
+
+	#rotate and branch
+	production :*: B(n,d) :*:*: XB(n+1,d*1.2)XB(n+1,d*1.2)
+
+	production :*: T(r) :*:*: T(r*1.2)T(r)
+
+
+
+	prepare : RotateOnAxis : AXIS_Y : -rad(90)
+	prepare : SetMaterial : 20
+
+	group : T(d) : c(d*bp)+-m(d)
+	group : B(n, d) : [Y{c(c_r )m(d)c(c_r )m(d)c(c_r )}YF(25)]
+
+
+	alias : A : null
+	alias : m(x) : MoveOnAxis : AXIS_X : x
+
+	alias : X : RotateOnAxis : AXIS_X : tr
+	alias : Y : RotateOnAxis : AXIS_Y : rad(90)
+
+	alias : ^ : RotateOnAxis : AXIS_Y : rad(90)
+	alias : + : RotateOnAxis : AXIS_Y : rnd(-r_rng ,r_rng )
+	alias : - : RotateOnAxis : AXIS_Z : rnd(-r_rng ,r_rng )
+
+	alias : { : PushCurveStack
+	alias : c(r) : Circle : PLANE_YZ : D_STACK : r
+	alias : } : PopCurveStackToLoft : L_NORMAL : FALSE
+	alias : [ : PushStack
+	alias : ] : PopStack
+
+	subsystem : F(d) : succulent_flower : derivations : d
+
+
+lsystem : succulent_flower
+
+
+	define : a : rad(137.5)
+	define : crl :0.012
+
+	define : lr : 1.02   #length rate
+	define : wr : 1.012   #width rate  1.017
+	define : cr : 0.99  #curl rate
+	define : tr : 0.9  #thickness rate
+
+	define : b_l : 3    # begining length
+	define : b_w : 2    # begining width
+	define : b_c : 0.9  # begining curl
+	define : b_t : 1.2  # begining thickness
+
+	define : h_inc : 0.017  #height increment	
+
+	derivations : 27
+
+	axiom : A(b_l, b_w, b_c, b_t)
+	
+	production :*: A(l,w,c,t) :*:*: +(a)U(h_inc)[S(l,w,c,t)]A(l*lr,w*wr,c*cr,t*tr)
+
+	prepare : SetMaterial : 100
+
+	#group : F(d) : f(d)U(d*4)
+
+	alias : A : null
+	# length/width/thickness/edge thickness factor/curl/loft type
+	alias : S(l,w,c,t) : SucculentLeaf : l : w : t : 0.1 : c : 0 : 0.5 : L_LOOSE
+	alias : F(d) : MoveOnAxis : 0 : d
+	alias : U(d) : MoveOnAxis : AXIS_Z : -d
+	alias : +(theta) : RotateOnAxis : 2 : theta 
+	alias : [ : PushStack
+	alias : ] : PopStack
+

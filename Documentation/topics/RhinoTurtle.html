@@ -135,6 +135,9 @@
     			<a href="#BranchSection">BranchSection</a> &nbsp;&nbsp;
     			<a href="#StraightTube">StraightTube</a> &nbsp;&nbsp;
     			<a href="#Petal">Petal</a> &nbsp;&nbsp;
+    			<a href="#SucculentLeaf"> SucculentLeaf</a> &nbsp;&nbsp;
+    			<a href="#Thorn">Thorn</a> &nbsp;&nbsp;
+    			<a href="#LowPolyLeaf">LowPolyLeaf</a> &nbsp;&nbsp;
     			
     		</p>
     		    		    
@@ -771,7 +774,7 @@
         <!--  PopCurveStackToLoft -->
     	<div>
     		<a name="PopCurveStackToLoft"> </a>
-    		<p class="codeHeader">  PopCurveStackToLoft  : &lt; normalize seam &gt; : </p>
+    		<p class="codeHeader">  PopCurveStackToLoft  : &lt; loft type &gt; : &lt; normalize seam &gt; : </p>
     		<p>
     			Pops the current curve list and builds a lofted surface from the curves.  There must be at least two curve in the Curve List.  
     			You can use normalize seam to unify the indvidual curve's seam points with minimal twisting.  This operation will take longer.
@@ -779,12 +782,13 @@
     			<br />
     		</p>
     		<p>
+    			&lt; loft type &gt; = integer value for loft type: normal = 0, loose = 1, tight = 2, straight = 3, developable = 4, uniform = 5 <br />
     			&lt; normalize &gt; = 1 true, 0 for false: normalizes the surface seam <br />
     		</p>
    		
     		<p class="codeExample"> 
-    			#create a loft from the curves on the stack with a normalized seam<br />
-    			PopCurveStackToLoft : TRUE <br />
+    			#create a normal style loft from the curves on the stack with a normalized seam<br />
+    			PopCurveStackToLoft : L_NORMAL : TRUE <br />
     			
     		 </p>
     		
@@ -1008,7 +1012,7 @@
 		<h2> Parametric Objects </h2> 
 	</div>    	
     	
-	    	<!--  BranchSection -->
+	<!--  BranchSection -->
     	<div >
     		<a name="BranchSection"> </a>
     		<p class="codeHeader">  BranchSection : &lt; plane &gt; : &lt; radius &gt; : &lt; randomness &gt; : &lt; detail &gt; </p>
@@ -1035,7 +1039,7 @@
     		
     	</div> 
 	
-	    	<!--  StraightTube -->
+	<!--  StraightTube -->
     	<div >
     		<a name="StraightTube"> </a>
     		<p class="codeHeader">  StraightTube : &lt; radius &gt; : &lt; length &gt; : &lt; radius factor &gt; : &lt; cap &gt; </p>
@@ -1063,15 +1067,15 @@
 	
 	</div>    	
     	
-	    	<!--  Petal -->
+	<!--  Petal -->
     	<div >
     		<a name="Petal"> </a>
     		<p class="codeHeader">  Petal : &lt; length &gt; : &lt; width &gt; : &lt; width bias &gt; : &lt; curl &gt; : &lt; detail &gt; </p>
     		<p>  
-    		  Experimental parametric object designed as a general purpose petal or leaf.   This creates a petal shape (Surface) along the Turtle's heading (x axis).  
+    		  Parametric object designed as a general purpose petal or leaf.   This creates a petal shape (Surface) along the Turtle's heading (x axis).  
     		  The petal is a general oval based on length and width.  The width bias controls where the buldge of the oval is (0=beginning, 1 = tip).  
     		  Curl controls how much the petal curls into itself - this is the overall value in radians.  The detail will effect this final shape.  
-    		  Too little detail with a large curl makes segmented objects.
+    		  Too little detail with a large curl will create segmented objects.  A Petal Grasshopper file is distributed with the project so you can test parameters.
 
     		  <br />
     		</p>
@@ -1092,10 +1096,106 @@
     		
     	</div> 	
     	
+    	
+    	<!--  Succulent Leaf -->
+    	<div >
+    		<a name="SucculentLeaf"> </a>
+    		<p class="codeHeader">  SucculentLeaf : &lt; length &gt; : &lt; width &gt; : &lt; thickness &gt; : &lt; edge thickness factor &gt; : &lt; curl &gt;  : &lt; cup &gt; : &lt; width bias &gt; : &lt; loft type &gt; </p>
+    		<p>  
+    		  Parametric object designed as a general purpose leaf with thickness (inspired by a variety  of succulents).   This creates a lofted surface oriented along the Turtle's heading (x axis).  
+    		  The SucculentLeaf's shape is based on length and width and thickness.  The edge thickness factor is the proportion of the edges to the overall thickness.  The width bias controls where the buldge of the oval is (0=beginning, 1 = tip).  
+    		  Curl controls how much the petal curls along the x-axis (tilts upward with more curl), and Cup controls the curvature across the x-axis.  
+    		   A SucculentLeaf Grasshopper file is distributed with the project so you can test parameters.
+
+    		  <br />
+    		</p>
+    		<p>    	
+		&lt; length &gt; = length of the succulent leaf <br /> 		
+    		&lt; width &gt; = width of the succulent leaf  <br />
+    		&lt; thickness &gt; = thickness of the succulent leaf  <br />
+    		&lt; edge thickness factor &gt; = multiplier against thickness that controls the thickness if the edge (0=sharp / pinched, 1=thick / round) <br />
+    		&lt; curl &gt; = amount of curl in petal along x-axis (-1 to 1, 0 = no curl / flat)<br />
+    		&lt; cup &gt; = amount of cup in petal across x-axis (-1 to 1, 0 = no cup / flat)<br />
+    		&lt; width bias &gt; = where width is applied to succulent leaf: 0=base, 0.5 = middle, 1 = end <br />
+    		&lt; loft type &gt; = integer value for loft type: normal = 0, loose = 1, tight = 2, straight = 3, developable = 4, uniform = 5 <br />
+    		
+    		</p>
+
+		<p class="codeExample"> 
+			#create a succlent leaf along the turtle's heading <br />
+			SucculentLeaf : l : w : t : 0.3 : curl : cup  : 0.85 : L_LOOSE <br /> 
+		</p>
+    		
+    	</div> 	
+    	
+    	
+    	<!--  Thorn -->
+    	<div >
+    		<a name="Thorn"> </a>
+    		<p class="codeHeader">  Thorn : &lt; length &gt; : &lt; width &gt; : &lt; height &gt; : &lt; height taper bias &gt; : &lt; width taper bias &gt;  : &lt; curl &gt; : &lt; loft type &gt; </p>
+    		<p>  
+    		  Parametric object designed as a general purpose thorn.  This creates a lofted surface oriented along the turtle's heading (x-axis).  The thorn is based on length with a base defined by width and height in the YZ Plane.  
+    		  The thorn can be tapered along it's width and height (0=taper begins at base, 1=taper happens towards end).  Curl controls the curvature along the x-axis.
+    		   A Thorn Grasshopper file is distributed with the project so you can test parameters.
+
+    		  <br />
+    		</p>
+    		<p>    	
+		&lt; length &gt; = length of the thorn <br /> 		
+    		&lt; width &gt; = width of the thorn's base <br />
+    		&lt; height &gt; = height of the thorn's base  <br />
+    		&lt; height taper bias &gt; = where the height taper starts (0=begining, 1 = end) <br />
+    		&lt; width taper bias &gt; = where the width taper starts (0=begining, 1 = end) <br />    		
+    		&lt; curl &gt; = amount of curl in thorn along x-axis (-1 to 1, 0 = no curl / flat)<br />
+    		&lt; loft type &gt; = integer value for loft type: normal = 0, loose = 1, tight = 2, straight = 3, developable = 4, uniform = 5 <br />
+    		
+    		</p>
+
+		<p class="codeExample"> 
+			#create a thorn pointing in the direction of the turtle's heading <br />
+			Thorn : len : wid : hgt : hb : wb : crl : L_NORMAL <br /> 
+		</p>
+    		
+    	</div> 	    	
+    	
+    	
+    	<!--  Low Poly Leaf -->
+    	<div >
+    		<a name="LowPolyLeaf"> </a>
+    		<p class="codeHeader">  LowPolyLeaf : &lt; length &gt; : &lt; width &gt; : &lt; width bias &gt;  : &lt; curl &gt;  </p>
+    		<p>  
+    		  Parametric object designed as a low polygon count leaf (4 polys).  This creates a roughly oval mesh oriented along the turtle's heading (x-axis).  
+    		  Curl controls the curvature along the x-axis.  Texture mapping is planar, so a lot of curl can distort mapping.
+    		   A LowPolyLeaf Grasshopper file is distributed with the project so you can test parameters.
+
+    		  <br />
+    		</p>
+    		<p>    	
+		&lt; length &gt; = length of the leaf shape <br /> 		
+    		&lt; width &gt; = width of the leaf shape <br />
+    		&lt; width bias &gt; = where the width occurs (0=begining, 0.5 = middle, 1 = end) <br />    		
+    		&lt; curl &gt; = amount of curl in the leaf (-1 to 1, 0 = no curl / flat)<br />
+
+    		</p>
+
+		<p class="codeExample"> 
+			#create a simple mesh leaf orientated along the turtle's heading <br />
+			#with a width bias of 0.2, it will be pear-shaped <br />
+			LowPolyLeaf : l_len : l_wid : 0.2 : 0.31 <br /> 
+		</p>
+    		
+    	</div> 	     	
+    	
+    	
     	<div>
     		<a  href="#TOPOFPAGE"> Contents </a>
 	</div>
     	
+	
+	
+	
+	
+	
     	<!-- 
 			
 			================================  Presentation ===============================

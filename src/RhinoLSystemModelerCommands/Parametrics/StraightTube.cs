@@ -21,10 +21,6 @@ namespace RhinoLSystem.Commands {
         public override void Execute(RhinoTurtle turtle, RhinoDoc document, float[] args) {
 
 
-            //if (args.Length != 4) {
-            //    throw new Exception("Invalid number of args in : " + CommandName());
-            //}
-
             double minRadius = 0.001;
             double endRadius = 1;
             double radius = args[0];
@@ -33,13 +29,7 @@ namespace RhinoLSystem.Commands {
             int cap = (int)args[3];
             bool createCap = false;
 
-            if (cap != 1 && cap != 0) {
-                throw new Exception("Invalid boolean value for cap in : " + CommandName());
-            } 
-            
-            if (cap == 1) {
-                createCap = true;
-            }
+            createCap = ModelerCommand.BooleanValueFromArgument(cap, CommandName());
 
             if (radius < minRadius) {
                 radius = minRadius;
@@ -52,41 +42,61 @@ namespace RhinoLSystem.Commands {
 
             endRadius = radius * radiusFactor;
 
-            //orient plane along heading
-            Plane turtlePlane = new Plane(turtle.Plane.Origin, turtle.Plane.YAxis, turtle.Plane.ZAxis);
-
-            Rhino.Geometry.Circle startCircle = new Rhino.Geometry.Circle(turtlePlane, radius);
-            Plane endPlane = turtlePlane;
-            endPlane.Origin = endPlane.PointAt(0, 0, length);
-            Rhino.Geometry.Circle endCircle = new Rhino.Geometry.Circle(endPlane, endRadius);
-
-            List<Curve> curves = new List<Curve>();
-            curves.Add(new ArcCurve(startCircle));
-            curves.Add(new ArcCurve(endCircle));
-
-            Brep[] lofts = Brep.CreateFromLoft(curves, Point3d.Unset, Point3d.Unset, LoftType.Normal, false);
-
-            if (lofts.Length == 1) {
-                document.Objects.AddBrep(lofts[0], turtle.Attributes);
-            }
-
+            Point3d sp = new Point3d(0, radius, 0);
+            Point3d ep = new Point3d(length, endRadius, 0);
+            Curve profile = new LineCurve(sp, ep);
 
             if (createCap) {
-                Point3d ras = endPlane.PointAt(-endRadius, 0, 0);
-                Point3d rae = endPlane.PointAt(endRadius, 0, 0);
-                Rhino.Geometry.Line revLine = new Rhino.Geometry.Line(ras, rae);
-                Rhino.Geometry.Arc arc = new Rhino.Geometry.Arc(endCircle, Math.PI);
-                RevSurface rev = RevSurface.Create(new ArcCurve(arc), revLine, 0, Math.PI);
-                Brep bCap =  Brep.CreateFromRevSurface(rev, false, false);
 
-                if (bCap != null) {
-                    document.Objects.Add(bCap, turtle.Attributes);
+                Point3d a_cen = new Point3d(length , 0, 0);
+                Rhino.Geometry.Arc arc = new Rhino.Geometry.Arc(a_cen, endRadius, Math.PI * 0.5);
+                Rhino.Geometry.ArcCurve ac = new ArcCurve(arc);
+
+                List<Curve> j_list = new List<Curve>();
+                j_list.Add(profile);
+                j_list.Add(ac);
+
+                Curve[] curves = Curve.JoinCurves(j_list);
+
+                if (curves.Length == 1) {
+                    profile = curves[0];
                 }
 
-            }//end cap
+
+            }//end if
+
+
+            Rhino.Geometry.Line r_axis = new Rhino.Geometry.Line(new Point3d(0, 0, 0), new Point3d(1, 0, 0));
+
+            RevSurface rev = RevSurface.Create(profile, r_axis, 0, Math.PI * 2);
+
+            if (rev != null) {
+
+                Brep bSurf = Brep.CreateFromRevSurface(rev, false, false);
+
+                if (bSurf != null) {
+
+                    bSurf.Transform(Transform.PlaneToPlane(Plane.WorldXY, turtle.Plane));
+
+                    if (document.Objects.AddBrep(bSurf, turtle.Attributes) == Guid.Empty) {
+                        throw new Exception("Failed to Create Brep object in: " + CommandName());
+                    }
+                } else {
+
+                    throw new Exception("Failed to Create Brep from revolve geometry in: " + CommandName());
+
+                }
+
+
+            } else {
+
+                throw new Exception("Failed to Create revolve geometry in: " + CommandName());
+
+            }
+
 
         }//end execute
 
 
-    }
+    }//end class
 }

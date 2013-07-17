@@ -58,7 +58,7 @@ lsystem : basic_tree
 
 	alias : { : PushCurveStack
 	alias : c(r) : Circle : PLANE_YZ : D_STACK : r
-	alias : } : PopCurveStackToLoft : TRUE
+	alias : } : PopCurveStackToLoft : L_NORMAL : TRUE
 
 	#wobble using theta range...
 	alias : W : RotateOnAxis : 2 : rnd(-r_t,r_t)

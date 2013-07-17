@@ -33,7 +33,7 @@ namespace RhinoLSystem.Commands {
 
 
             //leaf plane
-            Plane l_plane = turtle .Plane;
+            Plane l_plane = turtle.Plane;
 
 
             Point3d sp, ep, ct_p;

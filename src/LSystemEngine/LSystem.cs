@@ -161,6 +161,15 @@ namespace LSystemEngine {
             _lang.SetVariable("TRUE", 1);
             _lang.SetVariable("FALSE", 0);
 
+
+            //loft types
+            _lang.SetVariable("L_NORMAL", 0);
+            _lang.SetVariable("L_LOOSE", 1);
+            _lang.SetVariable("L_TIGHT", 2);
+            _lang.SetVariable("L_STRAIGHT", 3);
+            _lang.SetVariable("L_DEVELOPABLE", 4);
+            _lang.SetVariable("L_UNIFORM", 5);
+
         }
 
 

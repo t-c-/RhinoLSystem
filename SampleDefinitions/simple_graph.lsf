@@ -1,0 +1,24 @@
+
+#
+#
+#  Example to show a simple graph of changing rate.
+#  Change rate and init to get an idea of how a value will grow.
+#
+
+lsystem : graph_change
+
+	define : dist : 1
+	define : rate : 1.1
+	define : init : 1
+
+	derivations : 25
+
+	axiom : F(init)A(init)
+
+	production :*: A(x) :*:*: F(x*rate)A(x*rate)
+
+	group : F(x) : L(x)X
+
+	alias : A : null
+	alias : L(l) : Line : PLANE_XY : D_DOC : 0 : l : 0
+	alias : X : MoveOnAxis : AXIS_X : dist

@@ -37,7 +37,7 @@ lsystem : line_test_2
 	alias : +(t) : RotateOnAxis : 2 : t
 
 	alias : { : PushCurveStack
-	alias : } : PopCurveStackToLoft : FALSE
+	alias : } : PopCurveStackToLoft : L_NORMAL : FALSE
 	
 	
 

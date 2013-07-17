@@ -15,7 +15,7 @@ lsystem : points_to_polyline_loft
 	group : R : [+{.F.F.F.F.}]
 
 	alias : < : PushCurveStack
-	alias : > : PopCurveStackToLoft : FALSE
+	alias : > : PopCurveStackToLoft : L_NORMAL : FALSE
 
 	alias : { : PushPointStack
 	alias : } : PopPointsToPolyline : D_BOTH : FALSE

@@ -62,6 +62,8 @@
     <Compile Include="Environment\SetTropismFactor.cs" />
     <Compile Include="Environment\SetTropismVector.cs" />
     <Compile Include="Parametrics\LowPolyLeaf.cs" />
+    <Compile Include="Parametrics\SucculentLeaf.cs" />
+    <Compile Include="Parametrics\Thorn.cs" />
     <Compile Include="PointStack\Point.cs" />
     <Compile Include="PointStack\PopPointsToMeshBorder.cs" />
     <Compile Include="PointStack\PopPointsToPolyline.cs" />

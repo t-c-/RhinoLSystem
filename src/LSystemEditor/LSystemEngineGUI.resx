@@ -126,16 +126,6 @@
   <metadata name="FilePopupMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>388, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="exitToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACw8AAAsPAZL5A6UAAAAGYktHRAD/AP8A/6C9p5MAAAAHdElNRQfdBwsEJiIW4pRc
-        AAAAHWlUWHRDb21tZW50AAAAAABDcmVhdGVkIHdpdGggR0lNUGQuZQcAAABoSURBVDhP1YxBDoAwDMP2
-        /0/DmCgSpU29iQNY6qVx0n7Jdl4F8kyqZOT5MJOpFwb+R5wbqqAyCS1Gv5RKnhozstLS2MGrg1VpajSS
-        6e+BKqoshBSIc+GDTKTewEIpdag3QFKHep+itR2u6GOdySMSKgAAAABJRU5ErkJggg==
-</value>
-  </data>
   <metadata name="HelpMenuContextStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>648, 17</value>
   </metadata>

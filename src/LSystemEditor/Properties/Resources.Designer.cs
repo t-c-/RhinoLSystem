@@ -67,9 +67,9 @@ namespace LSystemEditor.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap close_icon2 {
+        internal static System.Drawing.Bitmap close_icon3 {
             get {
-                object obj = ResourceManager.GetObject("close_icon2", resourceCulture);
+                object obj = ResourceManager.GetObject("close_icon3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -98,13 +98,6 @@ namespace LSystemEditor.Properties {
         internal static System.Drawing.Bitmap colors_icon {
             get {
                 object obj = ResourceManager.GetObject("colors_icon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap editor_icon {
-            get {
-                object obj = ResourceManager.GetObject("editor_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -165,13 +158,6 @@ namespace LSystemEditor.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap modeler_icon {
-            get {
-                object obj = ResourceManager.GetObject("modeler_icon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap new_icon {
             get {
                 object obj = ResourceManager.GetObject("new_icon", resourceCulture);
@@ -217,13 +203,6 @@ namespace LSystemEditor.Properties {
         internal static System.Drawing.Bitmap sep02 {
             get {
                 object obj = ResourceManager.GetObject("sep02", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap show_both_icon {
-            get {
-                object obj = ResourceManager.GetObject("show_both_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

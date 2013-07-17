@@ -6,9 +6,9 @@ lsystem : lw_poly_leaf
 
 	define : length : 5
 	define : width : 1.5
-	define : curl : rad(3) #curl increment
+	define : curl : 0.6
 	
 	axiom : L
-	alias : L : LowPolyLeaf : PLANE_XY : length : width : curl
+	alias : L : LowPolyLeaf : length : width : 0.5 : curl
 
 

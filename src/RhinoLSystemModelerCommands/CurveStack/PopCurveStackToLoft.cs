@@ -14,15 +14,17 @@ namespace RhinoLSystem.Commands {
        }
 
        public override int NumberOfArguments() {
-           return 1;
+           return 2;
        }
 
        public override void Execute(RhinoTurtle turtle, RhinoDoc document, float[] args) {
 
 
-           float norm_s = args[0];
-           bool normalize_seam = ModelerCommand.BooleanValueFromArgument(norm_s, CommandName());
+           float loft_t_f = args[0];
+           float norm_s = args[1];
 
+           Rhino.Geometry.LoftType loft_type = ModelerCommand.LoftTypeFromArgument(loft_t_f, CommandName());
+           bool normalize_seam = ModelerCommand.BooleanValueFromArgument(norm_s, CommandName());
 
 
            List<Curve> curves = turtle.PopCurveStack();
@@ -40,7 +42,7 @@ namespace RhinoLSystem.Commands {
                throw new Exception("Not enough curves to create Loft: " + curves.Count + " provided, in: " + CommandName());
            }
 
-           Brep[] loftSrfs = Brep.CreateFromLoft(curves, Point3d.Unset, Point3d.Unset, LoftType.Normal, false);
+           Brep[] loftSrfs = Brep.CreateFromLoft(curves, Point3d.Unset, Point3d.Unset, loft_type, false);
 
            if (loftSrfs != null) {
                if (loftSrfs.Length == 1) {

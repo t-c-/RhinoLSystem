@@ -32,5 +32,5 @@ lsystem : circle_tube
 	alias : +(t) : RotateOnAxis : 2 : t
 	alias : p : RotateOnAxis : AXIS_Y : rad(15)
 	alias : { : PushCurveStack
-	alias : } : PopCurveStackToLoft : FALSE
+	alias : } : PopCurveStackToLoft : L_NORMAL : FALSE
 

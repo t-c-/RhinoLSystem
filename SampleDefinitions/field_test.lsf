@@ -22,7 +22,7 @@ lsystem : field_of_trees
 	#alias : C : null
 
 	alias : < : PushCurveStack
-	alias : > : PopCurveStackToLoft : FALSE
+	alias : > : PopCurveStackToLoft : L_NORMAL : FALSE
 
 	alias : { : PushPointStack
 	alias : } : PopPointsToCurve : D_STACK : FALSE

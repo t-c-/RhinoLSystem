@@ -30,7 +30,7 @@ lsystem : ellipse_surface
 	alias : + : RotateOnAxis : AXIS_Z : theta
 	alias : U : MoveOnAxis : AXIS_Z : 1.5
 	alias : { : PushCurveStack
-	alias : } : PopCurveStackToLoft : FALSE
+	alias : } : PopCurveStackToLoft : L_NORMAL : FALSE
 	
 	
 

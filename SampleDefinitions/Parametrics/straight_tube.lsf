@@ -1,0 +1,21 @@
+
+
+
+lsystem : tapered_tube
+
+	axiom : T(1,10,0.5)
+
+	alias : T(r,l,t) : StraightTube : r : l : t : TRUE
+
+lsystem : straight_tube
+
+	axiom : T(2,10,1)
+
+	alias : T(r,l,t) : StraightTube : r : l : t : FALSE
+
+
+lsystem : widening_tube
+
+	axiom : T(2,10,3)
+
+	alias : T(r,l,t) : StraightTube : r : l : t : TRUE
